@@ -1,20 +1,14 @@
 package com.hanaberia.model;
 
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import lombok.Getter;
-import lombok.Setter;
-
+import javax.persistence.*;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Products {
 
     @Id
@@ -31,22 +25,27 @@ public class Products {
     )
     private Long id;
 
+    @Column
+    private String imageName;
+
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
-    private String desciption;
+    private String description;
 
     @Column(nullable = false)
     private Integer price;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String category;
+    private Categories category;
 
-    @OneToMany(mappedBy = "reservations")
-    private Set<Users> reservationsUserss;
+    @Column(nullable = false)
+    private boolean available;
 
-    @OneToMany(mappedBy = "orders")
-    private Set<Users> ordersUserss;
-
+    @Override
+    public String toString(){
+        return category + ", " + name + ", " + description + ", " + price + ", " + available;
+    }
 }
