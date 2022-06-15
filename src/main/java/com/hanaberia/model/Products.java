@@ -16,8 +16,7 @@ public class Products {
     @SequenceGenerator(
             name = "primary_sequence",
             sequenceName = "primary_sequence",
-            allocationSize = 1,
-            initialValue = 10000
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -43,6 +42,14 @@ public class Products {
 
     @Column(nullable = false)
     private boolean available;
+
+/*    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reservations_id")
+    private Reservations reservations;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orders_id")
+    private Orders orders;*/
 
     @Override
     public String toString(){

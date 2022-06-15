@@ -1,12 +1,134 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" id="tlo" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+    <title>Rękodzieło</title>
+    <meta name="description" content="Różne sobie rękodzieła">
+    <meta name="author" content="Dong Ha Kotwa">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link th:href="@{/styles/main.css}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 <body>
-<a th:href="@{/products}" class="btn btn-success"><i class="bi bi-plus-square"></i></a>
+<nav class="nav-bar">
+    <input type="checkbox" id="menu-toggle"/>
+    <label id="trigger" for="menu-toggle"></label>
+    <label id="burger" for="menu-toggle"></label>
+    <ul id="menu">
+        <li><a href="#">Home</a></li>
+        <li><hr></li>
+        <li><a href="#bransoletki">Bransoletki</a></li>
+        <li><hr></li>
+        <li><a href="#kolczyki">Kolczyki</a></li>
+        <li><hr></li>
+        <li><a href="#naszyjniki">Naszyjniki</a></li>
+        <li><hr></li>
+        <li><a href="#pierścionki">Pierścionki</a></li>
+    </ul>
+</nav>
+<main>
+    <header>
+        <article id="main">
+            <h1>Hanaberia</h1>
+        </article>
+    </header>
+    <section>
+        <h2 class="head home"></h2>
+    </section>
+    <section id="bransoletki">
+        <h2 class="head bracelets">Bransoletki</h2>
+        <article class="gallery">
+            <ul>
+                <a href="#" class="close"></a>
+                <li th:each="product : ${bracelets}">
+                    <a th:href="@{'#' + ${product.id}}">
+                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
+                    <div th:id="${product.id}" class="port">
+                        <div class="description">
+                            <h3><span th:text="${product.name}"></span></h3>
+                            <p><span th:text="${product.description}"></span>
+                            <h3><span th:text="${product.price}"></span>, - zł</h3>
+                            <button th:if="${product.available}"><i class="bi bi-basket2"></i></button>
+                        </div>
+                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt="">
+                    </div>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <section id="kolczyki">
+        <h2 class="head earrings">Kolczyki</h2>
+        <article class="gallery">
+            <ul>
+                <a href="#" class="close"></a>
+                <li th:each="product : ${earrings}">
+                    <a th:href="@{'#' + ${product.id}}">
+                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
+                    <div th:id="${product.id}" class="port">
+                        <div class="description">
+                            <h3><span th:text="${product.name}"></span></h3>
+                            <p><span th:text="${product.description}"></span>
+                            <h3><span th:text="${product.price}"></span>, - zł</h3>
+                            <button th:if="${product.available}"><i class="bi bi-basket2"></i></button>
+                        </div>
+                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt="">
+                    </div>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <section id="naszyjniki">
+        <h2 class="head necklaces">Naszyjniki</h2>
+        <article class="gallery">
+            <ul>
+                <a href="#" class="close"></a>
+                <li th:each="product : ${necklaces}">
+                    <a th:href="@{'#' + ${product.id}}">
+                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
+                    <div th:id="${product.id}" class="port">
+                        <div class="description">
+                            <h3><span th:text="${product.name}"></span></h3>
+                            <p><span th:text="${product.description}"></span>
+                            <h3><span th:text="${product.price}"></span>, - zł</h3>
+                            <button th:if="${product.available}"><i class="bi bi-basket2"></i></button>
+                        </div>
+                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt="">
+                    </div>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <section id="pierścionki">
+        <h2 class="head rings">Pierścionki</h2>
+        <article class="gallery">
+            <ul>
+                <a href="#" class="close"></a>
+                <li th:each="product : ${rings}">
+                    <a th:href="@{'#' + ${product.id}}">
+                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
+                    <div th:id="${product.id}" class="port">
+                        <div class="description">
+                            <h3><span th:text="${product.name}"></span></h3>
+                            <p><span th:text="${product.description}"></span>
+                            <h3><span th:text="${product.price}"></span>, - zł</h3>
+                            <button th:if="${product.available}"><i class="bi bi-basket2"></i></button>
+                        </div>
+                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt="">
+                    </div>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <footer>
+        <article>
+            <p class="foot">Designed and executed by Dong Ha Kotwa
+        </article>
+    </footer>
+</main>
+<nav id="menu2">
+    <a href="https://www.instagram.com/halia.art/" target="_blank" id="insta"><i class="bi bi-instagram"></i></a>
+</nav>
+<script th:src="@{http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/actions.js}"></script>
 </body>
 </html>

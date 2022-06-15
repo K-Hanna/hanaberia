@@ -28,11 +28,11 @@
             <tbody>
             <tr th:each="product : ${bracelets}">
                 <td>
-                    <img th:src="@{${'/photos/' + product.getImageName() + '.jpg'}}" width="120"/>
+                    <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="120"/>
                 </td>
-                <td th:text="${product.getName()}"></td>
-                <td th:text="${product.getDescription()}"></td>
-                <td th:text="${product.getPrice()}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.price}"></td>
                 <td>
                     <a th:href="@{/products/to-edit/{id}(id=${product.getId()})}" class="btn btn-outline-primary">
                         <i class="bi bi-pencil-square"></i></a>
@@ -57,11 +57,11 @@
             <tbody>
             <tr th:each="product : ${earrings}">
                 <td>
-                    <img th:src="@{${'/photos/' + product.getImageName() + '.jpg'}}" width="120"/>
+                    <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="120"/>
                 </td>
-                <td th:text="${product.getName()}"></td>
-                <td th:text="${product.getDescription()}"></td>
-                <td th:text="${product.getPrice()}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.price}"></td>
                 <td>
                     <a th:href="@{/products/to-edit/{id}(id=${product.getId()})}" class="btn btn-outline-primary">
                         <i class="bi bi-pencil-square"></i></a>
@@ -86,13 +86,13 @@
             <tbody>
             <tr th:each="product : ${necklaces}">
                 <td>
-                    <img th:src="@{${'/photos/' + product.getImageName() + '.jpg'}}" width="120"/>
+                    <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="120"/>
                 </td>
-                <td th:text="${product.getName()}"></td>
-                <td th:text="${product.getDescription()}"></td>
-                <td th:text="${product.getPrice()}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.price}"></td>
                 <td>
-                    <a th:href="@{/products/to-edit/{id}(id=${product.getId()})}" class="btn btn-outline-primary">
+                    <a th:href="@{/products/to-edit/{id}(id=${product.id})}" class="btn btn-outline-primary">
                         <i class="bi bi-pencil-square"></i></a>
                     <a th:href="@{/products/to-remove/{id}(id=${product.getId()})}" class="btn btn-outline-danger">
                         <i class="bi bi-x-square"></i></a>
@@ -115,11 +115,11 @@
             <tbody>
             <tr th:each="product : ${rings}">
                 <td>
-                    <img th:src="@{${'/photos/' + product.getImageName() + '.jpg'}}" width="120"/>
+                    <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="120"/>
                 </td>
-                <td th:text="${product.getName()}"></td>
-                <td th:text="${product.getDescription()}"></td>
-                <td th:text="${product.getPrice()}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.price}"></td>
                 <td>
                     <a th:href="@{/products/to-edit/{id}(id=${product.getId()})}" class="btn btn-outline-primary">
                         <i class="bi bi-pencil-square"></i></a>

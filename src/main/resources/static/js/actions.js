@@ -1,4 +1,4 @@
-// portfolio
+// gallery
  $('.gallery ul li a').click(function() {
      var itemID = $(this).attr('href');
      $('.gallery ul').addClass('item_open');
@@ -15,6 +15,7 @@
          scrollTop: parseInt($("#top").offset().top)
      }, 400);
  });
+
  // menu
  $(function() {
   function slideMenu() {
@@ -37,10 +38,5 @@
     $(".menu-list .accordion-content").not($(this).next()).slideUp("fast").removeClass("open");
     $(".menu-list .accordion-toggle").not(jQuery(this)).removeClass("active-tab").find(".menu-link").removeClass("active");
   });
-}); // jQuery load
-
-//          #2 Burger Menu...
-//https://codepen.io/victorfreire/pen/BjNveN
-
-//github.com/VictorFreire/3-Material-Design-Burger-Menu
+});
 
