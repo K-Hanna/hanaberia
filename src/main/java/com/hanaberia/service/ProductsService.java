@@ -26,12 +26,12 @@ public class ProductsService {
     }
 
     public Products retrieve(final Long id) {
-        return productsRepository.findById(id).orElseThrow();
+        return productsRepository.findById(id).orElseThrow(null);
     }
 
     public void update(final Long id, final Products newProduct) {
 
-        Products oldProduct = productsRepository.findById(id).orElseThrow();
+        Products oldProduct = productsRepository.findById(id).orElseThrow(null);
         oldProduct.setImageName(newProduct.getImageName());
         oldProduct.setName(newProduct.getName());
         oldProduct.setDescription(newProduct.getDescription());
