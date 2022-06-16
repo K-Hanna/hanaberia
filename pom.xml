@@ -9,12 +9,13 @@
         <relativePath /><!-- lookup parent from repository -->
     </parent>
     <groupId>com</groupId>
-    <artifactId>intro-app</artifactId>
+    <artifactId>hanaberia</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>intro-app</name>
+    <name>hanaberia</name>
 
     <properties>
-        <java.version>11</java.version>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
     <dependencies>
