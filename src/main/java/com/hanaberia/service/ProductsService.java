@@ -1,5 +1,6 @@
 package com.hanaberia.service;
 
+import com.hanaberia.model.Categories;
 import com.hanaberia.model.Products;
 
 import java.util.List;
@@ -7,7 +8,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hanaberia.repository.ProductsRepository;
-
 
 @Service
 public class ProductsService {
@@ -19,21 +19,38 @@ public class ProductsService {
         return productsRepository.findAll();
     }
 
-    public Products get(final Long id) {
+    public Long create(final Products product) {
+        product.setAvailable(true);
+
+        return productsRepository.save(product).getId();
+    }
+
+    public Products retrieve(final Long id) {
         return productsRepository.findById(id).orElseThrow(null);
     }
 
-    public Long create(final Products products) {
-        return productsRepository.save(products).getId();
-    }
+    public void update(final Long id, final Products newProduct) {
 
-    public void update(final Long id, final Products products) {
+        Products oldProduct = productsRepository.findById(id).orElseThrow(null);
+        oldProduct.setImageName(newProduct.getImageName());
+        oldProduct.setName(newProduct.getName());
+        oldProduct.setDescription(newProduct.getDescription());
+        oldProduct.setPrice(newProduct.getPrice());
+        oldProduct.setCategory(newProduct.getCategory());
+        oldProduct.setAvailable(true);
 
-        productsRepository.save(products);
+        productsRepository.save(oldProduct);
     }
 
     public void delete(final Long id) {
         productsRepository.deleteById(id);
     }
 
+    public List<Products> getAvailableProducts(){
+        return productsRepository.findByAvailableTrue();
+    }
+
+    public List<Products> getByCategory(Categories category){
+        return productsRepository.findByCategory(category);
+    }
 }

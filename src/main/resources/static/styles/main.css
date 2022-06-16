@@ -59,6 +59,15 @@ p {
 	font-size: 15px;
 	font-family: 'Lato', sans-serif;
 }
+a {
+    color: white;
+    font-family: 'Lato', sans-serif;
+}
+a:hover {
+    color: #3300CC;
+    background-color: white;
+    font-family: 'Lato', bold;
+}
 .head {
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -85,6 +94,14 @@ section {
 	background-color: #000000;
 	padding: 20px 0;
 }
+button {
+    color: white;
+    background-color: #ff5e13;
+    font-size: 30px;
+    border-radius: 50%;
+    padding: 10px;
+    border: none;
+}
 footer {
 	background-color: #3300CC;
 	padding: 10px;
@@ -101,14 +118,7 @@ footer {
 a img {
 	width: 100%;
 }
-footer a{
-	color: black;
-	font-size: 30px;
-	padding: 20px;
-	botton: 0;
-}
-
-/*Menu stuff*/ 
+/*Menu stuff*/
 @keyframes checked-anim {
 50% {
 	width: 100%;
@@ -131,7 +141,6 @@ footer a{
 }
 .nav-bar li, a {
 	margin: 75px 0 -55px 0;
-	color: white;
 	font-family: 'Lato', sans-serif;
 	text-decoration: none;
 	outline: 0;
