@@ -37,12 +37,12 @@ public class ProductsController {
         List<Products> rings = productsService.getByCategory(Categories.RING);
         model.addAttribute("rings", rings);
 
-        return "product/products";
+        return "product/retrieveProducts";
     }
 
     @GetMapping("/to-add")
     public String productToAdd(Products product){
-        return "product/create";
+        return "product/createProduct";
     }
 
     @PostMapping("/add")
@@ -57,7 +57,7 @@ public class ProductsController {
         Products product = productsService.retrieve(id);
         model.addAttribute("products", product);
 
-        return "product/update";
+        return "product/updateProduct";
     }
 
     @PostMapping("/edit/{id}")
@@ -74,7 +74,7 @@ public class ProductsController {
 
         Products product = productsService.retrieve(id);
         model.addAttribute("products", product);
-        return "product/delete";
+        return "product/deleteProduct";
     }
 
     @GetMapping("/remove/{id}")
