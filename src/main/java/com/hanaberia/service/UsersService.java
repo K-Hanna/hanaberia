@@ -42,6 +42,7 @@ public class UsersService {
 
         oldUser.setUserName(user.getUserName());
         oldUser.setEmail(user.getEmail());
+        oldUser.setPhone(user.getPhone());
         oldUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         oldUser.setConfirm(bCryptPasswordEncoder.encode(user.getConfirm()));
 
@@ -52,4 +53,11 @@ public class UsersService {
         usersRepository.deleteById(id);
     }
 
+    public boolean userNameExists(String userName) {
+        return usersRepository.findUserByUserName(userName) != null;
+    }
+
+    public boolean emailExists(String email){
+        return usersRepository.findUserByEmail(email) != null;
+    }
 }

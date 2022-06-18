@@ -39,9 +39,12 @@ public class Users {
     private String email;
 
     @Column
+    private String phone;
+
+    @Column(nullable = false)
     private String password;
 
-    @Column
+    @Column(nullable = false)
     private String confirm;
 
 /*    @ManyToOne(fetch = FetchType.LAZY)
