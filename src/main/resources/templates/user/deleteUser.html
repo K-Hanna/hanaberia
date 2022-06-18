@@ -46,6 +46,7 @@
                     <br>
                     <small>Czy na pewno chcesz usunąć swoje konto?</small>
                 </div>
+                <small><br></small>
                 <div class="modal-footer">
                     <a th:href="@{/users/{name}(name=${users.userName})}" class="btn btn-outline-secondary"><i class="bi bi-x-square"></i></a>
                     <a th:href="@{/users/remove/{id}(id=${users.id})}" class="btn btn-danger">
