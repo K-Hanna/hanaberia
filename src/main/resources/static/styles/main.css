@@ -54,6 +54,11 @@ h3 {
 	font-size: 20px;
 	font-family: 'Lobster Two', Georgia, cursive;
 }
+.icons {
+	width: 100%;
+	padding: 20px;
+	text-align: right;
+}
 p {
 	text-align: justify;
 	font-size: 15px;
@@ -112,7 +117,7 @@ footer {
 }
 .foot {
 	width: 100%;
-	padding: 20px;
+	padding: 10px;
 	text-align: right;
 }
 a img {

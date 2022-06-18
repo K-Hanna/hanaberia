@@ -36,14 +36,20 @@ public class Users {
     private String userName;
 
     @Column
-    private String eMail;
+    private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column
+    private String password;
+
+    @Column
+    private String confirm;
+
+/*    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservations_id")
     private Products reservations;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orders_id")
-    private Products orders;
+    private Products orders;*/
 
 }

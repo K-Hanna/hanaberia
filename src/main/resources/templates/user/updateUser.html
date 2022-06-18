@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hanaberia</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link th:href="@{/styles/user.css}" rel="stylesheet" />
+</head>
+<body>
+<nav id="menu1"></nav>
+<main>
+    <header>
+        <article id="main">
+            <h1>Hanaberia</h1>
+        </article>
+    </header>
+    <ul class="nav nav-tabs">
+        <li class="nav-item ">
+            <a class="nav-link" th:href="@{/}"><i class="bi bi-house"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Moje dane</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Rezerwacje</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Zamówienia</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i></a>
+        </li>
+    </ul>
+    <section class="head">
+        <div
+                class="container"
+                style="padding-top: 10vh; display: flex; flex-direction: column; align-items: center;">
+            <br/>
+            <h4>Moje dane</h4>
+            <form   th:action="@{'/users/edit/' + ${users.getId()}}"
+                    th:object="${users}"
+                    method="post">
+                <div class="form-group row">
+                    <br>
+                    <label for="userName" class="col-3 col-form-label">Login</label>
+                    <div class="col-9">
+                        <input
+                                class="form-control"
+                                type="text"
+                                id="userName"
+                                th:field="*{userName}"
+                                required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-3 col-form-label">E-mail</label>
+                    <div class="col-9">
+                        <input
+                                class="form-control"
+                                type="text"
+                                id="email"
+                                th:field="*{email}"
+                                required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="userPassword" class="col-3 col-form-label">Password</label>
+                    <div class="col-9">
+                        <input
+                                class="form-control"
+                                type="password"
+                                id="userPassword"
+                                th:field="*{password}"
+                                required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="confirmPassword" class="col-3 col-form-label">Confirm</label>
+                    <div class="col-9">
+                        <input
+                                class="form-control"
+                                type="password"
+                                id="confirmPassword"
+                                th:field="*{confirm}"
+                                required/>
+                    </div>
+                    <small><br></small>
+                </div>
+                <div class="modal-footer">
+                    <a th:href="@{/users/{name}(name=${users.userName})}" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-square"></i></a>
+                    <button type="submit"
+                            class="btn btn-success"
+                            value="Submit">
+                        <i class="bi bi-check2-square"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <article>
+            <p class="foot">Designed and executed by Dong Ha Kotwa
+        </article>
+    </footer>
+</main>
+<nav id="menu2"></nav>
+</body>
+</html>
