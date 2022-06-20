@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" id="tlo" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">>
+<html lang="pl" id="tlo" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Rękodzieło</title>
@@ -25,7 +25,9 @@
         <li><hr></li>
         <li><a href="#pierścionki">Pierścionki</a></li>
         <li><hr></li>
-        <li><div th:insert="fragments/nav :: nav"></div></li>
+        <li><a sec:authorize="isAnonymous()" th:href="@{/login}">Zaloguj się</a>
+         <a sec:authorize="isAuthenticated()" th:href="@{/users/{name}(name=${#authentication.getPrincipal().getUsername()})}">
+             Moje konto</a></li>
     </ul>
 </nav>
 <main>

@@ -85,9 +85,10 @@ public class UsersController {
     }
 
     @GetMapping("/remove/{id}")
-    public String UserRemove(@PathVariable("id") Long id) {
+    public String UserRemove(@PathVariable("id") Long id, HttpServletRequest request) {
 
         usersService.delete(id);
+        logout(request);
         return "redirect:/";
     }
 
@@ -105,9 +106,11 @@ public class UsersController {
             errors++;
         }
 
-        if(!validator.isEmailValid(newUser.getEmail()) && !newUser.getEmail().isEmpty()){
-            model.addAttribute("errorE1", "E-mail jest nieodpowiedni.");
-            errors++;
+        if( !newUser.getEmail().isEmpty()){
+            if(!validator.isEmailValid(newUser.getEmail())) {
+                model.addAttribute("errorE1", "E-mail jest nieodpowiedni.");
+                errors++;
+            }
         }
 
         if(usersService.emailExists(newUser.getEmail()) && !newUser.getEmail().equals(oldUser.getEmail())){
@@ -117,6 +120,11 @@ public class UsersController {
 
         if(!validator.isPhoneValid(newUser.getPhone()) && !newUser.getPhone().isEmpty()){
             model.addAttribute("errorNo", "Numer telefonu jest nieodpowiedni.");
+            errors++;
+        }
+
+        if(newUser.getEmail().isEmpty() && !newUser.getPhone().isEmpty()){
+            model.addAttribute("errorEN", "Podaj e-mail albo numer telefonu.");
             errors++;
         }
 
