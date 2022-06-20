@@ -97,7 +97,7 @@ public class UsersController {
         int errors = 0;
 
         if(!validator.isUserNameValid(newUser.getUserName())){
-            model.addAttribute("errorUN1", "Login jest nieodpowiedni, korzystaj z liter i cyfr.");
+            model.addAttribute("errorUN1", "Login jest nieodpowiedni.");
             errors++;
         }
 
@@ -106,16 +106,15 @@ public class UsersController {
             errors++;
         }
 
-        if( !newUser.getEmail().isEmpty()){
-            if(!validator.isEmailValid(newUser.getEmail())) {
+        if(!newUser.getEmail().isEmpty()) {
+            if (!validator.isEmailValid(newUser.getEmail())) {
                 model.addAttribute("errorE1", "E-mail jest nieodpowiedni.");
                 errors++;
             }
-        }
-
-        if(usersService.emailExists(newUser.getEmail()) && !newUser.getEmail().equals(oldUser.getEmail())){
-            model.addAttribute("errorE2", "Konto na ten e-mail już istnieje.");
-            errors++;
+            if (usersService.emailExists(newUser.getEmail()) && !newUser.getEmail().equals(oldUser.getEmail())) {
+                model.addAttribute("errorE2", "Konto na ten e-mail już istnieje.");
+                errors++;
+            }
         }
 
         if(!validator.isPhoneValid(newUser.getPhone()) && !newUser.getPhone().isEmpty()){
@@ -123,7 +122,7 @@ public class UsersController {
             errors++;
         }
 
-        if(newUser.getEmail().isEmpty() && !newUser.getPhone().isEmpty()){
+        if(newUser.getEmail().isEmpty() && newUser.getPhone().isEmpty()){
             model.addAttribute("errorEN", "Podaj e-mail albo numer telefonu.");
             errors++;
         }
