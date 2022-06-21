@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Hanaberia</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link th:href="@{/styles/user.css}" rel="stylesheet" />
 </head>
 <body>
@@ -16,7 +17,7 @@
     </header>
     <ul class="nav nav-tabs">
         <li class="nav-item ">
-            <a class="nav-link" th:href="@{/}"><i class="bi bi-house"></i></a>
+            <a class="nav-link" th:href="@{/}" type="button"><i class="bi bi-house"></i></a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Moje dane</a>
@@ -28,10 +29,9 @@
             <a class="nav-link" href="#">Zamówienia</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i></a>
+            <form th:action="@{/logout}" method="post">
+                <button class="nav-link" type="submit"><i class="bi bi-box-arrow-right"></i></button>
+            </form>
         </li>
     </ul>
     <section class="head">
@@ -39,24 +39,13 @@
                 class="container"
                 style="padding-top: 10vh; display: flex; flex-direction: column; align-items: center;">
             <br/>
-            <h4>Moje dane</h4>
-            <form>
-                <div class="form-group row">
-                    <br>
-                    <small>Czy na pewno chcesz usunąć swoje konto?</small>
-                </div>
-                <small><br></small>
-                <div class="modal-footer">
-                    <a th:href="@{/users/{name}(name=${users.userName})}" class="btn btn-outline-secondary"><i class="bi bi-x-square"></i></a>
-                    <a th:href="@{/users/remove/{id}(id=${users.id})}" class="btn btn-danger">
-                        <i class="bi bi-check2-square"></i></a>
-                </div>
-            </form>
+           <h3>Nie masz dostępu.
+               <i class="bi bi-shield-exclamation text-danger"></i></h3>
         </div>
     </section>
     <footer>
         <article>
-            <p class="foot">Designed and executed by Dong Ha Kotwa
+            <p class="foot">Designed and executed by Dong Ha Kotwa</p>
         </article>
     </footer>
 </main>
