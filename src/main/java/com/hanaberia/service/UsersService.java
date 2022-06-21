@@ -1,5 +1,6 @@
 package com.hanaberia.service;
 
+import com.hanaberia.model.Roles;
 import com.hanaberia.model.Users;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class UsersService {
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setConfirm(bCryptPasswordEncoder.encode(user.getConfirm()));
+        user.setRoles(Roles.USER);
         return usersRepository.save(user);
     }
 
