@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hanaberia</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+    <link th:href="@{/styles/user.css}" rel="stylesheet" />
+</head>
+<body>
+<nav id="menu1"></nav>
+<main>
+    <header>
+        <article id="main">
+            <h1>Hanaberia</h1>
+        </article>
+    </header>
+    <ul class="nav nav-tabs">
+        <li class="nav-item ">
+            <a class="nav-link" th:href="@{/}"><i class="bi bi-house"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Moje dane</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Rezerwacje</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Zamówienia</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i></a>
+        </li>
+    </ul>
+    <section class="head">
+        <div
+                class="container"
+                style="padding-top: 10vh; display: flex; flex-direction: column; align-items: center;">
+            <br/>
+            <h4>Moje dane</h4>
+            <form>
+                <div class="form-group row">
+                    <br>
+                    <small>Czy na pewno chcesz usunąć swoje konto?</small>
+                </div>
+                <small><br></small>
+                <div class="modal-footer">
+                    <a th:href="@{/users/{name}(name=${users.userName})}" class="btn btn-outline-secondary"><i class="bi bi-x-square"></i></a>
+                    <a th:href="@{/users/remove/{id}(id=${users.id})}" class="btn btn-danger">
+                        <i class="bi bi-check2-square"></i></a>
+                </div>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <article>
+            <p class="foot">Designed and executed by Dong Ha Kotwa
+        </article>
+    </footer>
+</main>
+<nav id="menu2"></nav>
+</body>
+</html>

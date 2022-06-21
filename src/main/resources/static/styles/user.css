@@ -1,0 +1,83 @@
+@import url(http://fonts.googleapis.com/css?family=Josefin+Slab|Muli|Lato|Nobile|Lobster+Two&subset=latin&v2);
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css");
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body{
+	background-image: url('left.png'), url('right.png');
+	background-repeat: no-repeat, no-repeat;
+	background-position: left top, right bottom;
+	background-size: 13%, 13%;
+	background-attachment: fixed, fixed;
+}
+main {
+	max-width: 1100px;
+	margin: 0 auto;
+	box-shadow: 0 0 50px;
+}
+header {
+	background-color: #3300CC;
+	color: white;
+	top: 0;
+	text-shadow: 1px 1px 0.5px black;
+	font-size: 30px;
+	font-family: 'Lobster Two', Georgia, cursive;
+	padding: 0 30px;
+}
+article {
+	display: flex;
+}
+.head {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-image: url('bg.png');
+	height: calc(100vh - 200px);
+}
+footer {
+	background-color: #3300CC;
+	padding: 10px;
+	color: white;
+	font-size: 20px;
+	text-shadow: 1px 1px 0.5px black;
+	font-family: 'Lato', sans-serif;
+}
+.foot {
+	width: 100%;
+	padding: 20px;
+	text-align: right;
+}
+#menu1 {
+	position: fixed;
+	left: 0;
+	top: 0;
+	margin: 0; padding: 0;
+	width: 80px;
+	height: 80px;
+	background-color: #3300CC;
+	border-bottom-right-radius: 100%;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+}
+#menu2 {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	margin: 0; padding: 0;
+	width: 80px;
+	height: 80px;
+	background-color: #3300CC;
+	border-top-left-radius: 100%;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+}
