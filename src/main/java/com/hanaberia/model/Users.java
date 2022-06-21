@@ -1,14 +1,7 @@
 package com.hanaberia.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,6 +39,12 @@ public class Users {
 
     @Column(nullable = false)
     private String confirm;
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Roles roles;
+
+
 
 /*    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservations_id")

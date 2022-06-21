@@ -51,4 +51,9 @@ public class HomeController {
     public String showLogoutPage() {
         return "logout-success";
     }
+
+    @GetMapping("/403")
+    public String noAccess(){
+        return "noAccess";
+    }
 }
