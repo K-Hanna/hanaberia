@@ -7,7 +7,6 @@
     <meta name="author" content="Dong Ha Kotwa">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link th:href="@{/styles/main.css}" rel="stylesheet" />
-
 </head>
 <body>
 <nav class="nav-bar">
@@ -31,11 +30,7 @@
     </ul>
 </nav>
 <main>
-    <header>
-        <article id="main">
-            <h1>Hanaberia</h1>
-        </article>
-    </header>
+    <div th:insert="fragments/header :: header"></div>
     <section>
         <h2 class="head home"></h2>
     </section>
@@ -123,11 +118,7 @@
             </ul>
         </article>
     </section>
-    <footer>
-        <article>
-            <p class="foot">Designed and executed by Dong Ha Kotwa</p>
-        </article>
-    </footer>
+        <div th:insert="fragments/footer :: footer"></div>
 </main>
 <nav id="menu2">
     <a href="https://www.instagram.com/halia.art/" target="_blank" id="insta"><i class="bi bi-instagram"></i></a>

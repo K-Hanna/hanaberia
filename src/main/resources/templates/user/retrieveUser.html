@@ -10,37 +10,12 @@
 <body>
 <nav id="menu1"></nav>
     <main>
-        <header>
-            <article id="main">
-                <h1>Hanaberia</h1>
-            </article>
-        </header>
-        <ul class="nav nav-tabs">
-            <li class="nav-item ">
-                <a class="nav-link" th:href="@{/}" type="button"><i class="bi bi-house"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Moje dane</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Rezerwacje</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Zamówienia</a>
-            </li>
-            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="nav-link" th:href="@{/products}">Administracja</a>
-            </li>
-            <li class="nav-item">
-                <form th:action="@{/logout}" method="post">
-                    <button class="nav-link" type="submit"><i class="bi bi-box-arrow-right"></i></button>
-                </form>
-            </li>
-        </ul>
+        <div th:insert="fragments/header :: header"></div>
+        <div th:insert="fragments/nav :: nav"></div>
         <section class="head">
         <div
                 class="container"
-                style="padding-top: 10vh; display: flex; flex-direction: column; align-items: center;">
+                style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
             <br/>
             <h4>Moje dane</h4>
             <form>
@@ -91,11 +66,7 @@
             </form>
         </div>
         </section>
-        <footer>
-            <article>
-                <p class="foot">Designed and executed by Dong Ha Kotwa
-            </article>
-        </footer>
+            <div th:insert="fragments/footer :: footer"></div>
     </main>
 <nav id="menu2"></nav>
 </body>
