@@ -38,11 +38,8 @@ header {
 article {
 	display: flex;
 }
-.head {
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-attachment: fixed;
-	background-image: url('bg.png');
+section {
+    background-color: #FFFFFF;
 	min-height: calc(100vh - 200px);
 }
 footer {

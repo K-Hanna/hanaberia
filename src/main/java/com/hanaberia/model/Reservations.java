@@ -3,16 +3,16 @@ package com.hanaberia.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
-/*@Entity
+@Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor*/
+@AllArgsConstructor
 public class Reservations {
-/*
     @Id
     @Column(nullable = false, updatable = false)
     @SequenceGenerator(
@@ -27,14 +27,14 @@ public class Reservations {
     )
     private Long id;
 
-*//*    @OneToOne(fetch = FetchType.LAZY)
+    @Column
+    private LocalDate expiringDate;
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Users user;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "products_id")
-    private List<Products> productsList;*//*
-
-    @Column
-    private boolean expired;*/
+    private List<Products> productsList;
 }

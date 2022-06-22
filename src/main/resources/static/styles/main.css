@@ -41,50 +41,25 @@ header {
 article {
 	display: flex;
 }
-h1 {
-    font-size: 2.5rem;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-weight: 500;
-    line-height: 1.2;
-}
-h2 {
-	margin: auto;
-	text-align: center;
-	font-size: 25px;
-	padding: 200px;
-	text-shadow: 1 px 1px 0.5px black;
+h4 {
 	font-family: 'Lobster Two', Georgia, cursive;
-}
-h3 {
-	text-align: left;
-	font-size: 20px;
-	font-family: 'Lobster Two', Georgia, cursive;
-}
-.icons {
-	width: 100%;
-	padding: 20px;
-	text-align: right;
 }
 p {
 	text-align: justify;
 	font-size: 15px;
 	font-family: 'Lato', sans-serif;
 }
-a {
-    color: white;
-    font-family: 'Lato', sans-serif;
-}
-a:hover {
-    color: #3300CC;
-    background-color: white;
-    font-family: 'Lato', bold;
-}
 .head {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
 	height: 450px;
+    margin: auto;
+    text-align: center;
+    font-size: 25px;
+    padding: 200px;
+    text-shadow: 1 px 1px 0.5px black;
+    font-family: 'Lobster Two', Georgia, cursive;
 }
 .home {
 	background-image: url('all.png');
@@ -105,14 +80,6 @@ a:hover {
 section {
 	background-color: #000000;
 	padding: 20px 0;
-}
-button {
-    color: white;
-    background-color: #ff5e13;
-    font-size: 30px;
-    border-radius: 50%;
-    padding: 10px;
-    border: none;
 }
 footer {
 	background-color: #3300CC;
@@ -153,7 +120,6 @@ a img {
 	text-decoration: none;
 	outline: 0;
 	font-size: 20px;
-	font-weight: bold;
 	text-shadow: 1px 1px 1px black;
 	display: none;
 }

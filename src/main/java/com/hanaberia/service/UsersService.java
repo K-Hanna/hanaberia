@@ -21,7 +21,6 @@ public class UsersService {
         return usersRepository.findAll();
     }
 
-
     public Users create(final Users user) {
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
