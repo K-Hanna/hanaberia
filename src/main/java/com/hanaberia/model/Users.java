@@ -43,8 +43,9 @@ public class Users {
     @Enumerated(EnumType.STRING)
     @Column
     private Roles roles;
-
-
+/*
+    @Column
+    private boolean emailPreferred;*/
 
 /*    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservations_id")
