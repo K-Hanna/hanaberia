@@ -10,11 +10,10 @@
 <nav id="menu1"></nav>
     <main>
         <div th:insert="fragments/header :: header"></div>
-        <div th:insert="fragments/nav :: nav"></div>
-        <section class="head">
-        <div
-                class="container"
-                style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
+        <div th:insert="fragments/navUser :: nav"></div>
+        <section>
+        <div class="container"
+             style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
             <br/>
             <h4>Moje dane</h4>
             <form>
@@ -57,10 +56,12 @@
                     <small><br></small>
                 </div>
                 <div class="modal-footer">
-                    <a th:href="@{/users/to-edit/{id}(id=${users.id})}" class="btn btn-outline-primary">
-                        <i class="bi bi-pencil-square" title="Edytuj"></i></a>
-                    <a th:href="@{/users/to-remove/{id}(id=${users.id})}" class="btn btn-outline-danger">
-                        <i class="bi bi-x-square" title="Usuń"></i></a>
+                    <div class="btn-group">
+                        <a th:href="@{/users/to-edit/{id}(id=${users.id})}" class="btn btn-outline-primary">
+                            <i class="bi bi-pencil-square" title="Edytuj"></i></a>
+                        <a th:href="@{/users/to-remove/{id}(id=${users.id})}" class="btn btn-outline-danger">
+                            <i class="bi bi-x-square" title="Usuń"></i></a>
+                    </div>
                 </div>
             </form>
         </div>
