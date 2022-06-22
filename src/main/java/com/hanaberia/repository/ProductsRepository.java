@@ -1,6 +1,6 @@
 package com.hanaberia.repository;
 
-import com.hanaberia.model.Categories;
+import com.hanaberia.enums.Categories;
 import com.hanaberia.model.Products;
 import org.springframework.data.jpa.repository.JpaRepository;
 

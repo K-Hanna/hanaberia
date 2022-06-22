@@ -1,6 +1,6 @@
 package com.hanaberia.service;
 
-import com.hanaberia.model.Categories;
+import com.hanaberia.enums.Categories;
 import com.hanaberia.model.Products;
 
 import java.util.List;

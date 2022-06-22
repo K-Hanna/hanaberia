@@ -1,7 +1,6 @@
 package com.hanaberia.service;
 
 import com.hanaberia.model.Products;
-import com.hanaberia.model.Roles;
 import com.hanaberia.model.Reservations;
 import com.hanaberia.repository.ReservationsRepository;
 import org.springframework.beans.factory.annotation.Autowired;

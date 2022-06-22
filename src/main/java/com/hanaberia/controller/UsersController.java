@@ -1,5 +1,6 @@
 package com.hanaberia.controller;
 
+import com.hanaberia.enums.ContactForms;
 import com.hanaberia.model.Users;
 import com.hanaberia.repository.UsersRepository;
 import com.hanaberia.service.UsersService;
@@ -25,6 +26,7 @@ public class UsersController {
 
     @GetMapping("/to-add")
     public String userToAdd(Users user){
+        user.setContactForm(ContactForms.EMAIL);
         return "user/createUser";
     }
 
@@ -106,25 +108,28 @@ public class UsersController {
             errors++;
         }
 
-        if(!newUser.getEmail().isEmpty()) {
-            if (!validator.isEmailValid(newUser.getEmail())) {
-                model.addAttribute("errorE1", "E-mail jest nieodpowiedni.");
+        if(newUser.getContactForm().equals(ContactForms.EMAIL)) {
+            if (!validator.isEmailValid(newUser.getContact())) {
+                model.addAttribute("errorContact", "E-mail jest nieodpowiedni.");
                 errors++;
             }
-            if (usersService.emailExists(newUser.getEmail()) && !newUser.getEmail().equals(oldUser.getEmail())) {
-                model.addAttribute("errorE2", "Konto na ten e-mail już istnieje.");
+            if (usersService.contactExists(newUser.getContact())
+                    && !newUser.getContact().equals(oldUser.getContact())) {
+                model.addAttribute("errorContact", "Konto na ten e-mail już istnieje.");
                 errors++;
             }
         }
 
-        if(!validator.isPhoneValid(newUser.getPhone()) && !newUser.getPhone().isEmpty()){
-            model.addAttribute("errorNo", "Numer telefonu jest nieodpowiedni.");
-            errors++;
-        }
-
-        if(newUser.getEmail().isEmpty() && newUser.getPhone().isEmpty()){
-            model.addAttribute("errorEN", "Podaj e-mail albo numer telefonu.");
-            errors++;
+        if(newUser.getContactForm().equals(ContactForms.PHONE)) {
+            if (!validator.isPhoneValid(newUser.getContact())) {
+                model.addAttribute("errorContact", "Numer telefonu jest nieodpowiedni.");
+                errors++;
+            }
+            if (usersService.contactExists(newUser.getContact())
+                    && !newUser.getContact().equals(oldUser.getContact())) {
+                model.addAttribute("errorContact", "Konto na ten telefon już istnieje.");
+                errors++;
+            }
         }
 
         if(!validator.arePasswordsMatching(newUser.getPassword(), newUser.getConfirm())){

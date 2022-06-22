@@ -1,6 +1,8 @@
 package com.hanaberia.model;
 
 import javax.persistence.*;
+
+import com.hanaberia.enums.Categories;
 import lombok.*;
 
 @Entity
