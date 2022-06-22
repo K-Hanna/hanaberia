@@ -1,6 +1,6 @@
 package com.hanaberia.service;
 
-import com.hanaberia.model.Roles;
+import com.hanaberia.enums.Roles;
 import com.hanaberia.model.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

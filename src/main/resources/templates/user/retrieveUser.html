@@ -17,10 +17,10 @@
             <br/>
             <h4>Moje dane</h4>
             <form>
-                <div class="form-group row">
+                <div class="row g-2">
                     <br>
-                    <label for="userName" class="col-3 col-form-label">Login</label>
-                    <div class="col-9">
+                    <label for="userName" class="col-4 col-form-label">Login</label>
+                    <div class="col-8">
                         <input
                                 class="form-control-plaintext"
                                 type="text"
@@ -29,32 +29,40 @@
                                 readonly="readonly"/>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <span>Preferowana forma kontaktu jest uzupełniona.</span>
-                </div>
-                <div class="form-group row">
-                    <label for="email" class="col-3 col-form-label">E-mail</label>
-                    <div class="col-9">
+                <div class="row g-2">
+                    <label class="btn-group col-4" for="contact">
+                        <input type="radio"
+                               class="btn-check"
+                               th:field="*{users.contactForm}"
+                               value="EMAIL"
+                               id="emailCheck"
+                               autocomplete="off">
+                        <label class="btn btn-outline-secondary"
+                               for="emailCheck">
+                            <i class="bi bi-envelope"></i>
+                        </label>
+                        <input type="radio"
+                               class="btn-check"
+                               th:field="*{users.contactForm}"
+                               value="PHONE"
+                               id="phoneCheck"
+                               autocomplete="off">
+                        <label class="btn btn-outline-secondary"
+                               for="phoneCheck">
+                            <i class="bi bi-telephone"></i>
+                        </label>
+                    </label>
+                    <div class="col-8">
                         <input
                                 class="form-control-plaintext"
                                 type="text"
-                                id="email"
-                                th:field="${users.email}"
-                                readonly="readonly"/>
+                                id="contact"
+                                th:field="*{users.contact}"
+                                readonly/>
+                        <span th:text="${errorContact}" class="error"></span>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="phone" class="col-3 col-form-label">Telefon</label>
-                    <div class="col-9">
-                        <input
-                                class="form-control-plaintext"
-                                type="text"
-                                id="phone"
-                                th:field="${users.phone}"
-                                readonly="readonly"/>
-                    </div>
-                    <small><br></small>
-                </div>
+                <br>
                 <div class="modal-footer">
                     <div class="btn-group">
                         <a th:href="@{/users/to-edit/{id}(id=${users.id})}" class="btn btn-outline-primary">
