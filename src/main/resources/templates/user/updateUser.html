@@ -17,6 +17,11 @@
                 style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
             <br/>
             <h4>Edytuj konto</h4>
+
+            <p class="error" th:each="message : ${errors}">
+                <span th:text="${message}"></span>
+            </p>
+
             <form   th:action="@{'/users/edit/' + ${users.getId()}}"
                     th:object="${users}"
                     method="post">
@@ -30,8 +35,6 @@
                                 id="userName"
                                 th:field="*{userName}"
                                 required/>
-                        <span th:text="${errorUN1}" class="error"></span>
-                        <span th:text="${errorUN2}" class="error"></span>
                     </div>
                 </div>
                 <div class="row g-2">
@@ -64,7 +67,6 @@
                                 id="contact"
                                 th:field="*{contact}"
                                 required/>
-                        <span th:text="${errorContact}" class="error"></span>
                     </div>
                 </div>
                 <div class="row g-2">
@@ -87,13 +89,12 @@
                                 id="confirmPassword"
                                 th:field="*{confirm}"
                                 required/>
-                        <span th:text="${errorP}" class="error"></span>
                     </div>
                     <small><br></small>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group">
-                        <a th:href="@{/users/{name}(name=${users.userName})}" class="btn btn-outline-secondary">
+                        <a th:href="@{/users}" class="btn btn-outline-secondary">
                             <i class="bi bi-x-square"></i></a>
                         <button type="submit"
                                 class="btn btn-success"

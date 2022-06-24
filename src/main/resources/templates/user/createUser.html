@@ -19,6 +19,10 @@
                                 <h2 class="fw-bold mb-2">Zarejestruj się</h2>
                                 <p class="text-white-50 mb-5">Uzupełnij pola</p>
 
+                                <p class="error" th:each="message : ${errors}">
+                                    <span th:text="${message}"></span>
+                                </p>
+
                 <form th:action="@{/users/add}"
                       th:object="${users}"
                       method="post">
@@ -32,8 +36,6 @@
                                     id="userName"
                                     th:field="*{userName}"
                                     required/>
-                            <span th:text="${errorUN1}" class="error"></span>
-                            <span th:text="${errorUN2}" class="error"></span>
                         </div>
                     </div>
                     <div class="row g-2">
@@ -66,7 +68,6 @@
                                     id="contact"
                                     th:field="*{contact}"
                                     required/>
-                            <span th:text="${errorContact}" class="error"></span>
                         </div>
                     </div>
                     <div class="row g-2">
@@ -89,7 +90,6 @@
                                     id="confirmPassword"
                                     th:field="*{confirm}"
                                     required/>
-                            <span th:text="${errorP}" class="error"></span>
                         </div>
                         <small><br></small>
                     </div>

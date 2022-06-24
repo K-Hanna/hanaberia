@@ -10,23 +10,23 @@
 <nav id="menu1"></nav>
 <main>
     <div th:insert="fragments/header :: header"></div>
-    <div th:insert="fragments/navUser :: nav"></div>
+    <div th:insert="fragments/navReservation :: nav"></div>
     <section>
         <div
                 class="container"
                 style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
             <br/>
-            <h4>Usuń konto</h4>
+            <h4>Usuń rezerwację</h4>
             <form>
                 <div class="form-group row">
                     <br>
-                    <small>Czy na pewno chcesz usunąć swoje konto?</small>
+                    <small>Czy na pewno chcesz usunąć swoją rezerwację?</small>
                 </div>
                 <small><br></small>
                 <div class="modal-footer">
                     <div class="btn-group">
-                        <a th:href="@{/users}" class="btn btn-outline-secondary"><i class="bi bi-x-square"></i></a>
-                        <a th:href="@{/users/remove/{id}(id=${users.id})}" class="btn btn-danger">
+                        <a th:href="@{/reservations}" class="btn btn-outline-secondary"><i class="bi bi-x-square"></i></a>
+                        <a th:href="@{/reservations/remove/{id}(id=${reservations.id})}" class="btn btn-danger">
                             <i class="bi bi-check2-square"></i></a>
                     </div>
                 </div>

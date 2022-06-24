@@ -5,6 +5,7 @@ import com.hanaberia.model.Products;
 
 import java.util.List;
 
+import com.hanaberia.model.Reservations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hanaberia.repository.ProductsRepository;
@@ -40,6 +41,20 @@ public class ProductsService {
         oldProduct.setAvailable(true);
 
         productsRepository.save(oldProduct);
+    }
+
+    public void addToCart(Products product, Reservations reservation){
+        product.setAvailable(false);
+        product.setReservation(reservation);
+
+        productsRepository.save(product);
+    }
+
+    public void removeFromCart(Products product){
+        product.setAvailable(true);
+        product.setReservation(null);
+
+        productsRepository.save(product);
     }
 
     public void delete(final Long id) {

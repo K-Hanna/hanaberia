@@ -26,6 +26,7 @@ main {
 	max-width: 1100px;
 	margin: 0 auto;
 	box-shadow: 0 0 50px;
+	background-color: #FFFFFF;
 }
 header {
 	background-color: #3300CC;
@@ -39,7 +40,6 @@ article {
 	display: flex;
 }
 section {
-    background-color: #FFFFFF;
 	min-height: calc(100vh - 200px);
 }
 footer {
