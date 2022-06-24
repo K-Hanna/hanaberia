@@ -45,11 +45,11 @@ public class Products {
     @Column(nullable = false)
     private boolean available;
 
-/*    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reservations_id")
-    private Reservations reservations;
-
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reservations_id")
+    private Reservations reservation;
+
+    /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orders_id")
     private Orders orders;*/
 

@@ -8,13 +8,14 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page"
-                   th:href="@{/users/{name}(name=${#authentication.getPrincipal().getUsername()})}">Moje dane</a>
+                   th:href="@{/users}">Moje dane</a>
             </li>
             <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" th:href="@{/products}">Produkty</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Rezerwacje</a>
+            <li class="nav-item" sec:authorize="hasAuthority('USER')">
+                <a class="nav-link"
+                   th:href="@{/reservations}">Rezerwacje</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Zamówienia</a>
