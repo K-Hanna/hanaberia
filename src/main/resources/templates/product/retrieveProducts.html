@@ -47,6 +47,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
+                            <th scope="col">Id</th>
                             <th scope="col">Zdjęcie</th>
                             <th scope="col">Nazwa</th>
                             <th scope="col">Opis</th>
@@ -56,6 +57,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="product : ${bracelets}">
+                            <td th:text="${product.id}"></td>
                             <td>
                                 <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
                             </td>
@@ -78,6 +80,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
+                            <th scope="col">Id</th>
                             <th scope="col">Zdjęcie</th>
                             <th scope="col">Nazwa</th>
                             <th scope="col">Opis</th>
@@ -87,6 +90,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="product : ${earrings}">
+                            <td th:text="${product.id}"></td>
                             <td>
                                 <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
                             </td>
@@ -109,6 +113,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
+                            <th scope="col">Id</th>
                             <th scope="col">Zdjęcie</th>
                             <th scope="col">Nazwa</th>
                             <th scope="col">Opis</th>
@@ -118,6 +123,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="product : ${necklaces}">
+                            <td th:text="${product.id}"></td>
                             <td>
                                 <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
                             </td>
@@ -140,6 +146,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
+                            <th scope="col">Id</th>
                             <th scope="col">Zdjęcie</th>
                             <th scope="col">Nazwa</th>
                             <th scope="col">Opis</th>
@@ -149,6 +156,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="product : ${rings}">
+                            <td th:text="${product.id}"></td>
                             <td>
                                 <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
                             </td>

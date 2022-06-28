@@ -10,23 +10,23 @@
 <nav id="menu1"></nav>
 <main>
     <div th:insert="fragments/header :: header"></div>
-    <div th:insert="fragments/navProducts :: nav"></div>
+    <div th:insert="fragments/navOrder :: nav"></div>
     <section>
         <div
                 class="container"
                 style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
             <br/>
-            <h4>Usuń produkt</h4>
+            <h4>Usuń zamówienie</h4>
             <form>
                 <div class="form-group row">
                     <br>
-                    <small>Czy na pewno chcesz usunąć swoje konto?</small>
+                    <small>Czy na pewno chcesz usunąć to zamówienie?</small>
                 </div>
                 <br>
                 <div class="modal-footer">
                     <div class="btn-group">
-                        <a th:href="@{/products}" class="btn btn-outline-secondary"><i class="bi bi-x-square"></i></a>
-                        <a th:href="@{/products/remove/{id}(id=${products.id})}" class="btn btn-danger">
+                        <a th:href="@{/orders/all}" class="btn btn-outline-secondary"><i class="bi bi-x-square"></i></a>
+                        <a th:href="@{/orders/remove/{id}(id=${orders.id})}" class="btn btn-danger">
                             <i class="bi bi-check2-square"></i></a>
                     </div>
                 </div>

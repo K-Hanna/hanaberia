@@ -49,9 +49,9 @@ public class Products {
     @JoinColumn(name = "reservations_id")
     private Reservations reservation;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orders_id")
-    private Orders orders;*/
+    private Orders order;
 
     @Override
     public String toString(){

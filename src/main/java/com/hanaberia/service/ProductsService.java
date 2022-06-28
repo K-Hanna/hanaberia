@@ -1,6 +1,7 @@
 package com.hanaberia.service;
 
 import com.hanaberia.enums.Categories;
+import com.hanaberia.model.Orders;
 import com.hanaberia.model.Products;
 
 import java.util.List;
@@ -43,16 +44,10 @@ public class ProductsService {
         productsRepository.save(oldProduct);
     }
 
-    public void addToCart(Products product, Reservations reservation){
-        product.setAvailable(false);
+    public void moveProduct(boolean available, Products product, Reservations reservation, Orders order){
+        product.setAvailable(available);
         product.setReservation(reservation);
-
-        productsRepository.save(product);
-    }
-
-    public void removeFromCart(Products product){
-        product.setAvailable(true);
-        product.setReservation(null);
+        product.setOrder(order);
 
         productsRepository.save(product);
     }
@@ -61,8 +56,8 @@ public class ProductsService {
         productsRepository.deleteById(id);
     }
 
-    public List<Products> getAvailableProducts(){
-        return productsRepository.findByAvailableTrue();
+    public List<Products> getUnavailableProducts(){
+        return productsRepository.findByAvailableFalse();
     }
 
     public List<Products> getByCategory(Categories category){

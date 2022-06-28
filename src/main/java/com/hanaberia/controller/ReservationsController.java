@@ -36,36 +36,35 @@ public class ReservationsController {
     @GetMapping()
     public String getUsersReservation(Model model, HttpSession session) {
 
-            MyUserDetail principal = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String name = principal.getUsername();
-            Users user = usersService.retrieveByName(name);
+        MyUserDetail principal = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = principal.getUsername();
+        Users user = usersService.retrieveByName(name);
 
-            if (user != null) {
-                session.setAttribute("user", user);
+        if (user != null) {
+            session.setAttribute("user", user);
 
-                Reservations reservation = user.getReservations();
+            Reservations reservation = user.getReservations();
 
-                if(reservation == null){
-                    reservation = new Reservations();
-                }
-                model.addAttribute("reservations", reservation);
-
-                Set<Products> products = reservation.getProductsSet();
-                int total = 0;
-                for(Products product : products){
-                    total += product.getPrice();
-                }
-
-                if(total == 0) {
-                    model.addAttribute("message", "Koszyk jesy pusty.");
-                } else {
-                    model.addAttribute("message", "Wartość koszyka: " + total + ",- zł." +
-                            " Ważny do: " + reservation.getExpiringDate() +".");
-                }
-
-                return "reservation/retrieveReservation";
+            if(reservation == null){
+                reservation = new Reservations();
             }
-            return "index";
+            model.addAttribute("reservations", reservation);
+
+            Set<Products> products = reservation.getProductsSet();
+            int total = 0;
+            for(Products product : products){
+                total += product.getPrice();
+            }
+
+            model.addAttribute("total", total);
+
+            if(total == 0) {
+                model.addAttribute("message", "Koszyk jest pusty.");
+            }
+
+            return "reservation/retrieveReservation";
+        }
+        return "index";
     }
 
     @PostMapping("/add-to-cart/{id}")

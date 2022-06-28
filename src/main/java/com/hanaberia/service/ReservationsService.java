@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -52,7 +51,7 @@ public class ReservationsService {
         }
 
         Products product = productsService.retrieve(id);
-        productsService.addToCart(product, reservation);
+        productsService.moveProduct(false, product, reservation, null);
 
         Set<Products> products = reservation.getProductsSet();
         products.add(product);
@@ -66,7 +65,7 @@ public class ReservationsService {
         reservation.setExpiringDate(LocalDate.now().plusDays(7));
 
         Products product = productsService.retrieve(productId);
-        productsService.removeFromCart(product);
+        productsService.moveProduct(true, product, null, null);
 
         Set<Products> products = reservation.getProductsSet();
         products.remove(product);
@@ -83,9 +82,13 @@ public class ReservationsService {
         Set<Products> products = reservation.getProductsSet();
 
         for(Products product : products){
-            productsService.removeFromCart(product);
+            productsService.moveProduct(true, product, null, null);
         }
 
         reservationsRepository.deleteById(id);
+    }
+
+    public void deleteEmptyReservation(Reservations reservation){
+        reservationsRepository.delete(reservation);
     }
 }
