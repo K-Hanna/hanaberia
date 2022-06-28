@@ -51,6 +51,9 @@ footer {
 	font-family: 'Lato', sans-serif;
 	text-align: right;
 }
+.total {
+	text-align: right;
+}
 #menu1 {
 	position: fixed;
 	left: 0;

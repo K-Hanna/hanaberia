@@ -1,19 +1,23 @@
 package com.hanaberia.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-/*@Entity
+@Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor*/
+@AllArgsConstructor
 public class Orders {
 
-    /*@Id
+    @Id
     @Column(nullable = false, updatable = false)
     @SequenceGenerator(
             name = "primary_sequence",
@@ -27,15 +31,18 @@ public class Orders {
     )
     private Long id;
 
-*//*    @OneToOne(fetch = FetchType.LAZY)
+    @Column
+    private boolean completed;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column
+    private LocalDate completedDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private Users user;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "products_id")
-    private List<Products> productsList;*//*
-
-    @Column
-    private boolean realized;*/
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    private Set<Products> productsSet = new HashSet<>();
 
 }

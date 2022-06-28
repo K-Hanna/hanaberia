@@ -6,8 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-
 public interface ProductsRepository extends JpaRepository<Products, Long> {
-    List<Products> findByAvailableTrue();
+    List<Products> findByAvailableFalse();
     List<Products> findByCategory(Categories category);
 }

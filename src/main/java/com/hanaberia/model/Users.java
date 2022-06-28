@@ -7,6 +7,8 @@ import com.hanaberia.enums.Roles;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 
 @Entity
 @Getter
@@ -50,8 +52,7 @@ public class Users {
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     private Reservations reservations;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orders_id")
-    private Products orders;*/
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Orders> orders;
 
 }
