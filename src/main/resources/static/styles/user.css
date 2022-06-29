@@ -26,7 +26,7 @@ main {
 	max-width: 1100px;
 	margin: 0 auto;
 	box-shadow: 0 0 50px;
-	background-color: #FFFFFF;
+	background-color: white;
 }
 header {
 	background-color: #3300CC;
@@ -36,11 +36,8 @@ header {
 	font-family: 'Lobster Two', Georgia, cursive;
 	padding: 10px 30px;
 }
-article {
-	display: flex;
-}
 section {
-	min-height: calc(100vh - 200px);
+	min-height: calc(100vh - 180px);
 }
 footer {
 	background-color: #3300CC;
@@ -54,6 +51,7 @@ footer {
 .total {
 	text-align: right;
 }
+
 #menu1 {
 	position: fixed;
 	left: 0;
@@ -75,4 +73,14 @@ footer {
 	background-color: #3300CC;
 	border-top-left-radius: 100%;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+}
+
+/* mobile view */
+@media all and (max-width: 1260px){
+    #menu1, #menu2{
+        display: none;
+    }
+    body {
+        background-image: none;
+    }
 }
