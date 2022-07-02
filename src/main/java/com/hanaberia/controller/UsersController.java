@@ -84,7 +84,7 @@ public class UsersController {
             logout(request);
         }
 
-        return "user/retrieveUser";
+        return "redirect:/users";
     }
 
     @GetMapping("/to-remove/{id}")

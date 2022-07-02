@@ -117,7 +117,7 @@ public class OrdersController {
     public String completeOrder(@PathVariable Long id){
         ordersService.complete(id);
 
-        return "redirect:/orders";
+        return "redirect:/orders/all";
     }
 
     @GetMapping("/to-edit/{id}")

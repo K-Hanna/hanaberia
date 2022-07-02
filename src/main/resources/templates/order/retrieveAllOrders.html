@@ -27,7 +27,8 @@
                                 th:data-bs-target="@{'#collapse' + ${order.id}}"
                                 aria-expanded="false"
                                 aria-controls="collapseOne">
-                            <span th:text="'Zamówienie: ' + ${name}"> </span>
+                            <span th:text="'Zamówienie: ' + ${name}"></span>,
+                            <span th:text="${order.completed} ? ' zrealizowane.' : ' w oczekiwaniu.'"> </span>
                         </button>
                     </h2>
                     <div th:id="'collapse' + ${order.id}"

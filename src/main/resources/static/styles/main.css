@@ -56,10 +56,11 @@ p {
 	background-size: cover;
 	height: 450px;
     margin: auto;
+    color: #3300CC;
     text-align: center;
     font-size: 25px;
-    padding: 200px;
-    text-shadow: 1 px 1px 0.5px black;
+    padding: 200px 0;
+    text-shadow: 3px 3px 0 white, 3px -3px 0 white, -3px 3px 0 white, -3px -3px 0 white;
     font-family: 'Lobster Two', Georgia, cursive;
 }
 .home {
@@ -93,6 +94,12 @@ footer {
 }
 a img {
 	width: 100%;
+}
+#insta, #login, #logout{
+    color: white;
+    border: 0;
+    margin: 0;
+    font-size: 25px;
 }
 /*Menu stuff*/
 @keyframes checked-anim {
@@ -135,10 +142,6 @@ a img {
  	text-decoration: none;
 	width: 230px;
 	text-indent: 56px;
-}
-.nav-bar li hr{
-	width:  230px;
-	align: center;
 }
 #trigger, #burger, #burger:before, #burger:after {
 	position: fixed;
@@ -190,7 +193,8 @@ a img {
 	position: fixed;
 	left: 0;
 	top: 0;
-	margin: 0; padding: 0;
+	margin: 0;
+	padding: 0;
 	width: 80px;
 	height: 80px;
 	background-image: linear-gradient(to bottom right, #3300CC, #9AE9FF);
@@ -209,17 +213,14 @@ a img {
 	position: fixed;
 	right: 0;
 	bottom: 0;
-	margin: 0; padding: 0;
+	margin: 0;
+	padding: 0;
 	width: 80px;
 	height: 80px;
 	background-image: linear-gradient(to top left, #3300CC, #9AE9FF);
 	border-top-left-radius: 100%;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
-}
-#insta {
-	position: relative;
-	left: 56px;
-	bottom: -100px;
+	z-index: -1;
 }
 
 /* GALLERY ITEMS */
@@ -364,9 +365,6 @@ a img {
 	p {
 	    text-align: left;
 	}
-	#menu2{
-	    display: none;
-	}
 }
 
 /* mobile view */
@@ -402,11 +400,4 @@ a img {
 	.close {
 	  right: 40px;
 	}
-}
-
-/*mini stuff*/
-@media all and (max-width: 400px){
-    .head {
-    padding: 50px;
-    }
 }
