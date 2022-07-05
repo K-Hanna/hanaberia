@@ -27,31 +27,13 @@
                                 type="text"
                                 id="userName"
                                 th:field="${users.userName}"
-                                readonly="readonly"/>
+                                readonly/>
                     </div>
                 </div>
                 <div class="row g-2">
-                    <label class="btn-group col-4" for="contact">
-                        <input type="radio"
-                               class="btn-check"
-                               th:field="*{users.contactForm}"
-                               value="EMAIL"
-                               id="emailCheck"
-                               autocomplete="off">
-                        <label class="btn btn-outline-secondary"
-                               for="emailCheck">
-                            <i class="bi bi-envelope"></i>
-                        </label>
-                        <input type="radio"
-                               class="btn-check"
-                               th:field="*{users.contactForm}"
-                               value="PHONE"
-                               id="phoneCheck"
-                               autocomplete="off">
-                        <label class="btn btn-outline-secondary"
-                               for="phoneCheck">
-                            <i class="bi bi-telephone"></i>
-                        </label>
+                    <label for="contact" class="col-4 col-form-label">
+                        <div th:if="${users.contactForm.name() == 'EMAIL'}"><i class="bi bi-envelope"></i></div>
+                        <div th:if="${users.contactForm.name() == 'PHONE'}"><i class="bi bi-telephone"></i></div>
                     </label>
                     <div class="col-8">
                         <input

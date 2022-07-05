@@ -37,11 +37,11 @@ public class OrdersService {
         return ordersRepository.findById(id).orElseThrow(null);
     }
 
-    public void complete(final Long id) {
+    public void complete(final Long id, Orders orders) {
 
         Orders order = retrieve(id);
         order.setCompleted(true);
-        order.setCompletedDate(LocalDate.now());
+        order.setCompletedDate(orders.getCompletedDate());
 
         ordersRepository.save(order);
     }
