@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -113,9 +114,19 @@ public class OrdersController {
         return "redirect:/orders";
     }
 
+    @GetMapping("/to-complete/{id}")
+    public String orderToComplete(@PathVariable Long id, Model model){
+
+        Orders order = ordersService.retrieve(id);
+        order.setCompletedDate(LocalDate.now());
+        model.addAttribute("orders", order);
+
+        return "order/completeOrder";
+    }
+
     @PostMapping("/complete/{id}")
-    public String completeOrder(@PathVariable Long id){
-        ordersService.complete(id);
+    public String completeOrder(@PathVariable Long id, @Valid Orders orders){
+        ordersService.complete(id, orders);
 
         return "redirect:/orders/all";
     }

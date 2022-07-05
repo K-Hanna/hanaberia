@@ -76,9 +76,10 @@ footer {
 	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
 	z-index: -1;
 }
-#insta, #login, #logout{
+#insta, #contact, #login, #logout{
     color: white;
     border: 0;
     margin: 0;
+    padding: 0 10px;
     font-size: 25px;
 }
