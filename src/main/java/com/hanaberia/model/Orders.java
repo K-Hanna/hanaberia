@@ -36,6 +36,9 @@ public class Orders {
     @Column
     private LocalDate completedDate;
 
+    @Column
+    private String message;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private Users user;
