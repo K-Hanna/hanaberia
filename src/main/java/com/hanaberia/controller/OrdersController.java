@@ -99,21 +99,6 @@ public class OrdersController {
         return "index";
     }
 
-    @GetMapping("/to-add")
-    public String orderToAdd(@SessionAttribute("user") Users user, Model model, @ModelAttribute Orders order){
-
-        Reservations reservation = user.getReservations();
-        Set<Products> products = reservation.getProductsSet();
-        int total = 0;
-        for(Products product : products){
-            total += product.getPrice();
-        }
-
-        model.addAttribute("total", total);
-
-        return "order/createOrder";
-    }
-
     @PostMapping("/add")
     public String orderAdd(@ModelAttribute Orders order,  @SessionAttribute("user") Users user){
 
