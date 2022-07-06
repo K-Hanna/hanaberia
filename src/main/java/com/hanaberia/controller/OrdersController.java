@@ -6,6 +6,7 @@ import com.hanaberia.model.Reservations;
 import com.hanaberia.model.Users;
 import com.hanaberia.repository.OrdersRepository;
 import com.hanaberia.service.*;
+import com.hanaberia.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -41,6 +43,7 @@ public class OrdersController {
     public String getAllOrders(Model model){
 
         List<Orders> allOrders = ordersService.getAllOrders();
+        allOrders.sort(Comparator.comparing(Orders :: getId).reversed());
         model.addAttribute("orders", allOrders);
 
         if(allOrders.isEmpty()){
@@ -73,7 +76,9 @@ public class OrdersController {
         if (user != null) {
             session.setAttribute("user", user);
 
-            Set<Orders> orders = user.getOrders();
+            List<Orders> orders = user.getOrders();
+            orders.sort(Comparator.comparing(Orders :: getId).reversed());
+
             model.addAttribute("orders", orders);
 
             if(orders.isEmpty()){
@@ -94,12 +99,27 @@ public class OrdersController {
         return "index";
     }
 
+    @GetMapping("/to-add")
+    public String orderToAdd(@SessionAttribute("user") Users user, Model model, @ModelAttribute Orders order){
+
+        Reservations reservation = user.getReservations();
+        Set<Products> products = reservation.getProductsSet();
+        int total = 0;
+        for(Products product : products){
+            total += product.getPrice();
+        }
+
+        model.addAttribute("total", total);
+
+        return "order/createOrder";
+    }
+
     @PostMapping("/add")
     public String orderAdd(@ModelAttribute Orders order,  @SessionAttribute("user") Users user){
 
         order.setUser(user);
         ordersService.create(order);
-        Set<Orders> usersOrders = user.getOrders();
+        List<Orders> usersOrders = user.getOrders();
         usersOrders.add(order);
         user.setOrders(usersOrders);
 

@@ -7,7 +7,7 @@ import com.hanaberia.enums.Roles;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 
 @Entity
@@ -53,6 +53,6 @@ public class Users {
     private Reservations reservations;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<Orders> orders;
+    private List<Orders> orders;
 
 }

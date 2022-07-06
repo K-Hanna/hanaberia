@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hanaberia</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+  <link th:href="@{/styles/user.css}" rel="stylesheet" />
+</head>
+<body>
+<nav id="menu1"></nav>
+<main>
+  <div th:insert="fragments/header :: header"></div>
+  <div th:insert="fragments/navOrder :: nav"></div>
+  <section>
+    <div
+            class="container"
+            style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
+      <br/>
+      <h4>Złóż zamówienie</h4>
+      <form
+              action="#"
+              th:action="@{/orders/add}"
+              th:object="${orders}"
+              method="post">
+          Całkowita wartość zamówienia: <span th:text="${total}"></span>,- zł.
+        <div class="row g-2">
+          <div class="col-12">
+            <label for="message" class="col-form-label">Wiadomość dla sprzedawcy:</label>
+          </div>
+          <div class="col-12">
+            <textarea rows = "2"
+                      class="form-control"
+                      id="message"
+                      th:field="*{message}"
+                      maxlength="255">
+            </textarea>
+            <p class="error"><span th:text="${message}"></span></p>
+          </div>
+        </div>
+        <br>
+        <div class="modal-footer">
+          <div class="btn-group">
+            <a th:href="@{/reservations}" class="btn btn-outline-secondary"><i class="bi bi-x-square"></i></a>
+            <button type="submit"
+                    class="btn btn-success"
+                    value="Submit">
+              <i class="bi bi-check2-square"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+  <div th:insert="fragments/footer :: footer"></div>
+</main>
+<nav id="menu2"></nav>
+</body>
+</html>

@@ -48,18 +48,9 @@
                 <h4 class="total">Razem: <span th:text="${total}"></span>,- zł.</h4>
                 <p class="total">Rezerwacja ważna do: <span th:text="${reservations.expiringDate}"></span>.</p>
                 <div class="text-center">
-                    <button type="button"
-                            class="btn btn-success"
-                            data-bs-toggle="modal"
-                            data-bs-target="#createOrderModal">
-                        Do kasy
-                    </button>
+                    <a th:href="@{/orders/to-add}" class="btn btn-success">
+                        Do kasy</a>
                 </div>
-
-                <div
-                        th:insert="order/createOrderModal :: modal"
-                        th:with="orders=${orders}"></div>
-
             </div>
                 <p><span th:text="${message}"></span></p>
         </div>

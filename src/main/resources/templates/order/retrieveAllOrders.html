@@ -47,9 +47,16 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <p class="total">Suma zamówienia: <span th:text="${total}"></span>,- zł</p>
-                            <p class="total" th:if="${order.completed}">Zrealizowano dnia:
-                                <span th:text="${order.completedDate}"></span>.</p>
+                            <div class="d-flex justify-content-between">
+                                <div class="w-50">
+                                    <p><span th:text="${order.message}"></span></p>
+                                </div>
+                                <div class="w-50">
+                                    <p class="total">Suma zamówienia: <span th:text="${total}"></span>,- zł</p>
+                                    <p class="total" th:if="${order.completed}">Zrealizowano dnia:
+                                        <span th:text="${order.completedDate}"></span>.</p>
+                                </div>
+                            </div>
                             <div th:unless="${order.completed}" class="text-center">
                                 <div class="btn-group">
                                     <!--<a th:href="@{/orders/to-edit/{id}(id=${order.id})}" class="btn btn-outline-primary">
