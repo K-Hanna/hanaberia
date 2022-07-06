@@ -1,5 +1,6 @@
 package com.hanaberia.controller;
 
+import com.hanaberia.model.Orders;
 import com.hanaberia.model.Products;
 import com.hanaberia.model.Reservations;
 import com.hanaberia.model.Users;
@@ -34,7 +35,7 @@ public class ReservationsController {
     private ProductsService productsService;
 
     @GetMapping()
-    public String getUsersReservation(Model model, HttpSession session) {
+    public String getUsersReservation(Model model, HttpSession session, @ModelAttribute Orders order) {
 
         MyUserDetail principal = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = principal.getUsername();
@@ -91,17 +92,8 @@ public class ReservationsController {
         return "redirect:/reservations";
     }
 
-    @GetMapping("/to-remove/{id}")
-    public String reservationToRemove(@PathVariable("id") Long id, Model model){
-
-        Reservations reservation = reservationsService.retrieve(id);
-        model.addAttribute("reservations", reservation);
-
-        return "reservation/deleteReservation";
-    }
-
     @GetMapping("/remove/{id}")
-    public String reservationRemove(@PathVariable("id") Long id) {
+    public String reservationRemove(@PathVariable("id") Long id, Model model) {
 
         reservationsService.delete(id);
         return "redirect:/reservations";

@@ -3,17 +3,17 @@
 <div
         class="modal fade"
         th:fragment="modal"
-        id="createOrderModal"
+        id="deleteReservationModal"
         tabindex="-1"
         role="dialog"
-        aria-labelledby="createOrderModalTitle"
+        aria-labelledby="deleteReservationModalTitle"
         aria-hidden="true"
 >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createOrderModalTitle">
-                    Złóż zamówienie
+                <h5 class="modal-title" id="deleteReservationModalTitle">
+                    Usuń rezerwację
                 </h5>
                 <button
                         type="button"
@@ -27,23 +27,14 @@
             <div class="modal-body">
                 <form
                         action="#"
-                        th:action="@{/orders/add}"
-                        th:object="${orders}"
-                        method="post">
-                    Całkowita wartość zamówienia: <span th:text="${total}"></span>,- zł.
+                        th:action="@{/reservations/remove/{id}(id=${reservations.id})}"
+                        th:object="${reservations}"
+                        method="get">
+
                     <div class="row g-2">
-                        <div class="col-12">
-                            <label for="message" class="col-form-label">Wiadomość dla sprzedawcy:</label>
-                        </div>
-                        <div class="col-12">
-                        <textarea rows = "2"
-                                  class="form-control"
-                                  id="message"
-                                  th:field="*{message}"
-                                  maxlength="255">
-                        </textarea>
-                            <br>
-                        </div>
+                        <br>
+                        Czy na pewno chcesz usunąć tę rezerwację?
+                        <br><br>
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group">
@@ -54,7 +45,7 @@
                                 <i class="bi bi-x-square"></i>
                             </button>
                             <button type="submit"
-                                    class="btn btn-success"
+                                    class="btn btn-danger"
                                     value="Submit">
                                 <i class="bi bi-check2-square"></i>
                             </button>

@@ -19,9 +19,18 @@
             <h4>Mój koszyk</h4>
             <div class="w-100" th:if="${total != 0}">
                 <div class="total">
-                    <a th:href="@{/reservations/to-remove/{id}(id=${reservations.id})}" class="btn btn-outline-danger">
-                        <i class="bi bi-x-square" title="Opróżnij koszyk"></i></a>
+                    <button type="button"
+                            class="btn btn-outline-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteReservationModal">
+                        <i class="bi bi-x-square" title="Opróżnij koszyk"></i>
+                    </button>
                 </div>
+
+                <div
+                        th:insert="reservation/deleteReservationModal :: modal"
+                        th:with="reservations=${reservations}"></div>
+
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -48,9 +57,18 @@
                 <h4 class="total">Razem: <span th:text="${total}"></span>,- zł.</h4>
                 <p class="total">Rezerwacja ważna do: <span th:text="${reservations.expiringDate}"></span>.</p>
                 <div class="text-center">
-                    <a th:href="@{/orders/to-add}" class="btn btn-success">
-                        Do kasy</a>
+                    <button type="button"
+                            class="btn btn-success"
+                            data-bs-toggle="modal"
+                            data-bs-target="#createOrderModal">
+                        Do kasy
+                    </button>
                 </div>
+
+                <div
+                        th:insert="order/createOrderModal :: modal"
+                        th:with="orders=${orders}"></div>
+
             </div>
                 <p><span th:text="${message}"></span></p>
         </div>
