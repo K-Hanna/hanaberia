@@ -1,7 +1,6 @@
 package unit.service;
 
 import com.hanaberia.HanaberiaApplication;
-import com.hanaberia.model.Products;
 import com.hanaberia.model.Reservations;
 import com.hanaberia.model.Users;
 import com.hanaberia.repository.ReservationsRepository;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import unit.mock.ProductMock;
 import unit.mock.ReservationMock;
 import unit.mock.UserMock;
 
@@ -32,7 +30,6 @@ public class ReservationsServiceTest {
 
     private final Reservations reservationOne = ReservationMock.mockedReservationOne();
     private final Users user = UserMock.mockedUserOne();
-    private final Products product = ProductMock.mockedProductOne();
 
     @Test
     void createReservationTest(){
