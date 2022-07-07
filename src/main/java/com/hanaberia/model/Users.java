@@ -4,8 +4,7 @@ import javax.persistence.*;
 
 import com.hanaberia.enums.ContactForms;
 import com.hanaberia.enums.Roles;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,6 +12,9 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Users {
 
     @Id
@@ -32,6 +34,10 @@ public class Users {
     @Column(nullable = false)
     private String userName;
 
+    @Enumerated(EnumType.STRING)
+    @Column
+    private ContactForms contactForm;
+
     @Column
     private String contact;
 
@@ -44,10 +50,6 @@ public class Users {
     @Enumerated(EnumType.STRING)
     @Column
     private Roles roles;
-
-    @Enumerated(EnumType.STRING)
-    @Column
-    private ContactForms contactForm;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     private Reservations reservations;
