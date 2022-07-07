@@ -56,6 +56,17 @@ public class OrdersService {
         ordersRepository.deleteById(id);
     }
 
+    public void deleteCompletedOrders(final Long id){
+        Orders order = retrieve(id);
+        Set<Products> products = order.getProductsSet();
+
+        for(Products product : products){
+            productsService.moveProduct(false, product, null, null);
+        }
+
+        ordersRepository.deleteById(id);
+    }
+
     public void changingOrder(String direction, Long productId, Long orderId) {
 
         Products product = productsService.retrieve(productId);

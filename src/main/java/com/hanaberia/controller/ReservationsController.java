@@ -93,7 +93,7 @@ public class ReservationsController {
     }
 
     @GetMapping("/remove/{id}")
-    public String reservationRemove(@PathVariable("id") Long id, Model model) {
+    public String reservationRemove(@PathVariable("id") Long id) {
 
         reservationsService.delete(id);
         return "redirect:/reservations";
