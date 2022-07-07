@@ -40,7 +40,7 @@ public class ReservationsService {
         }
     }
 
-    public Reservations addToCart(final Long productId, final Users user) {
+    public Reservations addToCart(final Long id, final Users user) {
 
         Reservations reservation = user.getReservations();
 
@@ -50,7 +50,7 @@ public class ReservationsService {
             reservation.setExpiringDate(LocalDate.now().plusDays(7));
         }
 
-        Products product = productsService.retrieve(productId);
+        Products product = productsService.retrieve(id);
         productsService.moveProduct(false, product, reservation, null);
 
         Set<Products> products = reservation.getProductsSet();
@@ -81,10 +81,8 @@ public class ReservationsService {
         Reservations reservation = retrieve(id);
         Set<Products> products = reservation.getProductsSet();
 
-        if(products != null) {
-            for (Products product : products) {
-                productsService.moveProduct(true, product, null, null);
-            }
+        for(Products product : products){
+            productsService.moveProduct(true, product, null, null);
         }
 
         reservationsRepository.deleteById(id);
