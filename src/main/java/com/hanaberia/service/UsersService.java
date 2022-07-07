@@ -64,12 +64,17 @@ public class UsersService {
         Reservations reservations = user.getReservations();
         List<Orders> orders = user.getOrders();
 
-        reservationsService.delete(reservations.getId());
-        for (Orders order : orders) {
-            if(order.isCompleted()){
-                ordersService.deleteCompletedOrders(order.getId());
-            } else {
-                ordersService.delete(order.getId());
+        if(reservations != null) {
+            reservationsService.delete(reservations.getId());
+        }
+
+        if(orders != null) {
+            for (Orders order : orders) {
+                if (order.isCompleted()) {
+                    ordersService.deleteCompletedOrders(order.getId());
+                } else {
+                    ordersService.delete(order.getId());
+                }
             }
         }
 
