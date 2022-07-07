@@ -1,6 +1,6 @@
 package com.hanaberia.controller;
 
-import com.hanaberia.model.Categories;
+import com.hanaberia.enums.Categories;
 import com.hanaberia.model.Products;
 import com.hanaberia.repository.ProductsRepository;
 import com.hanaberia.service.ProductsService;

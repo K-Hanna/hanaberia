@@ -2,8 +2,12 @@ package com.hanaberia.model;
 
 import javax.persistence.*;
 
+import com.hanaberia.enums.ContactForms;
+import com.hanaberia.enums.Roles;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 
 @Entity
@@ -29,10 +33,7 @@ public class Users {
     private String userName;
 
     @Column
-    private String email;
-
-    @Column
-    private String phone;
+    private String contact;
 
     @Column(nullable = false)
     private String password;
@@ -44,14 +45,14 @@ public class Users {
     @Column
     private Roles roles;
 
+    @Enumerated(EnumType.STRING)
+    @Column
+    private ContactForms contactForm;
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    private Reservations reservations;
 
-/*    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reservations_id")
-    private Products reservations;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orders_id")
-    private Products orders;*/
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Orders> orders;
 
 }

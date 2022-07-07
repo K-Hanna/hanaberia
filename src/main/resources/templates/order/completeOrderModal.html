@@ -1,0 +1,56 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div
+        class="modal fade"
+        th:fragment="modal"
+        id="completeOrderModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="completeOrderModalTitle"
+        aria-hidden="true"
+>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="completeOrderModalTitle">
+                    Zrealizuj zamówienie
+                </h5>
+                <button
+                        type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form
+                        action="#"
+                        th:action="@{/orders/complete/{id}(id=${order.id})}"
+                        th:object="${orders}"
+                        method="post">
+                    Całkowita wartość zamówienia: <span th:text="${total}"></span>,- zł.
+                    <div class="modal-footer">
+                        <div class="btn-group">
+                            <button
+                                    type="button"
+                                    class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">
+                                <i class="bi bi-x-square"></i>
+                            </button>
+                            <button type="submit"
+                                    class="btn btn-success"
+                                    value="Submit">
+                                <i class="bi bi-check2-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,25 +1,27 @@
 package com.hanaberia.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-/*@Entity
+@Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor*/
+@AllArgsConstructor
 public class Reservations {
-/*
+
     @Id
     @Column(nullable = false, updatable = false)
     @SequenceGenerator(
             name = "primary_sequence",
             sequenceName = "primary_sequence",
-            allocationSize = 1,
-            initialValue = 1
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -27,14 +29,14 @@ public class Reservations {
     )
     private Long id;
 
-*//*    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column
+    private LocalDate expiringDate;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id")
     private Users user;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "products_id")
-    private List<Products> productsList;*//*
-
-    @Column
-    private boolean expired;*/
+    @OneToMany(mappedBy = "reservation", fetch = FetchType.EAGER)
+    private Set<Products> productsSet = new HashSet<>();
 }

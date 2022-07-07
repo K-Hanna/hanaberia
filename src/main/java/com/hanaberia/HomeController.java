@@ -1,6 +1,6 @@
 package com.hanaberia;
 
-import com.hanaberia.model.Categories;
+import com.hanaberia.enums.Categories;
 import com.hanaberia.model.Products;
 import com.hanaberia.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
