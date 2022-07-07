@@ -51,10 +51,10 @@ public class UsersController {
 
         MyUserDetail principal = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = principal.getUsername();
-        Users user = usersService.retrieveByName(name);
+        Users retrievedUser = usersService.retrieveByName(name);
 
-        session.setAttribute("user", user);
-        model.addAttribute("users", user);
+        session.setAttribute("users", retrievedUser);
+        model.addAttribute("users", retrievedUser);
 
         return "user/retrieveUser";
     }
