@@ -1,6 +1,8 @@
 package com.hanaberia.service;
 
 import com.hanaberia.enums.Roles;
+import com.hanaberia.model.Orders;
+import com.hanaberia.model.Reservations;
 import com.hanaberia.model.Users;
 import java.util.List;
 
@@ -14,6 +16,12 @@ public class UsersService {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private ReservationsService reservationsService;
+
+    @Autowired
+    private OrdersService ordersService;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
@@ -50,7 +58,25 @@ public class UsersService {
         usersRepository.save(oldUser);
     }
 
-    public void delete(final Long id) {
+    public void delete(Long id) {
+
+        Users user = retrieve(id);
+
+        Reservations reservations = user.getReservations();
+        List<Orders> orders = user.getOrders();
+
+        if(reservations != null)
+            reservationsService.delete(reservations.getId());
+
+        if(orders != null) {
+            for (Orders order : orders) {
+                if (order.isCompleted())
+                    ordersService.deleteCompletedOrder(order.getId());
+                else
+                    ordersService.delete(order.getId());
+            }
+        }
+
         usersRepository.deleteById(id);
     }
 
