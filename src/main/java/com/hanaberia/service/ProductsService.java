@@ -21,10 +21,10 @@ public class ProductsService {
         return productsRepository.findAll();
     }
 
-    public Long create(final Products product) {
+    public Products create(final Products product) {
         product.setAvailable(true);
 
-        return productsRepository.save(product).getId();
+        return productsRepository.save(product);
     }
 
     public Products retrieve(final Long id) {
