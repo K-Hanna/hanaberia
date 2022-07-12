@@ -39,7 +39,7 @@
                 <a href="#" class="close"></a>
                 <li th:each="product : ${bracelets}" th:if="${product.available}">
                     <a th:href="@{'#' + ${product.id}}">
-                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}"
+                        <img th:name="${product.id}" th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}"
                              th:alt="${product.name}"></a>
                     <div th:id="${product.id}" class="port">
                         <div class="description">
@@ -81,7 +81,7 @@
                 <a href="#" class="close"></a>
                 <li th:each="product : ${earrings}" th:if="${product.available}">
                     <a th:href="@{'#' + ${product.id}}">
-                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
+                        <img th:name="${product.id}" th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
                     <div th:id="${product.id}" class="port">
                         <div class="description">
                             <h4><span th:text="${product.name}"></span></h4>
@@ -120,7 +120,7 @@
                 <a href="#" class="close"></a>
                 <li th:each="product : ${necklaces}" th:if="${product.available}">
                     <a th:href="@{'#' + ${product.id}}">
-                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
+                        <img th:name="${product.id}" th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
                     <div th:id="${product.id}" class="port">
                         <div class="description">
                             <h4><span th:text="${product.name}"></span></h4>
@@ -159,7 +159,7 @@
                 <a href="#" class="close"></a>
                 <li th:each="product : ${rings}" th:if="${product.available}">
                     <a th:href="@{'#' + ${product.id}}">
-                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
+                        <img th:name="${product.id}" th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
                     <div th:id="${product.id}" class="port">
                         <div class="description">
                             <h4><span th:text="${product.name}"></span></h4>
