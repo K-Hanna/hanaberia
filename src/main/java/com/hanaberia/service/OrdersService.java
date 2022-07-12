@@ -29,6 +29,9 @@ public class OrdersService {
 
     public Orders create(final Orders order) {
 
+        String message = order.getMessage().replaceAll("[\\t\\n\\r]+", " ");
+        order.setMessage(message);
+
         return ordersRepository.save(order);
     }
 

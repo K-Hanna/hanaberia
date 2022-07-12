@@ -22,6 +22,8 @@ public class ProductsService {
     }
 
     public Products create(final Products product) {
+        String covertDesc = product.getDescription().replaceAll("[\\t\\n\\r]+", " ");
+        product.setDescription(covertDesc);
         product.setAvailable(true);
 
         return productsRepository.save(product);
@@ -34,9 +36,10 @@ public class ProductsService {
     public void update(final Long id, final Products newProduct) {
 
         Products oldProduct = productsRepository.findById(id).orElseThrow(null);
+        String covertDesc = newProduct.getDescription().replaceAll("[\\t\\n\\r]+", " ");
         oldProduct.setImageName(newProduct.getImageName());
         oldProduct.setName(newProduct.getName());
-        oldProduct.setDescription(newProduct.getDescription());
+        oldProduct.setDescription(covertDesc);
         oldProduct.setPrice(newProduct.getPrice());
         oldProduct.setCategory(newProduct.getCategory());
         oldProduct.setAvailable(true);
