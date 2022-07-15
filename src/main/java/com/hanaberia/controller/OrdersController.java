@@ -6,7 +6,6 @@ import com.hanaberia.model.Reservations;
 import com.hanaberia.model.Users;
 import com.hanaberia.repository.OrdersRepository;
 import com.hanaberia.service.*;
-import com.hanaberia.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

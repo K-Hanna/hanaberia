@@ -48,6 +48,7 @@ p {
 	text-align: justify;
 	font-size: 15px;
 	font-family: 'Lato', sans-serif;
+	width: 100%;
 }
 .head {
 	background-repeat: no-repeat;
@@ -78,6 +79,9 @@ p {
 .rings {
 	background-image: url('ring.png');
 }
+.archive {
+	background-image: url('archive.png');
+}
 section {
 	background-color: #000000;
 	padding: 20px 0;
@@ -94,12 +98,20 @@ footer {
 a img {
 	width: 100%;
 }
-#insta, #login, #logout{
+#logo, #insta, #login, #logout{
     color: white;
+    text-decoration: none;
     border: 0;
     margin: 0;
     padding: 0 10px;
-    font-size: 25px;
+    font-size: 30px;
+}
+#copyright{
+    color: white;
+    text-decoration: none;
+    margin: 0;
+    padding: 10px;
+    font-size: 15px;
 }
 /*Menu stuff*/
 @keyframes checked-anim {
