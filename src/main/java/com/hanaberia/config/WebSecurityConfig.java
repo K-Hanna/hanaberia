@@ -28,17 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/webjars/**", "/users/to-add","/users/add", "/styles/**").permitAll()
-                .antMatchers("/products").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
-                .and()
+                .antMatchers("/archive", "/messages/add", "/messages/to-add").permitAll()
+                .antMatchers("/products/**", "/orders/all", "/messages/all").hasAuthority("ADMIN")
+                .anyRequest().authenticated().and()
                 .formLogin()
-                .loginPage("/login")
-                .failureUrl("/login-error")
-                .permitAll()
-                .and()
-                .logout()
-                .logoutSuccessUrl("/index.html")
-                .permitAll()
+                .loginPage("/login").failureUrl("/login-error").permitAll().and()
+                .logout().logoutSuccessUrl("/index.html").permitAll()
                 .logoutSuccessUrl("/").and()
                 .exceptionHandling().accessDeniedPage("/403");
     }

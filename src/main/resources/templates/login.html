@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Hanaberia</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link th:href="@{/styles/user.css}" rel="stylesheet" />
 </head>
 <body>
@@ -38,7 +38,7 @@
                             </div>
                             <div>
                                 <p class="mb-0">Nie masz konta?
-                                    <a
+                                    <a id="register"
                                             class="text-white-50 fw-bold"
                                             th:href="@{/users/to-add}">
                                         Zarejestruj się</a>
@@ -51,10 +51,5 @@
         </div>
     </section>
 <nav id="menu2"></nav>
-
-<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
-
 </body>
 </html>

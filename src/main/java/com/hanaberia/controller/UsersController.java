@@ -1,17 +1,24 @@
 package com.hanaberia.controller;
 
+import com.hanaberia.enums.ContactForms;
+import com.hanaberia.model.Messages;
 import com.hanaberia.model.Users;
 import com.hanaberia.repository.UsersRepository;
+import com.hanaberia.service.MyUserDetail;
 import com.hanaberia.service.UsersService;
 import com.hanaberia.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/users")
@@ -25,6 +32,7 @@ public class UsersController {
 
     @GetMapping("/to-add")
     public String userToAdd(Users user){
+        user.setContactForm(ContactForms.EMAIL);
         return "user/createUser";
     }
 
@@ -39,10 +47,15 @@ public class UsersController {
         }
     }
 
-    @GetMapping("/{name}")
-    public String userGet(@PathVariable("name") String name, Model model){
-        Users user = usersService.retrieveByName(name);
-        model.addAttribute("users", user);
+    @GetMapping()
+    public String userGet(Model model, HttpSession session) {
+
+        MyUserDetail principal = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = principal.getUsername();
+        Users retrievedUser = usersService.retrieveByName(name);
+
+        session.setAttribute("users", retrievedUser);
+        model.addAttribute("users", retrievedUser);
 
         return "user/retrieveUser";
     }
@@ -57,7 +70,7 @@ public class UsersController {
     }
 
     @PostMapping("/edit/{id}")
-    public String UserEdit(Model model, @PathVariable("id") Long id, @Valid Users user, HttpServletRequest request) {
+    public String userEdit(Model model, @PathVariable("id") Long id, @Valid Users user, HttpServletRequest request) {
 
         Users oldUser = usersService.retrieve(id);
         model.addAttribute("users", oldUser);
@@ -72,11 +85,11 @@ public class UsersController {
             logout(request);
         }
 
-        return "user/retrieveUser";
+        return "redirect:/users";
     }
 
     @GetMapping("/to-remove/{id}")
-    public String userToDelete(@PathVariable("id") Long id, Model model){
+    public String userToRemove(@PathVariable("id") Long id, Model model){
 
         Users user = usersService.retrieve(id);
         model.addAttribute("users", user);
@@ -85,7 +98,7 @@ public class UsersController {
     }
 
     @GetMapping("/remove/{id}")
-    public String UserRemove(@PathVariable("id") Long id, HttpServletRequest request) {
+    public String userRemove(@PathVariable("id") Long id, HttpServletRequest request) {
 
         usersService.delete(id);
         logout(request);
@@ -95,43 +108,48 @@ public class UsersController {
     public int validate(Model model, Users newUser, Users oldUser){
         Validator validator = new Validator();
         int errors = 0;
+        List<String> messages = new ArrayList<>();
 
         if(!validator.isUserNameValid(newUser.getUserName())){
-            model.addAttribute("errorUN1", "Login jest nieodpowiedni.");
+           messages.add("Login jest nieodpowiedni.");
             errors++;
         }
 
         if(usersService.userNameExists(newUser.getUserName()) && !newUser.getUserName().equals(oldUser.getUserName())){
-            model.addAttribute("errorUN2", "Login jest zajęty.");
+           messages.add("Login jest zajęty.");
             errors++;
         }
 
-        if(!newUser.getEmail().isEmpty()) {
-            if (!validator.isEmailValid(newUser.getEmail())) {
-                model.addAttribute("errorE1", "E-mail jest nieodpowiedni.");
+        if(newUser.getContactForm().equals(ContactForms.EMAIL)) {
+            if (!validator.isEmailValid(newUser.getContact())) {
+               messages.add("E-mail jest nieodpowiedni.");
                 errors++;
             }
-            if (usersService.emailExists(newUser.getEmail()) && !newUser.getEmail().equals(oldUser.getEmail())) {
-                model.addAttribute("errorE2", "Konto na ten e-mail już istnieje.");
+            if (usersService.contactExists(newUser.getContact())
+                    && !newUser.getContact().equals(oldUser.getContact())) {
+               messages.add("Konto na ten e-mail już istnieje.");
                 errors++;
             }
         }
 
-        if(!validator.isPhoneValid(newUser.getPhone()) && !newUser.getPhone().isEmpty()){
-            model.addAttribute("errorNo", "Numer telefonu jest nieodpowiedni.");
-            errors++;
-        }
-
-        if(newUser.getEmail().isEmpty() && newUser.getPhone().isEmpty()){
-            model.addAttribute("errorEN", "Podaj e-mail albo numer telefonu.");
-            errors++;
+        if(newUser.getContactForm().equals(ContactForms.PHONE)) {
+            if (!validator.isPhoneValid(newUser.getContact())) {
+               messages.add("Numer telefonu jest nieodpowiedni.");
+                errors++;
+            }
+            if (usersService.contactExists(newUser.getContact())
+                    && !newUser.getContact().equals(oldUser.getContact())) {
+               messages.add("Konto na ten telefon już istnieje.");
+                errors++;
+            }
         }
 
         if(!validator.arePasswordsMatching(newUser.getPassword(), newUser.getConfirm())){
-            model.addAttribute("errorP", "Hasła nie pasują.");
+           messages.add("Hasła nie pasują.");
             errors++;
         }
 
+        model.addAttribute("errors", messages);
         return errors;
     }
 

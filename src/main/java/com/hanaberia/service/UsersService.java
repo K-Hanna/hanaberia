@@ -1,6 +1,8 @@
 package com.hanaberia.service;
 
-import com.hanaberia.model.Roles;
+import com.hanaberia.enums.Roles;
+import com.hanaberia.model.Orders;
+import com.hanaberia.model.Reservations;
 import com.hanaberia.model.Users;
 import java.util.List;
 
@@ -15,12 +17,17 @@ public class UsersService {
     @Autowired
     private UsersRepository usersRepository;
 
+    @Autowired
+    private ReservationsService reservationsService;
+
+    @Autowired
+    private OrdersService ordersService;
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     public List<Users> findAll() {
         return usersRepository.findAll();
     }
-
 
     public Users create(final Users user) {
 
@@ -43,8 +50,8 @@ public class UsersService {
         Users oldUser = usersRepository.findById(id).orElseThrow(null);
 
         oldUser.setUserName(user.getUserName());
-        oldUser.setEmail(user.getEmail());
-        oldUser.setPhone(user.getPhone());
+        oldUser.setContact(user.getContact());
+        oldUser.setContactForm(user.getContactForm());
         oldUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         oldUser.setConfirm(bCryptPasswordEncoder.encode(user.getConfirm()));
 
@@ -52,6 +59,25 @@ public class UsersService {
     }
 
     public void delete(final Long id) {
+
+        Users user = retrieve(id);
+        Reservations reservations = user.getReservations();
+        List<Orders> orders = user.getOrders();
+
+        if(reservations != null) {
+            reservationsService.delete(reservations.getId());
+        }
+
+        if(orders != null) {
+            for (Orders order : orders) {
+                if (order.isCompleted()) {
+                    ordersService.deleteCompletedOrders(order.getId());
+                } else {
+                    ordersService.delete(order.getId());
+                }
+            }
+        }
+
         usersRepository.deleteById(id);
     }
 
@@ -59,7 +85,7 @@ public class UsersService {
         return usersRepository.findUserByUserName(userName) != null;
     }
 
-    public boolean emailExists(String email){
-        return usersRepository.findUserByEmail(email) != null;
+    public boolean contactExists(String contact){
+        return usersRepository.findUserByContact(contact) != null;
     }
 }

@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Josefin+Slab|Muli|Lato|Nobile|Lobster+Two&subset=latin&v2);
+@import url("https://fonts.googleapis.com/css?family=Josefin+Slab|Muli|Lato|Nobile|Lobster+Two&subset=latin&v2");
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css");
 
 * {
@@ -26,39 +26,32 @@ main {
 	max-width: 1100px;
 	margin: 0 auto;
 	box-shadow: 0 0 50px;
+	background-color: white;
 }
 header {
 	background-color: #3300CC;
 	color: white;
 	top: 0;
 	text-shadow: 1px 1px 0.5px black;
-	font-size: 30px;
 	font-family: 'Lobster Two', Georgia, cursive;
-	padding: 0 30px;
+	padding: 10px 30px;
 }
-article {
-	display: flex;
-}
-.head {
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-attachment: fixed;
-	background-image: url('bg.png');
-	height: calc(100vh - 200px);
+section {
+	min-height: calc(100vh - 180px);
 }
 footer {
 	background-color: #3300CC;
-	padding: 10px;
+	padding: 20px;
 	color: white;
-	font-size: 20px;
+	font-size: 16px;
 	text-shadow: 1px 1px 0.5px black;
 	font-family: 'Lato', sans-serif;
-}
-.foot {
-	width: 100%;
-	padding: 20px;
 	text-align: right;
 }
+.total {
+	text-align: right;
+}
+
 #menu1 {
 	position: fixed;
 	left: 0;
@@ -69,6 +62,7 @@ footer {
 	background-color: #3300CC;
 	border-bottom-right-radius: 100%;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+	z-index: -1;
 }
 #menu2 {
 	position: fixed;
@@ -80,4 +74,20 @@ footer {
 	background-color: #3300CC;
 	border-top-left-radius: 100%;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+	z-index: -1;
+}
+#logo, #insta, #login, #logout{
+    color: white;
+    text-decoration: none;
+    border: 0;
+    margin: 0;
+    padding: 0 10px;
+    font-size: 30px;
+}
+#copyright{
+    color: white;
+    text-decoration: none;
+    margin: 0;
+    padding: 10px;
+    font-size: 15px;
 }

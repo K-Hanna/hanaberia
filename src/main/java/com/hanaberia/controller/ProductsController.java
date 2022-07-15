@@ -1,6 +1,6 @@
 package com.hanaberia.controller;
 
-import com.hanaberia.model.Categories;
+import com.hanaberia.enums.Categories;
 import com.hanaberia.model.Products;
 import com.hanaberia.repository.ProductsRepository;
 import com.hanaberia.service.ProductsService;
@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -26,15 +27,19 @@ public class ProductsController {
     public String allProducts(Model model){
 
         List<Products> bracelets = productsService.getByCategory(Categories.BRACELET);
+        bracelets.sort(Comparator.comparing(Products :: getId).reversed());
         model.addAttribute("bracelets", bracelets);
 
         List<Products> earrings = productsService.getByCategory(Categories.EARRINGS);
+        earrings.sort(Comparator.comparing(Products :: getId).reversed());
         model.addAttribute("earrings", earrings);
 
         List<Products> necklaces = productsService.getByCategory(Categories.NECKLACE);
+        necklaces.sort(Comparator.comparing(Products :: getId).reversed());
         model.addAttribute("necklaces", necklaces);
 
         List<Products> rings = productsService.getByCategory(Categories.RING);
+        rings.sort(Comparator.comparing(Products :: getId).reversed());
         model.addAttribute("rings", rings);
 
         return "product/retrieveProducts";

@@ -3,92 +3,76 @@
 <head>
     <meta charset="UTF-8" />
     <title>Hanaberia</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
     <link th:href="@{/styles/user.css}" rel="stylesheet" />
 </head>
 <body>
 <nav id="menu1"></nav>
 <main>
-    <header>
-        <article id="main">
-            <h1>Hanaberia</h1>
-        </article>
-    </header>
-    <ul class="nav nav-tabs">
-        <li class="nav-item ">
-            <a class="nav-link" th:href="@{/}"><i class="bi bi-house"></i></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Moje dane</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Rezerwacje</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Zamówienia</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i></a>
-        </li>
-    </ul>
-    <section class="head">
+    <div th:insert="fragments/header :: header"></div>
+    <div th:insert="fragments/navUser :: nav"></div>
+    <section>
         <div
                 class="container"
-                style="padding-top: 10vh; display: flex; flex-direction: column; align-items: center;">
+                style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
             <br/>
-            <h4>Moje dane</h4>
+            <h4>Edytuj konto</h4>
+
+            <p class="error" th:each="message : ${errors}">
+                <span th:text="${message}"></span>
+            </p>
+
             <form   th:action="@{'/users/edit/' + ${users.getId()}}"
                     th:object="${users}"
                     method="post">
-                <div class="form-group row">
+                <div class="row g-2">
                     <br>
-                    <label for="userName" class="col-3 col-form-label">Login</label>
-                    <div class="col-9">
+                    <label for="userName" class="col-4 col-form-label">Login</label>
+                    <div class="col-8">
                         <input
                                 class="form-control"
                                 type="text"
                                 id="userName"
                                 th:field="*{userName}"
                                 required/>
-                        <span th:text="${errorUN1}" class="error" style="color: red"></span>
-                        <span th:text="${errorUN2}" class="error" style="color: red"></span>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <span>Uzupełnij preferowaną formę kontaktu:</span>
-                </div>
-                <div class="form-group row">
-                    <label for="email" class="col-3 col-form-label">E-mail</label>
-                    <div class="col-9">
+                <div class="row g-2">
+                    <label class="btn-group col-4" for="contact">
+                        <input type="radio"
+                               class="btn-check"
+                               th:field="*{contactForm}"
+                               value="EMAIL"
+                               id="emailCheck"
+                               autocomplete="off">
+                        <label class="btn btn-outline-secondary"
+                               for="emailCheck">
+                            <i class="bi bi-envelope"></i>
+                        </label>
+                        <input type="radio"
+                               class="btn-check"
+                               th:field="*{contactForm}"
+                               value="PHONE"
+                               id="phoneCheck"
+                               autocomplete="off">
+                        <label class="btn btn-outline-secondary"
+                               for="phoneCheck">
+                            <i class="bi bi-telephone"></i>
+                        </label>
+                    </label>
+                    <div class="col-8">
                         <input
                                 class="form-control"
                                 type="text"
-                                id="email"
-                                th:field="*{email}"
-                                th:required="false"/>
-                        <span th:text="${errorE1}" class="error" style="color: red"></span>
-                        <span th:text="${errorE2}" class="error" style="color: red"></span>
+                                id="contact"
+                                th:field="*{contact}"
+                                required/>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="phone" class="col-3 col-form-label">Telefon</label>
-                    <div class="col-9">
-                        <input
-                                class="form-control"
-                                type="text"
-                                id="phone"
-                                th:field="*{phone}"
-                                th:maxlength="11"
-                                th:required="false"/>
-                        <span th:text="${errorNo}" class="error" style="color: red"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="userPassword" class="col-3 col-form-label">Hasło</label>
-                    <div class="col-9">
+                <div class="row g-2">
+                    <label for="userPassword" class="col-4 col-form-label">Hasło</label>
+                    <div class="col-8">
                         <input
                                 class="form-control"
                                 type="password"
@@ -97,36 +81,33 @@
                                 required/>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="confirmPassword" class="col-3 col-form-label">Powtórz</label>
-                    <div class="col-9">
+                <div class="row g-2">
+                    <label for="confirmPassword" class="col-4 col-form-label">Powtórz</label>
+                    <div class="col-8">
                         <input
                                 class="form-control"
                                 type="password"
                                 id="confirmPassword"
                                 th:field="*{confirm}"
                                 required/>
-                        <span th:text="${errorP}" class="error" style="color: red"></span>
                     </div>
                     <small><br></small>
                 </div>
                 <div class="modal-footer">
-                    <a th:href="@{/users/{name}(name=${users.userName})}" class="btn btn-outline-secondary">
-                        <i class="bi bi-x-square"></i></a>
-                    <button type="submit"
-                            class="btn btn-success"
-                            value="Submit">
-                        <i class="bi bi-check2-square"></i>
-                    </button>
+                    <div class="btn-group">
+                        <a th:href="@{/users}" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-square"></i></a>
+                        <button type="submit"
+                                class="btn btn-success"
+                                value="Submit">
+                            <i class="bi bi-check2-square"></i>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
     </section>
-    <footer>
-        <article>
-            <p class="foot">Designed and executed by Dong Ha Kotwa
-        </article>
-    </footer>
+    <div th:insert="fragments/footer :: footer"></div>
 </main>
 <nav id="menu2"></nav>
 </body>

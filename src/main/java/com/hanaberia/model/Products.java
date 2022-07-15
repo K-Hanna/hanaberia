@@ -1,6 +1,8 @@
 package com.hanaberia.model;
 
 import javax.persistence.*;
+
+import com.hanaberia.enums.Categories;
 import lombok.*;
 
 @Entity
@@ -43,13 +45,13 @@ public class Products {
     @Column(nullable = false)
     private boolean available;
 
-/*    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservations_id")
-    private Reservations reservations;
+    private Reservations reservation;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orders_id")
-    private Orders orders;*/
+    private Orders order;
 
     @Override
     public String toString(){

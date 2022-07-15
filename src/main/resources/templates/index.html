@@ -7,7 +7,7 @@
     <meta name="author" content="Dong Ha Kotwa">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link th:href="@{/styles/main.css}" rel="stylesheet" />
-
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
 </head>
 <body>
 <nav class="nav-bar">
@@ -15,27 +15,24 @@
     <label id="trigger" for="menu-toggle"></label>
     <label id="burger" for="menu-toggle"></label>
     <ul id="menu">
-        <li><a href="#">Home</a></li>
-        <li><hr></li>
-        <li><a href="#bransoletki">Bransoletki</a></li>
-        <li><hr></li>
-        <li><a href="#kolczyki">Kolczyki</a></li>
-        <li><hr></li>
-        <li><a href="#naszyjniki">Naszyjniki</a></li>
-        <li><hr></li>
-        <li><a href="#pierścionki">Pierścionki</a></li>
-        <li><hr></li>
-        <li><a sec:authorize="isAnonymous()" th:href="@{/login}">Zaloguj się</a>
-         <a sec:authorize="isAuthenticated()" th:href="@{/users/{name}(name=${#authentication.getPrincipal().getUsername()})}">
+        <li><a href="#" class="menu-link">Góra strony</a></li>
+        <li><hr class="bg-light border-3 border-top border-light"></li>
+        <li><a href="#bransoletki" class="menu-link">Bransoletki</a></li>
+        <li><a href="#kolczyki" class="menu-link">Kolczyki</a></li>
+        <li><a href="#naszyjniki" class="menu-link">Naszyjniki</a></li>
+        <li><a href="#pierścionki" class="menu-link">Pierścionki</a></li>
+        <li><a th:href="@{/archive}" class="menu-link">Archiwum</a></li>
+        <li><hr class="bg-light border-3 border-top border-light"></li>
+        <li><a th:href="@{/messages/to-add}" class="menu-link">Kontakt</a></li>
+        <li><a sec:authorize="isAnonymous()" th:href="@{/login}"
+               class="menu-link">Zaloguj się</a>
+         <a sec:authorize="isAuthenticated()" th:href="@{/users}"
+            class="menu-link">
              Moje konto</a></li>
     </ul>
 </nav>
 <main>
-    <header>
-        <article id="main">
-            <h1>Hanaberia</h1>
-        </article>
-    </header>
+    <div th:insert="fragments/header :: header"></div>
     <section>
         <h2 class="head home"></h2>
     </section>
@@ -44,17 +41,38 @@
         <article class="gallery">
             <ul>
                 <a href="#" class="close"></a>
-                <li th:each="product : ${bracelets}">
+                <li th:each="product : ${bracelets}" th:if="${product.available}">
                     <a th:href="@{'#' + ${product.id}}">
-                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
+                        <img th:name="${product.id}" th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}"
+                             th:alt="${product.name}"></a>
                     <div th:id="${product.id}" class="port">
                         <div class="description">
-                            <h3><span th:text="${product.name}"></span></h3>
+                            <h4><span th:text="${product.name}"></span></h4>
                             <p><span th:text="${product.description}"></span>
-                            <h3><span th:text="${product.price}"></span>, - zł</h3>
-                            <button th:if="${product.available}"><i class="bi bi-basket2"></i></button>
-                        </div>
-                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt="">
+                            <div class="d-flex justify-content-between">
+                                <h4><span th:text="${product.price}"></span>, - zł</h4>
+                                <div sec:authorize="hasAuthority('USER')">
+                                    <form th:action="@{/reservations/add-to-cart/{id}(id=${product.id})}"
+                                          th:object="${reservations}"
+                                          method="post">
+                                        <button type="submit"
+                                                class="btn btn-success"
+                                                value="Submit">
+                                            <i class="bi bi-basket2"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div sec:authorize="isAnonymous()">
+                                <p>
+                                    Aby dodać produkt do koszyka,
+                                    <a th:href="@{/login}" class="d-inline">zaloguj się</a>.
+                                </p>
+                            </div>
+                            </div>
+                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}"
+                             th:alt="${product.name}">
+                    </div>
                     </div>
                 </li>
             </ul>
@@ -65,15 +83,33 @@
         <article class="gallery">
             <ul>
                 <a href="#" class="close"></a>
-                <li th:each="product : ${earrings}">
+                <li th:each="product : ${earrings}" th:if="${product.available}">
                     <a th:href="@{'#' + ${product.id}}">
-                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
+                        <img th:name="${product.id}" th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
                     <div th:id="${product.id}" class="port">
                         <div class="description">
-                            <h3><span th:text="${product.name}"></span></h3>
+                            <h4><span th:text="${product.name}"></span></h4>
                             <p><span th:text="${product.description}"></span>
-                            <h3><span th:text="${product.price}"></span>, - zł</h3>
-                            <button th:if="${product.available}"><i class="bi bi-basket2"></i></button>
+                            <div class="d-flex justify-content-between">
+                                <h4><span th:text="${product.price}"></span>, - zł</h4>
+                                <div sec:authorize="hasAuthority('USER')">
+                                    <form th:action="@{/reservations/add-to-cart/{id}(id=${product.id})}"
+                                          th:object="${reservations}"
+                                          method="post">
+                                        <button type="submit"
+                                                class="btn btn-success"
+                                                value="Submit">
+                                            <i class="bi bi-basket2"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div sec:authorize="isAnonymous()">
+                                <p>
+                                    Aby dodać produkt do koszyka,
+                                    <a th:href="@{/login}" class="d-inline">zaloguj się</a>.
+                                </p>
+                            </div>
                         </div>
                         <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt="">
                     </div>
@@ -86,15 +122,33 @@
         <article class="gallery">
             <ul>
                 <a href="#" class="close"></a>
-                <li th:each="product : ${necklaces}">
+                <li th:each="product : ${necklaces}" th:if="${product.available}">
                     <a th:href="@{'#' + ${product.id}}">
-                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
+                        <img th:name="${product.id}" th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
                     <div th:id="${product.id}" class="port">
                         <div class="description">
-                            <h3><span th:text="${product.name}"></span></h3>
+                            <h4><span th:text="${product.name}"></span></h4>
                             <p><span th:text="${product.description}"></span>
-                            <h3><span th:text="${product.price}"></span>, - zł</h3>
-                            <button th:if="${product.available}"><i class="bi bi-basket2"></i></button>
+                            <div class="d-flex justify-content-between">
+                                <h4><span th:text="${product.price}"></span>, - zł</h4>
+                                <div sec:authorize="hasAuthority('USER')">
+                                    <form th:action="@{/reservations/add-to-cart/{id}(id=${product.id})}"
+                                          th:object="${reservations}"
+                                          method="post">
+                                        <button type="submit"
+                                                class="btn btn-success"
+                                                value="Submit">
+                                            <i class="bi bi-basket2"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div sec:authorize="isAnonymous()">
+                                <p>
+                                    Aby dodać produkt do koszyka,
+                                    <a th:href="@{/login}" class="d-inline">zaloguj się</a>.
+                                </p>
+                            </div>
                         </div>
                         <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt="">
                     </div>
@@ -107,15 +161,33 @@
         <article class="gallery">
             <ul>
                 <a href="#" class="close"></a>
-                <li th:each="product : ${rings}">
+                <li th:each="product : ${rings}" th:if="${product.available}">
                     <a th:href="@{'#' + ${product.id}}">
-                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
+                        <img th:name="${product.id}" th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt=""></a>
                     <div th:id="${product.id}" class="port">
                         <div class="description">
-                            <h3><span th:text="${product.name}"></span></h3>
+                            <h4><span th:text="${product.name}"></span></h4>
                             <p><span th:text="${product.description}"></span>
-                            <h3><span th:text="${product.price}"></span>, - zł</h3>
-                            <button th:if="${product.available}"><i class="bi bi-basket2"></i></button>
+                            <div class="d-flex justify-content-between">
+                                <h4><span th:text="${product.price}"></span>, - zł</h4>
+                                <div sec:authorize="hasAuthority('USER')">
+                                    <form th:action="@{/reservations/add-to-cart/{id}(id=${product.id})}"
+                                          th:object="${reservations}"
+                                          method="post">
+                                        <button type="submit"
+                                                class="btn btn-success"
+                                                value="Submit">
+                                            <i class="bi bi-basket2"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div sec:authorize="isAnonymous()">
+                                <p>
+                                    Aby dodać produkt do koszyka,
+                                    <a th:href="@{/login}" class="d-inline">zaloguj się</a>.
+                                </p>
+                            </div>
                         </div>
                         <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" alt="">
                     </div>
@@ -123,16 +195,13 @@
             </ul>
         </article>
     </section>
-    <footer>
-        <article>
-            <p class="foot">Designed and executed by Dong Ha Kotwa</p>
-        </article>
-    </footer>
+        <div th:insert="fragments/footer :: footer"></div>
 </main>
 <nav id="menu2">
-    <a href="https://www.instagram.com/halia.art/" target="_blank" id="insta"><i class="bi bi-instagram"></i></a>
 </nav>
-<script th:src="@{http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>
+
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>
 <script th:src="@{/styles/actions.js}" type="text/javascript"></script>
+
 </body>
 </html>

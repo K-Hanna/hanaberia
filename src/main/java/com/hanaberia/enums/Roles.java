@@ -1,4 +1,4 @@
-package com.hanaberia.model;
+package com.hanaberia.enums;
 
 public enum Roles {
 
