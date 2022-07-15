@@ -27,8 +27,8 @@
                                 th:data-bs-target="@{'#collapse' + ${order.id}}"
                                 aria-expanded="false"
                                 aria-controls="collapseOne">
-                            <span th:text="'Zamówienie: ' + ${name}"></span>
-                            <span th:text="${order.completed} ? ', zrealizowane.' : ', w oczekiwaniu.'"> </span>
+                            <span th:text="'Zamówienie: ' + ${name}"></span>,&nbsp;
+                            <span th:text="${order.completed} ? 'zrealizowane.' : 'w oczekiwaniu.'"> </span>
                         </button>
                     </h2>
                     <div th:id="'collapse' + ${order.id}"
@@ -55,16 +55,16 @@
                                     <p class="total">Suma zamówienia: <span th:text="${total}"></span>,- zł</p>
                                     <p class="total" th:if="${order.completed}">Zrealizowano dnia:
                                         <span th:text="${order.completedDate}"></span>.</p>
-                                </div>
-                            </div>
-                            <div th:unless="${order.completed}" class="text-center">
-                                <div class="btn-group">
-                                    <!--<a th:href="@{/orders/to-edit/{id}(id=${order.id})}" class="btn btn-outline-primary">
-                                        <i class="bi bi-pencil-square"></i></a>-->
-                                    <a th:href="@{/orders/to-remove/{id}(id=${order.id})}" class="btn btn-outline-danger">
-                                        <i class="bi bi-x-square"></i></a>
-                                    <a th:href="@{/orders/to-complete/{id}(id=${order.id})}" class="btn btn-success">
-                                        <i class="bi bi-check2-square"></i></a>
+                                    <div th:unless="${order.completed}" class="total">
+                                        <div class="btn-group">
+                                            <!--<a th:href="@{/orders/to-edit/{id}(id=${order.id})}" class="btn btn-outline-primary">
+                                                <i class="bi bi-pencil-square"></i></a>-->
+                                            <a th:href="@{/orders/to-remove/{id}(id=${order.id})}" class="btn btn-outline-danger">
+                                                <i class="bi bi-x-square" title="Usuń zamówienie"></i></a>
+                                            <a th:href="@{/orders/to-complete/{id}(id=${order.id})}" class="btn btn-success">
+                                                <i class="bi bi-check2-square" title="Zrealizuj zamówienie"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
