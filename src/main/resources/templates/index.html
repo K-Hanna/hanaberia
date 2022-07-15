@@ -16,10 +16,14 @@
     <label id="burger" for="menu-toggle"></label>
     <ul id="menu">
         <li><a href="#" class="menu-link">Góra strony</a></li>
+        <li><hr class="bg-light border-3 border-top border-light"></li>
         <li><a href="#bransoletki" class="menu-link">Bransoletki</a></li>
         <li><a href="#kolczyki" class="menu-link">Kolczyki</a></li>
         <li><a href="#naszyjniki" class="menu-link">Naszyjniki</a></li>
         <li><a href="#pierścionki" class="menu-link">Pierścionki</a></li>
+        <li><a th:href="@{/archive}" class="menu-link">Archiwum</a></li>
+        <li><hr class="bg-light border-3 border-top border-light"></li>
+        <li><a th:href="@{/messages/to-add}" class="menu-link">Kontakt</a></li>
         <li><a sec:authorize="isAnonymous()" th:href="@{/login}"
                class="menu-link">Zaloguj się</a>
          <a sec:authorize="isAuthenticated()" th:href="@{/users}"

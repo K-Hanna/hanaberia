@@ -1,6 +1,7 @@
 package com.hanaberia.controller;
 
 import com.hanaberia.enums.ContactForms;
+import com.hanaberia.model.Messages;
 import com.hanaberia.model.Users;
 import com.hanaberia.repository.UsersRepository;
 import com.hanaberia.service.MyUserDetail;

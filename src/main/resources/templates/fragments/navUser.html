@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
     <div th:fragment="nav">
         <ul class="nav nav-tabs">
@@ -15,6 +15,9 @@
             </li>
             <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" th:href="@{/orders/all}">Zamówienia</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                <a class="nav-link" th:href="@{/messages/all}">Wiadomości</a>
             </li>
 
             <li class="nav-item" sec:authorize="hasAuthority('USER')">
