@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -43,12 +44,14 @@ public class OrdersController {
 
         List<Orders> allOrders = ordersService.getAllOrders();
         allOrders.sort(Comparator.comparing(Orders :: getId).reversed());
-        model.addAttribute("orders", allOrders);
+
+        List<String> usersOrders = new ArrayList<>();
+        List<Integer> totals = new ArrayList<>();
 
         if(allOrders.isEmpty()){
             model.addAttribute("message", "Nie ma żadnych zamówień.");
         } else {
-            for(Orders order :allOrders){
+            for(Orders order : allOrders){
 
                 String usersName = usersService.retrieve(order.getUser().getId()).getUserName();
                 Set<Products> products = order.getProductsSet();
@@ -57,10 +60,15 @@ public class OrdersController {
                     total += product.getPrice();
                 }
 
-                model.addAttribute("name", usersName);
-                model.addAttribute("total", total);
+                usersOrders.add(usersName);
+                totals.add(total);
             }
         }
+
+        model.addAttribute("orders", allOrders);
+        model.addAttribute("totalOrders", allOrders.size() - 1);
+        model.addAttribute("users", usersOrders);
+        model.addAttribute("totals", totals);
 
         return "order/retrieveAllOrders";
     }
@@ -78,6 +86,8 @@ public class OrdersController {
             List<Orders> orders = user.getOrders();
             orders.sort(Comparator.comparing(Orders :: getId).reversed());
 
+            List<Integer> totals = new ArrayList<>();
+
             model.addAttribute("orders", orders);
 
             if(orders.isEmpty()){
@@ -90,8 +100,12 @@ public class OrdersController {
                 for(Products product : products){
                     total += product.getPrice();
                 }
-                model.addAttribute("total", total);
+
+                totals.add(total);
             }
+
+            model.addAttribute("count", orders.size() - 1);
+            model.addAttribute("total", totals);
 
             return "order/retrieveOrder";
         }
