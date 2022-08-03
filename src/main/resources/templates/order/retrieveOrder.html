@@ -20,25 +20,25 @@
             <p><span th:text="${message}"></span></p>
 
             <div class="accordion w-100" id="accordionParent">
-                <div class="accordion-item"  th:each="order : ${orders}">
+                <div class="accordion-item" th:each="i : ${#numbers.sequence(0, count)}">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button collapsed"
                                 type="button"
                                 data-bs-toggle="collapse"
-                                th:data-bs-target="@{'#collapse' + ${order.id}}"
+                                th:data-bs-target="@{'#collapse' + ${orders[i].id}}"
                                 aria-expanded="false"
                                 aria-controls="collapseOne">
-                           <span th:text="${order.completed} ? 'Zamówienie zrealizowane.' : 'Zamówienie w oczekiwaniu.'"></span>
+                           <span th:text="${orders[i].completed} ? 'Zamówienie zrealizowane.' : 'Zamówienie w oczekiwaniu.'"></span>
                         </button>
                     </h2>
-                    <div th:id="'collapse' + ${order.id}"
+                    <div th:id="'collapse' + ${orders[i].id}"
                          class="accordion-collapse collapse"
                          aria-labelledby="headingOne"
                          data-bs-parent="#accordionParent">
                         <div class="accordion-body">
                             <table class="table table-hover">
                                 <tbody>
-                                <tr th:each="product : ${order.productsSet}">
+                                <tr th:each="product : ${orders[i].productsSet}">
                                     <td>
                                         <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
                                     </td>
@@ -49,12 +49,12 @@
                             </table>
                             <div class="d-flex justify-content-between">
                                 <div class="w-50 border border-secondary p-2" >
-                                    <p><span th:text="${order.message}"></span></p>
+                                    <p><span th:text="${orders[i].message}"></span></p>
                                 </div>
                                 <div class="w-50">
-                                    <p class="total">Suma zamówienia: <span th:text="${total}"></span>,- zł</p>
-                                    <p class="total" th:if="${order.completed}">Zrealizowano dnia:
-                                        <span th:text="${order.completedDate}"></span>.</p>
+                                    <p class="total">Suma zamówienia: <span th:text="${total[i]}"></span>,- zł</p>
+                                    <p class="total" th:if="${orders[i].completed}">Zrealizowano dnia:
+                                        <span th:text="${orders[i].completedDate}"></span>.</p>
                                 </div>
                             </div>
                         </div>
