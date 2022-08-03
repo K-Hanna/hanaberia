@@ -98,7 +98,7 @@ footer {
 a img {
 	width: 100%;
 }
-#logo, #insta, #login, #logout{
+.element, #login, #logout{
     color: white;
     text-decoration: none;
     border: 0;
