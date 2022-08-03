@@ -19,26 +19,26 @@
             <h4>Zamówienia</h4>
             <p><span th:text="${message}"></span></p>
             <div class="accordion w-100" id="accordionParent">
-                <div class="accordion-item"  th:each="order : ${orders}">
+                <div class="accordion-item" th:each="i : ${#numbers.sequence(0, totalOrders)}">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button collapsed"
                                 type="button"
                                 data-bs-toggle="collapse"
-                                th:data-bs-target="@{'#collapse' + ${order.id}}"
+                                th:data-bs-target="@{'#collapse' + ${orders[i].id}}"
                                 aria-expanded="false"
                                 aria-controls="collapseOne">
-                            <span th:text="'Zamówienie: ' + ${name}"></span>,&nbsp;
-                            <span th:text="${order.completed} ? 'zrealizowane.' : 'w oczekiwaniu.'"> </span>
+                            <span th:text="'Zamówienie: ' + ${users[i]}"></span>,&nbsp
+                            <span th:text="${orders[i].completed} ? 'zrealizowane.' : 'w oczekiwaniu.'"> </span>
                         </button>
                     </h2>
-                    <div th:id="'collapse' + ${order.id}"
+                    <div th:id="'collapse' + ${orders[i].id}"
                          class="accordion-collapse collapse"
                          aria-labelledby="headingOne"
                          data-bs-parent="#accordionParent">
                         <div class="accordion-body">
                             <table class="table table-hover">
                                 <tbody>
-                                <tr th:each="product : ${order.productsSet}">
+                                <tr th:each="product : ${orders[i].productsSet}">
                                     <td>
                                         <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
                                     </td>
@@ -49,19 +49,19 @@
                             </table>
                             <div class="d-flex justify-content-between">
                                 <div class="w-50 border border-secondary p-2">
-                                    <p><span th:text="${order.message}"></span></p>
+                                    <p><span th:text="${orders[i].message}"></span></p>
                                 </div>
                                 <div class="w-50">
-                                    <p class="total">Suma zamówienia: <span th:text="${total}"></span>,- zł</p>
-                                    <p class="total" th:if="${order.completed}">Zrealizowano dnia:
-                                        <span th:text="${order.completedDate}"></span>.</p>
-                                    <div th:unless="${order.completed}" class="total">
+                                    <p class="total">Suma zamówienia: <span th:text="${totals[i]}"></span>,- zł</p>
+                                    <p class="total" th:if="${orders[i].completed}">Zrealizowano dnia:
+                                        <span th:text="${orders[i].completedDate}"></span>.</p>
+                                    <div th:unless="${orders[i].completed}" class="total">
                                         <div class="btn-group">
-                                            <!--<a th:href="@{/orders/to-edit/{id}(id=${order.id})}" class="btn btn-outline-primary">
+                                            <!--<a th:href="@{/orders[i]s/to-edit/{id}(id=${orders[i].id})}" class="btn btn-outline-primary">
                                                 <i class="bi bi-pencil-square"></i></a>-->
-                                            <a th:href="@{/orders/to-remove/{id}(id=${order.id})}" class="btn btn-outline-danger">
+                                            <a th:href="@{/orders/to-remove/{id}(id=${orders[i].id})}" class="btn btn-outline-danger">
                                                 <i class="bi bi-x-square" title="Usuń zamówienie"></i></a>
-                                            <a th:href="@{/orders/to-complete/{id}(id=${order.id})}" class="btn btn-success">
+                                            <a th:href="@{/orders/to-complete/{id}(id=${orders[i].id})}" class="btn btn-success">
                                                 <i class="bi bi-check2-square" title="Zrealizuj zamówienie"></i></a>
                                         </div>
                                     </div>
