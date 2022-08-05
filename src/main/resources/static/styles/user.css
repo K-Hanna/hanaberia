@@ -29,7 +29,7 @@ main {
 	background-color: white;
 }
 header {
-	background-color: #3300CC;
+	background-image: linear-gradient(to bottom right, #3300CC, #9AE9FF);
 	color: white;
 	top: 0;
 	text-shadow: 1px 1px 0.5px black;
@@ -40,7 +40,7 @@ section {
 	min-height: calc(100vh - 180px);
 }
 footer {
-	background-color: #3300CC;
+	background-image: linear-gradient(to top left, #3300CC, #9AE9FF);
 	padding: 20px;
 	color: white;
 	font-size: 16px;
