@@ -17,10 +17,10 @@
              style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
             <br/>
             <h4>Moje dane</h4>
-            <form>
+            <form class="w-50">
                 <div class="row g-2">
                     <br>
-                    <label for="userName" class="col-4 col-form-label">Login</label>
+                    <label for="userName" class="col-4 col-form-label">Login:</label>
                     <div class="col-8">
                         <input
                                 class="form-control-plaintext"
@@ -32,8 +32,8 @@
                 </div>
                 <div class="row g-2">
                     <label for="contact" class="col-4 col-form-label">
-                        <div th:if="${users.contactForm.name() == 'EMAIL'}"><i class="bi bi-envelope"></i></div>
-                        <div th:if="${users.contactForm.name() == 'PHONE'}"><i class="bi bi-telephone"></i></div>
+                        <div th:if="${users.contactForm.name() == 'EMAIL'}">E-mail:</div>
+                        <div th:if="${users.contactForm.name() == 'PHONE'}">Telefon:</div>
                     </label>
                     <div class="col-8">
                         <input
@@ -41,6 +41,30 @@
                                 type="text"
                                 id="contact"
                                 th:field="*{users.contact}"
+                                readonly/>
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <br>
+                    <label for="question" class="col-4 col-form-label">Pytanie:</label>
+                    <div class="col-8">
+                        <input
+                                class="form-control-plaintext"
+                                type="text"
+                                id="question"
+                                th:field="${users.question.displayValue}"
+                                readonly/>
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <br>
+                    <label for="answer" class="col-4 col-form-label">Odpowiedź:</label>
+                    <div class="col-8">
+                        <input
+                                class="form-control-plaintext"
+                                type="text"
+                                id="answer"
+                                th:field="${users.answer}"
                                 readonly/>
                     </div>
                 </div>

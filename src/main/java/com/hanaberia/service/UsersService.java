@@ -45,6 +45,10 @@ public class UsersService {
         return usersRepository.findUserByUserName(name);
     }
 
+    public Users retrieveByContact(String contact){
+        return usersRepository.findUserByContact(contact);
+    }
+
     public void update(final Long id, final Users user) {
 
         Users oldUser = usersRepository.findById(id).orElseThrow(null);
@@ -52,6 +56,16 @@ public class UsersService {
         oldUser.setUserName(user.getUserName());
         oldUser.setContact(user.getContact());
         oldUser.setContactForm(user.getContactForm());
+        oldUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        oldUser.setConfirm(bCryptPasswordEncoder.encode(user.getConfirm()));
+        oldUser.setQuestion(user.getQuestion());
+        oldUser.setAnswer(user.getAnswer());
+
+        usersRepository.save(oldUser);
+    }
+
+    public void changePassword(final Long id, final Users user){
+        Users oldUser = usersRepository.findById(id).orElseThrow(null);
         oldUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         oldUser.setConfirm(bCryptPasswordEncoder.encode(user.getConfirm()));
 

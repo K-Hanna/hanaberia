@@ -59,7 +59,7 @@ footer {
 	margin: 0; padding: 0;
 	width: 80px;
 	height: 80px;
-	background-color: #3300CC;
+	background-image: linear-gradient(to bottom right, #3300CC, #9AE9FF);
 	border-bottom-right-radius: 100%;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
 	z-index: -1;
@@ -71,10 +71,13 @@ footer {
 	margin: 0; padding: 0;
 	width: 80px;
 	height: 80px;
-	background-color: #3300CC;
+	background-image: linear-gradient(to top left, #3300CC, #9AE9FF);
 	border-top-left-radius: 100%;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
 	z-index: -1;
+}
+.bg {
+    background-image: linear-gradient(to bottom right, #3300CC, #9AE9FF);
 }
 .element, #login, #logout{
     color: white;
