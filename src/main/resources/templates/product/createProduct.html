@@ -40,10 +40,8 @@
                     class="form-control"
                     id="type-select"
                     th:field="*{category}">
-              <option value="BRACELET">Bransoletka</option>
-              <option value="EARRINGS">Kolczyki</option>
-              <option value="NECKLACE">Naszyjnik</option>
-              <option value="RING">Pierścionek</option>
+              <option th:each="cat : ${T(com.hanaberia.enums.Categories).values()}"
+                      th:value="${cat}" th:text="${cat.displayValue}"></option>
             </select>
           </div>
         </div>
