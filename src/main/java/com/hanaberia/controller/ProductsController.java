@@ -2,7 +2,6 @@ package com.hanaberia.controller;
 
 import com.hanaberia.enums.Categories;
 import com.hanaberia.model.Products;
-import com.hanaberia.repository.ProductsRepository;
 import com.hanaberia.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,15 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/products")
 public class ProductsController {
-
-    @Autowired
-    private ProductsRepository productsRepository;
 
     @Autowired
     private ProductsService productsService;
@@ -26,21 +23,14 @@ public class ProductsController {
     @GetMapping()
     public String allProducts(Model model){
 
-        List<Products> bracelets = productsService.getByCategory(Categories.BRACELET);
-        bracelets.sort(Comparator.comparing(Products :: getId).reversed());
-        model.addAttribute("bracelets", bracelets);
+        Map<Categories, List<Products>> productsByCategories = new HashMap<>();
 
-        List<Products> earrings = productsService.getByCategory(Categories.EARRINGS);
-        earrings.sort(Comparator.comparing(Products :: getId).reversed());
-        model.addAttribute("earrings", earrings);
+        for(Categories category : Categories.values()){
+            List<Products> products = productsService.getByCategory(category);
+            productsByCategories.put(category, products);
+        }
 
-        List<Products> necklaces = productsService.getByCategory(Categories.NECKLACE);
-        necklaces.sort(Comparator.comparing(Products :: getId).reversed());
-        model.addAttribute("necklaces", necklaces);
-
-        List<Products> rings = productsService.getByCategory(Categories.RING);
-        rings.sort(Comparator.comparing(Products :: getId).reversed());
-        model.addAttribute("rings", rings);
+        model.addAttribute("productsByCategories", productsByCategories);
 
         return "product/retrieveProducts";
     }

@@ -3,6 +3,7 @@ package com.hanaberia.model;
 import javax.persistence.*;
 
 import com.hanaberia.enums.ContactForms;
+import com.hanaberia.enums.Questions;
 import com.hanaberia.enums.Roles;
 import lombok.*;
 
@@ -22,13 +23,10 @@ public class Users {
     @SequenceGenerator(
             name = "primary_sequence",
             sequenceName = "primary_sequence",
-            allocationSize = 1,
-            initialValue = 1
-    )
+            allocationSize = 1)
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "primary_sequence"
-    )
+            generator = "primary_sequence")
     private Long id;
 
     @Column(nullable = false)
@@ -50,6 +48,13 @@ public class Users {
     @Enumerated(EnumType.STRING)
     @Column
     private Roles roles;
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Questions question;
+
+    @Column
+    private String answer;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     private Reservations reservations;

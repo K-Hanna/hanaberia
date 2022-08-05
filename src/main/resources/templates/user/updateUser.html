@@ -35,6 +35,7 @@
                                 type="text"
                                 id="userName"
                                 th:field="*{userName}"
+                                maxlength="100"
                                 required/>
                     </div>
                 </div>
@@ -67,6 +68,7 @@
                                 type="text"
                                 id="contact"
                                 th:field="*{contact}"
+                                maxlength="100"
                                 required/>
                     </div>
                 </div>
@@ -78,6 +80,7 @@
                                 type="password"
                                 id="userPassword"
                                 th:field="*{password}"
+                                maxlength="100"
                                 required/>
                     </div>
                 </div>
@@ -89,7 +92,31 @@
                                 type="password"
                                 id="confirmPassword"
                                 th:field="*{confirm}"
+                                maxlength="100"
                                 required/>
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <label for="question" class="col-4 col-form-label">Pytanie</label>
+                    <div class="col-8">
+                        <select
+                                class="form-control"
+                                id="question"
+                                th:field="*{question}">
+                            <option th:each="question : ${T(com.hanaberia.enums.Questions).values()}"
+                                    th:value="${question}" th:text="${question.displayValue}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <label for="answer" class="col-4 col-form-label">Odpowiedź</label>
+                    <div class="col-8">
+                        <input
+                                class="form-control"
+                                type="text"
+                                id="answer"
+                                th:field="*{answer}"
+                                maxlength="125"/>
                     </div>
                     <small><br></small>
                 </div>

@@ -33,18 +33,13 @@
 
         <div class="container mt-5">
             <ul class="nav nav-tabs mt-5">
-                <li class="nav-item"><a href="#bransoletki" class="nav-link active"
-                                        data-bs-toggle="tab">Bransoletki</a></li>
-                <li class="nav-item"><a href="#kolczyki" class="nav-link"
-                                        data-bs-toggle="tab">Kolczyki</a></li>
-                <li class="nav-item"><a href="#naszyjniki" class="nav-link"
-                                        data-bs-toggle="tab">Naszyjniki</a></li>
-                <li class="nav-item"><a href="#pierscionki" class="nav-link"
-                                        data-bs-toggle="tab">Pierścionki</a></li>
+                <li class="nav-item" th:each="cat : ${T(com.hanaberia.enums.Categories).values()}">
+                    <a th:href="@{'#' + ${cat}}" class="nav-link" data-bs-toggle="tab">
+                    <span th:text="${cat.displayValue}"></span></a></li>
             </ul>
-
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="bransoletki">
+                <div class="tab-pane fade"
+                     th:each="cat : ${T(com.hanaberia.enums.Categories).values()}" th:id="${cat}">
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -57,109 +52,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="product : ${bracelets}">
+                        <tr th:each="product : ${productsByCategories.get(cat)}">
                             <td th:text="${product.id}"></td>
                             <td>
-                                <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
-                            </td>
-                            <td name="name" th:text="${product.name}"></td>
-                            <td th:text="${product.description}"></td>
-                            <td th:text="${product.price}"></td>
-                            <td>
-                                <div class="btn-group">
-                                    <a th:href="@{/products/to-edit/{id}(id=${product.id})}" class="btn btn-outline-primary">
-                                        <i class="bi bi-pencil-square" title="Edytuj"></i></a>
-                                    <a th:href="@{/products/to-remove/{id}(id=${product.id})}" class="btn btn-outline-danger">
-                                        <i class="bi bi-x-square" title="Usuń"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="kolczyki">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Zdjęcie</th>
-                            <th scope="col">Nazwa</th>
-                            <th scope="col">Opis</th>
-                            <th scope="col">Cena</th>
-                            <th scope="col">Akcje</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="product : ${earrings}">
-                            <td th:text="${product.id}"></td>
-                            <td>
-                                <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
-                            </td>
-                            <td name="name" th:text="${product.name}"></td>
-                            <td th:text="${product.description}"></td>
-                            <td th:text="${product.price}"></td>
-                            <td>
-                                <div class="btn-group">
-                                    <a th:href="@{/products/to-edit/{id}(id=${product.id})}" class="btn btn-outline-primary">
-                                        <i class="bi bi-pencil-square" title="Edytuj"></i></a>
-                                    <a th:href="@{/products/to-remove/{id}(id=${product.id})}" class="btn btn-outline-danger">
-                                        <i class="bi bi-x-square" title="Usuń"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="naszyjniki">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Zdjęcie</th>
-                            <th scope="col">Nazwa</th>
-                            <th scope="col">Opis</th>
-                            <th scope="col">Cena</th>
-                            <th scope="col">Akcje</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="product : ${necklaces}">
-                            <td th:text="${product.id}"></td>
-                            <td>
-                                <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
-                            </td>
-                            <td name="name" th:text="${product.name}"></td>
-                            <td th:text="${product.description}"></td>
-                            <td th:text="${product.price}"></td>
-                            <td>
-                                <div class="btn-group">
-                                    <a th:href="@{/products/to-edit/{id}(id=${product.id})}" class="btn btn-outline-primary">
-                                        <i class="bi bi-pencil-square" title="Edytuj"></i></a>
-                                    <a th:href="@{/products/to-remove/{id}(id=${product.id})}" class="btn btn-outline-danger">
-                                        <i class="bi bi-x-square" title="Usuń"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="pierscionki">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Zdjęcie</th>
-                            <th scope="col">Nazwa</th>
-                            <th scope="col">Opis</th>
-                            <th scope="col">Cena</th>
-                            <th scope="col">Akcje</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="product : ${rings}">
-                            <td th:text="${product.id}"></td>
-                            <td>
-                                <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
+                                <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}"
+                                     width="70"/>
                             </td>
                             <td name="name" th:text="${product.name}"></td>
                             <td th:text="${product.description}"></td>

@@ -29,7 +29,7 @@ main {
 	background-color: white;
 }
 header {
-	background-color: #3300CC;
+	background-image: linear-gradient(to bottom right, #3300CC, #9AE9FF);
 	color: white;
 	top: 0;
 	text-shadow: 1px 1px 0.5px black;
@@ -40,7 +40,7 @@ section {
 	min-height: calc(100vh - 180px);
 }
 footer {
-	background-color: #3300CC;
+	background-image: linear-gradient(to top left, #3300CC, #9AE9FF);
 	padding: 20px;
 	color: white;
 	font-size: 16px;
@@ -51,7 +51,6 @@ footer {
 .total {
 	text-align: right;
 }
-
 #menu1 {
 	position: fixed;
 	left: 0;
@@ -59,7 +58,7 @@ footer {
 	margin: 0; padding: 0;
 	width: 80px;
 	height: 80px;
-	background-color: #3300CC;
+	background-image: linear-gradient(to bottom right, #3300CC, #9AE9FF);
 	border-bottom-right-radius: 100%;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
 	z-index: -1;
@@ -71,12 +70,28 @@ footer {
 	margin: 0; padding: 0;
 	width: 80px;
 	height: 80px;
-	background-color: #3300CC;
+	background-image: linear-gradient(to top left, #3300CC, #9AE9FF);
 	border-top-left-radius: 100%;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
 	z-index: -1;
 }
-#logo, #insta, #login, #logout{
+.bg {
+    background-image: linear-gradient(to bottom right, #3300CC, #9AE9FF);
+    min-height: 580px;
+}
+#back{
+    border: 0;
+}
+.buttons{
+    position: absolute;
+    bottom: 20px;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    padding: 30px;
+}
+.element, #login, #logout{
     color: white;
     text-decoration: none;
     border: 0;
