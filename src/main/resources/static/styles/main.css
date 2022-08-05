@@ -67,16 +67,16 @@ p {
 	background-image: url('all.png');
 	height: 650px;
 }
-.bracelets {
+.BRACELET {
 	background-image: url('bracelet.png');
 }
-.earrings {
+.EARRINGS {
 	background-image: url('earrings.png');
 }
-.necklaces {
+.NECKLACE {
 	background-image: url('necklace.png');
 }
-.rings {
+.RING {
 	background-image: url('ring.png');
 }
 .archive {
