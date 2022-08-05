@@ -38,7 +38,7 @@
                     <span th:text="${cat.displayValue}"></span></a></li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade show active"
+                <div class="tab-pane fade"
                      th:each="cat : ${T(com.hanaberia.enums.Categories).values()}" th:id="${cat}">
                     <table class="table table-hover">
                         <thead>
