@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8" />
     <title>Hanaberia</title>
@@ -15,124 +15,117 @@
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card bg text-white" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
-                            <div class="mb-md-5 mt-md-4 pb-5">
 
-                                <h2 class="fw-bold mb-2">Zarejestruj się</h2>
-                                <p class="mb-5">Uzupełnij pola</p>
+                            <h2 class="fw-bold mb-2">Zarejestruj się</h2>
+                            <p class="mb-5">
+                                <ul style="list-style: none;">
+                                    <li th:each="message : ${errors}"><span th:text="${message}"></span></li>
+                                </ul>
+                            </p>
 
-                                <p class="error" th:each="message : ${errors}">
-                                    <span th:text="${message}"></span>
-                                </p>
+                            <form th:action="@{/users/add}"
+                                  th:object="${users}"
+                                  method="post">
+                                <div class="form-outline">
+                                    <input
+                                            class="form-control"
+                                            placeholder="Login"
+                                            type="text"
+                                            id="userName"
+                                            th:field="*{userName}"
+                                            maxlength="100"
+                                            required/>
+                                </div>
+                                <div class="form-outline d-flex justify-content-between">
+                                    <div class="mt-2">Preferowana forma kontaktu:</div>
+                                    <label class="btn-group">
+                                        <input type="radio"
+                                               class="btn-check"
+                                               th:field="*{contactForm}"
+                                               value="EMAIL"
+                                               id="emailCheck"
+                                               autocomplete="off">
+                                        <label class="btn btn-outline-light"
+                                               for="emailCheck">
+                                            <i class="bi bi-envelope" title="e-mail"></i>
+                                        </label>
+                                        <input type="radio"
+                                               class="btn-check"
+                                               th:field="*{contactForm}"
+                                               value="PHONE"
+                                               id="phoneCheck"
+                                               autocomplete="off">
+                                        <label class="btn btn-outline-light"
+                                               for="phoneCheck">
+                                            <i class="bi bi-telephone" title="sms"></i>
+                                        </label>
+                                    </label>
 
-                <form th:action="@{/users/add}"
-                      th:object="${users}"
-                      method="post">
-                    <div class="row g-2">
-                        <br>
-                        <label for="userName" class="col-3 col-form-label">Login</label>
-                        <div class="col-9">
-                            <input
-                                    class="form-control"
-                                    type="text"
-                                    id="userName"
-                                    th:field="*{userName}"
-                                    maxlength="100"
-                                    required/>
-                        </div>
-                    </div>
-                    <div class="row g-2">
-                        <label class="btn-group col-3" for="contact">
-                            <input type="radio"
-                                   class="btn-check"
-                                   th:field="*{contactForm}"
-                                   value="EMAIL"
-                                   id="emailCheck"
-                                   autocomplete="off">
-                            <label class="btn btn-outline-light"
-                                   for="emailCheck">
-                                <i class="bi bi-envelope"></i>
-                            </label>
-                            <input type="radio"
-                                   class="btn-check"
-                                   th:field="*{contactForm}"
-                                   value="PHONE"
-                                   id="phoneCheck"
-                                   autocomplete="off">
-                            <label class="btn btn-outline-light"
-                                   for="phoneCheck">
-                                <i class="bi bi-telephone"></i>
-                            </label>
-                        </label>
-                        <div class="col-9">
-                            <input
-                                    class="form-control"
-                                    type="text"
-                                    id="contact"
-                                    th:field="*{contact}"
-                                    maxlength="100"
-                                    required/>
-                        </div>
-                    </div>
-                    <div class="row g-2">
-                        <label for="userPassword" class="col-3 col-form-label">Hasło</label>
-                        <div class="col-9">
-                            <input
-                                    class="form-control"
-                                    type="password"
-                                    id="userPassword"
-                                    th:field="*{password}"
-                                    maxlength="100"
-                                    required/>
-                        </div>
-                    </div>
-                    <div class="row g-2">
-                        <label for="confirmPassword" class="col-3 col-form-label">Powtórz</label>
-                        <div class="col-9">
-                            <input
-                                    class="form-control"
-                                    type="password"
-                                    id="confirmPassword"
-                                    th:field="*{confirm}"
-                                    maxlength="100"
-                                    required/>
-                            <input type="checkbox" onclick="myFunction()">Pokaż hasła
-                        </div>
-                    </div>
-                    <div class="row g-2">
-                        <label for="question" class="col-3 col-form-label">Pytanie</label>
-                        <div class="col-9">
-                            <select
-                                    class="form-control"
-                                    id="question"
-                                    th:field="*{question}">
-                                <option th:each="question : ${T(com.hanaberia.enums.Questions).values()}"
-                                        th:value="${question}" th:text="${question.displayValue}"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row g-2">
-                        <label for="answer" class="col-3 col-form-label">Odpowiedź</label>
-                        <div class="col-9">
-                            <input
-                                    class="form-control"
-                                    type="text"
-                                    id="answer"
-                                    th:field="*{answer}"
-                                    maxlength="125"
-                                    required/>
-                        </div>
-                        <small><br></small>
-                    </div>
-                    <button class="btn btn-outline-light btn-lg px-5" type="submit" value="submit">
-                        Załóż konto
-                    </button>
-                </form>
-                            </div>
-                    <div>
-                        <p class="mb-0">
-                            <a id="resign" th:href="@{/login}" class="text-white fw-bold">Zrezygnuj</a>
-                        </p>
-                    </div>
+                                </div>
+                                <div class="form-outline">
+                                    <input
+                                            class="form-control"
+                                            placeholder="Kontakt"
+                                            type="text"
+                                            id="contact"
+                                            th:field="*{contact}"
+                                            maxlength="100"
+                                            required/>
+                                </div>
+                                <div class="form-outline">
+                                    <input
+                                            class="form-control"
+                                            placeholder="Hasło"
+                                            type="password"
+                                            id="userPassword"
+                                            th:field="*{password}"
+                                            maxlength="100"
+                                            required/>
+                                </div>
+                                <div class="row">
+                                    <div class="col-10">
+                                        <input
+                                                class="form-control"
+                                                placeholder="Powtórz hasło"
+                                                type="password"
+                                                id="confirmPassword"
+                                                th:field="*{confirm}"
+                                                maxlength="100"
+                                                required>
+                                    </div>
+                                    <label for="confirmPassword" class="col col-form-label">
+                                        <i class="bi bi-eye-slash" title="pokaż hasła" onclick="myFunction(this)"></i>
+                                    </label>
+                                </div>
+                                <div class="form-outline">
+                                    <select
+                                            class="form-control"
+                                            title="Wybierz pytanie pomocnicze"
+                                            id="question"
+                                            th:field="*{question}">
+                                        <option th:each="question : ${T(com.hanaberia.enums.Questions).values()}"
+                                                th:value="${question}" th:text="${question.displayValue}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-outline">
+                                    <input
+                                            class="form-control"
+                                            placeholder="Odpowiedź"
+                                            type="text"
+                                            id="answer"
+                                            th:field="*{answer}"
+                                            maxlength="125"
+                                            required/>
+                                    <small><br></small>
+                                </div>
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit" value="submit">
+                                    Załóż konto
+                                </button>
+                                <br><br>
+                                <a id="resign" th:href="@{/login}" class="text-white fw-bold">
+                                    <i class="bi bi-arrow-left-square" title="zrezygnuj"></i></a>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -142,7 +135,7 @@
 <nav id="menu2"></nav>
 
 <script>
-    function myFunction() {
+    function myFunction(z) {
   var x = document.getElementById("userPassword");
   var y = document.getElementById("confirmPassword");
   if (x.type === "password") {
@@ -152,6 +145,7 @@
     x.type = "password";
     y.type = "password";
   }
+    z.classList.toggle("bi-eye");
 }
 </script>
 

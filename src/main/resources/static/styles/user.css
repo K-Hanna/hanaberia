@@ -51,7 +51,6 @@ footer {
 .total {
 	text-align: right;
 }
-
 #menu1 {
 	position: fixed;
 	left: 0;
@@ -78,6 +77,19 @@ footer {
 }
 .bg {
     background-image: linear-gradient(to bottom right, #3300CC, #9AE9FF);
+    min-height: 580px;
+}
+#back{
+    border: 0;
+}
+.buttons{
+    position: absolute;
+    bottom: 20px;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    padding: 30px;
 }
 .element, #login, #logout{
     color: white;

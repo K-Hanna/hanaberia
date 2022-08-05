@@ -15,64 +15,64 @@
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card bg text-white" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
-                        <div class="mb-md-5 mt-md-4 pb-5">
 
-                            <h2 class="fw-bold mb-2">Zmiana hasła</h2>
+                        <h2 class="fw-bold mb-2">Zmień hasło</h2>
+                        <p class="mb-5"><span th:text="${message}"></span>&nbsp</p>
 
-                            <p class="error">
-                                <span th:text="${message}"></span>
-                            </p>
-
-                            <form th:action="@{'/recover/stepThree/' + ${users.id}}"
-                                  th:object="${users}"
-                                  method="post">
-                                <div class="row g-2">
-                                    <p>dla konta: <span th:text="${users.contact}"></span></p>
+                        <form th:action="@{'/recover/stepThree/' + ${users.id}}"
+                              th:object="${users}"
+                              method="post">
+                            <div class="form-outline">
+                                <span
+                                        class="form-control text-start"
+                                        th:text="${users.userName}">
+                                </span>
+                            </div>
+                            <div class="form-outline">
+                                <span
+                                        class="form-control text-start"
+                                        th:text="${users.question.displayValue}">
+                                </span>
+                            </div>
+                            <div class="form-outline">
+                                <span
+                                        class="form-control text-start"
+                                        th:text="${users.answer}">
+                                </span>
+                            </div>
+                            <div class="form-outline">
+                                <input
+                                        class="form-control"
+                                        placeholder="Hasło"
+                                        type="password"
+                                        id="userPassword"
+                                        th:field="*{password}"
+                                        maxlength="100"
+                                        required/>
+                            </div>
+                            <div class="row">
+                                <div class="col-10">
+                                    <input
+                                            class="form-control"
+                                            placeholder="Powtórz hasło"
+                                            type="password"
+                                            id="confirmPassword"
+                                            th:field="*{confirm}"
+                                            maxlength="100"
+                                            required>
                                 </div>
-                                <div class="row g-2">
-                                    <p>Pytanie: <span th:text="${users.question.displayValue}"></span></p>
-                                </div>
-                                <div class="row g-2">
-                                    <p>Odpowiedź: <span th:text="${users.answer}"></span></p>
-                                </div>
-                                <div class="row g-2">
-                                    <label for="userPassword" class="col-4 col-form-label">Hasło</label>
-                                    <div class="col-8">
-                                        <input
-                                                class="form-control"
-                                                type="password"
-                                                id="userPassword"
-                                                th:field="*{password}"
-                                                maxlength="100"
-                                                required/>
-                                    </div>
-                                </div>
-                                <div class="row g-2">
-                                    <label for="confirmPassword" class="col-4 col-form-label">Powtórz</label>
-                                    <div class="col-8">
-                                        <input
-                                                class="form-control"
-                                                type="password"
-                                                id="confirmPassword"
-                                                th:field="*{confirm}"
-                                                maxlength="100"
-                                                required/>
-                                        <input type="checkbox" onclick="myFunction()">Pokaż hasła
-                                    </div>
-                                </div>
-                                <br>
+                                <label for="confirmPassword" class="col col-form-label">
+                                    <i class="bi bi-eye-slash" title="pokaż hasła" onclick="myFunction(this)"></i>
+                                </label>
+                            </div>
+                            <div class="d-flex justify-content-between buttons">
+                                <a id="back" th:href="@{'/recover/stepTwo/' + ${users.id}}" class="btn btn-outline-light p-3">
+                                    <i class="bi bi-arrow-left-square" title="wstecz"></i></a>
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit" value="submit">
-                                    <i class="bi bi-arrow-right-square" title="dalej"></i>
+                                    <i class="bi bi-check2-square" title="Zatwierdź"></i></a>
                                 </button>
-                            </form>
-                        </div>
-                        <div>
-                            <p class="mb-0">
-                                <a id="resign" th:href="@{'/recover/stepTwo/' + ${users.id}}" class="text-white fw-bold">
-                                    <i class="bi bi-arrow-left-square" title="wstecz"></i>
-                                </a>
-                            </p>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
 <nav id="menu2"></nav>
 
 <script>
-    function myFunction() {
+    function myFunction(z) {
   var x = document.getElementById("userPassword");
   var y = document.getElementById("confirmPassword");
   if (x.type === "password") {
@@ -92,6 +92,7 @@
     x.type = "password";
     y.type = "password";
   }
+    z.classList.toggle("bi-eye");
 }
 </script>
 
