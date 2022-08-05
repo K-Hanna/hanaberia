@@ -52,8 +52,8 @@
                                     <p><span th:text="${orders[i].message}"></span></p>
                                 </div>
                                 <div class="w-50">
-                                    <p class="total">Suma zamówienia: <span th:text="${totals[i]}"></span>,- zł</p>
-                                    <p class="total" th:if="${orders[i].completed}">Zrealizowano dnia:
+                                    <p class="total">Suma: <span th:text="${totals[i]}"></span>,- zł</p>
+                                    <p class="total" th:if="${orders[i].completed}">Zrealizowano:
                                         <span th:text="${orders[i].completedDate}"></span>.</p>
                                     <div th:unless="${orders[i].completed}" class="total">
                                         <div class="btn-group">

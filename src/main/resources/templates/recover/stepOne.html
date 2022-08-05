@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hanaberia</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+    <link th:href="@{/styles/user.css}" rel="stylesheet" />
+</head>
+<body>
+<nav id="menu1"></nav>
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <div class="mb-md-5 mt-md-4 pb-5">
+
+                            <h2 class="fw-bold mb-2">Zmiana hasła</h2>
+
+                            <p class="error">
+                                <span th:text="${message}"></span>
+                            </p>
+
+                            <form action="#"
+                                  th:action="@{/recover/stepOne}"
+                                  th:object="${users}"
+                                  method="get">
+                                <div class="row g-2">
+                                    <br>
+                                    <label for="contact" class="col-3 col-form-label">Kontakt</label>
+                                    <div class="col-9">
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="contact"
+                                                th:field="*{contact}"
+                                                maxlength="100"
+                                                required/>
+                                    </div>
+                                    <small><br></small>
+                                </div>
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit" value="submit">
+                                    <i class="bi bi-arrow-right" title="dalej"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div>
+                            <p class="mb-0">
+                                <a id="resign" th:href="@{/login}" class="text-white fw-bold">
+                                    <i class="bi bi-arrow-left-square" title="wstecz"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<nav id="menu2"></nav>
+</body>
+</html>

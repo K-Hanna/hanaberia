@@ -13,12 +13,12 @@
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card bg text-white" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
                             <div class="mb-md-5 mt-md-4 pb-5">
 
                                 <h2 class="fw-bold mb-2">Zarejestruj się</h2>
-                                <p class="text-white-50 mb-5">Uzupełnij pola</p>
+                                <p class="mb-5">Uzupełnij pola</p>
 
                                 <p class="error" th:each="message : ${errors}">
                                     <span th:text="${message}"></span>
@@ -36,6 +36,7 @@
                                     type="text"
                                     id="userName"
                                     th:field="*{userName}"
+                                    maxlength="100"
                                     required/>
                         </div>
                     </div>
@@ -68,6 +69,7 @@
                                     type="text"
                                     id="contact"
                                     th:field="*{contact}"
+                                    maxlength="100"
                                     required/>
                         </div>
                     </div>
@@ -79,6 +81,7 @@
                                     type="password"
                                     id="userPassword"
                                     th:field="*{password}"
+                                    maxlength="100"
                                     required/>
                         </div>
                     </div>
@@ -90,17 +93,44 @@
                                     type="password"
                                     id="confirmPassword"
                                     th:field="*{confirm}"
+                                    maxlength="100"
+                                    required/>
+                            <input type="checkbox" onclick="myFunction()">Pokaż hasła
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <label for="question" class="col-3 col-form-label">Pytanie</label>
+                        <div class="col-9">
+                            <select
+                                    class="form-control"
+                                    id="question"
+                                    th:field="*{question}">
+                                <option th:each="question : ${T(com.hanaberia.enums.Questions).values()}"
+                                        th:value="${question}" th:text="${question.displayValue}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <label for="answer" class="col-3 col-form-label">Odpowiedź</label>
+                        <div class="col-9">
+                            <input
+                                    class="form-control"
+                                    type="text"
+                                    id="answer"
+                                    th:field="*{answer}"
+                                    maxlength="125"
                                     required/>
                         </div>
                         <small><br></small>
                     </div>
                     <button class="btn btn-outline-light btn-lg px-5" type="submit" value="submit">
-                        Załóż konto</button>
+                        Załóż konto
+                    </button>
                 </form>
                             </div>
                     <div>
                         <p class="mb-0">
-                            <a id="resign" th:href="@{/login}" class="text-white-50 fw-bold">Zrezygnuj</i></a>
+                            <a id="resign" th:href="@{/login}" class="text-white fw-bold">Zrezygnuj</a>
                         </p>
                     </div>
                         </div>
@@ -110,5 +140,20 @@
         </div>
     </section>
 <nav id="menu2"></nav>
+
+<script>
+    function myFunction() {
+  var x = document.getElementById("userPassword");
+  var y = document.getElementById("confirmPassword");
+  if (x.type === "password") {
+    x.type = "text";
+    y.type = "text";
+  } else {
+    x.type = "password";
+    y.type = "password";
+  }
+}
+</script>
+
 </body>
 </html>
