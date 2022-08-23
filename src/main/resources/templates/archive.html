@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" id="tlo" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="pl" id="tlo" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Hanaberia</title>
@@ -12,32 +11,7 @@
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
 </head>
 <body>
-    <div id="menu">
-        <div id="menu-bar" onclick="menuOnClick()">
-            <div id="bar1" class="bar"></div>
-            <div id="bar2" class="bar"></div>
-            <div id="bar3" class="bar"></div>
-        </div>
-        <nav class="nav" id="nav">
-            <ul>
-                <li><a href="/#" onclick="menuOnClick()">Góra strony</a></li>
-                <li><hr class="bg-light border-3 border-top border-light"></li>
-                <li th:each="cat : ${T(com.hanaberia.enums.Categories).values()}">
-                    <a th:href="@{'/#' + ${cat}}" onclick="menuOnClick()">
-                        <span th:text="${cat.displayValue}"></span></a></li>
-                <li><a th:href="@{/archive}">Archiwum</a></li>
-                <li><hr class="bg-light border-3 border-top border-light"></li>
-                <li><a th:href="@{/messages/to-add}">
-                    Kontakt</a></li>
-                <li><a sec:authorize="isAnonymous()" th:href="@{/login}">
-                    Zaloguj się</a>
-                    <a sec:authorize="isAuthenticated()" th:href="@{/users}">
-                        Moje konto</a></li>
-            </ul>
-        </nav>
-    </div>
-
-<div class="menu-bg" id="menu-bg"></div>
+    <div th:insert="fragments/menu :: nav"></div>
 <main>
     <div th:insert="fragments/header :: header"></div>
     <section>
