@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="pl" id="tlo" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="pl" id="tlo" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Hanaberia</title>
+    <link rel="icon" type="image/x-icon" href="/styles/fav.png">
     <meta name="description" content="Różne sobie rękodzieła">
     <meta name="author" content="Dong Ha Kotwa">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -11,25 +13,32 @@
 </head>
 <body>
 
-<nav class="nav-bar">
-    <input type="checkbox" id="menu-toggle"/>
-    <label id="trigger" for="menu-toggle"></label>
-    <label id="burger" for="menu-toggle"></label>
-    <ul id="menu">
-        <li><a href="#" class="menu-link">Góra strony</a></li>
-        <li><hr class="bg-light border-3 border-top border-light"></li>
-        <li th:each="cat : ${T(com.hanaberia.enums.Categories).values()}">
-            <a th:href="@{'#' + ${cat}}" class="menu-link">
-                <span th:text="${cat.displayValue}"></span></a></li>
-        <li><a th:href="@{/archive}" class="menu-link">Archiwum</a></li>
-        <li><hr class="bg-light border-3 border-top border-light"></li>
-        <li><a th:href="@{/messages/to-add}" class="menu-link">Kontakt</a></li>
-        <li><a sec:authorize="isAnonymous()" th:href="@{/login}"
-               class="menu-link">Zaloguj się</a>
-             <a sec:authorize="isAuthenticated()" th:href="@{/users}"
-                class="menu-link">Moje konto</a></li>
-    </ul>
-</nav>
+    <div id="menu">
+        <div id="menu-bar" onclick="menuOnClick()">
+            <div id="bar1" class="bar"></div>
+            <div id="bar2" class="bar"></div>
+            <div id="bar3" class="bar"></div>
+        </div>
+        <nav class="nav" id="nav">
+            <ul>
+                <li><a href="#" onclick="menuOnClick()">Strona główna</a></li>
+                <li><hr class="bg-light border-3 border-top border-light"></li>
+                <li th:each="cat : ${T(com.hanaberia.enums.Categories).values()}">
+                    <a th:href="@{'#' + ${cat}}" onclick="menuOnClick()">
+                        <span th:text="${cat.displayValue}"></span></a></li>
+                <li><a th:href="@{/archive}">Archiwum</a></li>
+                <li><hr class="bg-light border-3 border-top border-light"></li>
+                <li><a th:href="@{/messages/to-add}">
+                        Kontakt</a></li>
+                <li><a sec:authorize="isAnonymous()" th:href="@{/login}">
+                        Zaloguj się</a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/users}">
+                        Moje konto</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="menu-bg" id="menu-bg"></div>
 
 <main>
     <div th:insert="fragments/header :: header"></div>

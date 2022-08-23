@@ -9,9 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -26,6 +24,7 @@ public class HomeController {
 
         for(Categories category : Categories.values()){
             List<Products> products = productsService.getByCategory(category);
+            products.sort(Comparator.comparing(Products::getId).reversed());
             productsByCategories.put(category, products);
         }
 
