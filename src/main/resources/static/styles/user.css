@@ -39,6 +39,9 @@ header {
 section {
 	min-height: calc(100vh - 180px);
 }
+.hint {
+    opacity: 0.5;
+}
 footer {
 	background-image: linear-gradient(to top left, #3300CC, #9AE9FF);
 	padding: 20px;
