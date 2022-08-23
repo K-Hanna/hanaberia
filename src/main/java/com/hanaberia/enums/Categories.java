@@ -5,7 +5,8 @@ public enum Categories {
     BRACELET("Bransoletki"),
     EARRINGS("Kolczyki"),
     NECKLACE("Naszyjniki"),
-    RING("Pierścionki");
+    RING("Pierścionki"),
+    OTHERS("Inne");
 
     private final String displayValue;
 
