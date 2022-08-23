@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<body>
-<div th:fragment="nav">
-    <ul class="nav nav-tabs">
-        <li class="nav-item ">
-            <a class="nav-link" th:href="@{/}"><i class="bi bi-house"></i></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/users}">Moje dane</a>
-        </li>
-        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-            <a class="nav-link" th:href="@{/products}">Produkty</a>
-        </li>
-        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-            <a class="nav-link active" aria-current="page" th:href="@{/orders/all}">Zamówienia</a>
-        </li>
-        <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-            <a class="nav-link" th:href="@{/messages/all}">Wiadomości</a>
-        </li>
+    <body>
+        <div th:fragment="nav">
+            <ul class="nav nav-tabs">
+                <li class="nav-item ">
+                    <a class="nav-link" th:href="@{/}"><i class="bi bi-house"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/users}">Moje dane</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-link" th:href="@{/products}">Produkty</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-link active" aria-current="page" th:href="@{/orders/all}">Zamówienia</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-link" th:href="@{/messages/all}">Wiadomości</a>
+                </li>
 
-        <li class="nav-item" sec:authorize="hasAuthority('USER')">
-            <a class="nav-link" th:href="@{/reservations}">Rezerwacje</a>
-        </li>
-        <li class="nav-item" sec:authorize="hasAuthority('USER')">
-            <a class="nav-link active" aria-current="page" th:href="@{/orders}">Zamówienia</a>
-        </li>
-
-    </ul>
-</div>
-</body>
+                <li class="nav-item" sec:authorize="hasAuthority('USER')">
+                    <a class="nav-link" th:href="@{/reservations}">Rezerwacje</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAuthority('USER')">
+                    <a class="nav-link active" aria-current="page" th:href="@{/orders}">Zamówienia</a>
+                </li>
+            </ul>
+        </div>
+    </body>
 </html>

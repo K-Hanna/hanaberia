@@ -10,14 +10,15 @@
      return false;
  });
 
- $(".gallery ul li a").click(function() {
-     $('html, body').animate({
-         scrollTop: parseInt($("#top").offset().top)
-     }, 400);
+//menu
+ $('.item ul li a').click(function() {
+   document.getElementById("menu-bar").classList.toggle("change");
+   document.getElementById("nav").classList.toggle("change-item");
+   document.getElementById("menu-bg").classList.toggle("change-bg");
  });
 
- function menuOnClick() {
-   document.getElementById("menu-bar").classList.toggle("change");
-   document.getElementById("nav").classList.toggle("change");
-   document.getElementById("menu-bg").classList.toggle("change-bg");
- }
+function menuOnClick() {
+  document.getElementById("menu-bar").classList.toggle("change");
+  document.getElementById("nav").classList.toggle("change-item");
+  document.getElementById("menu-bg").classList.toggle("change-bg");
+}

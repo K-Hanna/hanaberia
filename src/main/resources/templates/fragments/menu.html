@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <body>
+        <div th:fragment="nav">
+            <div id="menu">
+                <div id="menu-bar" onclick="menuOnClick()">
+                    <div id="bar1" class="bar"></div>
+                    <div id="bar2" class="bar"></div>
+                    <div id="bar3" class="bar"></div>
+                </div>
+                <nav class="item" id="nav">
+                    <ul>
+                        <li><a href="/">Strona główna</a></li>
+                        <li><hr class="bg-light border-3 border-top border-light"></li>
+                        <li th:each="cat : ${T(com.hanaberia.enums.Categories).values()}">
+                            <a th:href="@{'/#' + ${cat}}">
+                                <span th:text="${cat.displayValue}"></span></a></li>
+                        <li><a th:href="@{/archive}">Archiwum</a></li>
+                        <li><hr class="bg-light border-3 border-top border-light"></li>
+                        <li><a th:href="@{/messages/to-add}">
+                            Kontakt</a></li>
+                        <li><a sec:authorize="isAnonymous()" th:href="@{/login}">
+                            Zaloguj się</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/users}">
+                                Moje konto</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="menu-bg" id="menu-bg"></div>
+        </div>
+    </body>
+</html>
