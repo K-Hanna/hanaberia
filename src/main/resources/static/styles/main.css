@@ -99,7 +99,7 @@ footer {
 a img {
 	width: 100%;
 }
-.element, #login, #logout{
+#logo, #login, #logout{
     color: white;
     text-decoration: none;
     border: 0;
@@ -108,10 +108,10 @@ a img {
     font-size: 30px;
 }
 #copyright{
-    color: white;
+/*    color: white;
     text-decoration: none;
     margin: 0;
-    padding: 10px;
+    padding: 10px;*/
     font-size: 15px;
 }
 /*Menu stuff*/
@@ -160,7 +160,7 @@ a img {
   list-style: none;
   padding: 5px 0;
   width: 180px;
-  text-indent: 50px;
+  text-indent: 30px;
 }
 
 .item li a {
@@ -362,7 +362,7 @@ a img {
 /*tablet view*/
 @media all and (max-width: 1100px){
     header{
-        padding-left: 100px;
+        padding-left: 80px;
     }
     .head {
         background-size: cover;

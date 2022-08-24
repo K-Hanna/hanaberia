@@ -2,7 +2,8 @@
     <body>
         <header th:fragment="header" class="d-flex justify-content-between">
             <div>
-                <h1><a href="/" class="element"><img src="/styles/logo.png" height="50px" alt="Hanaberia logo"></a></h1>
+                <h1><a href="/" id="logo">
+                    <img src="/styles/logo.png" height="50px" alt="Hanaberia logo"></a></h1>
             </div>
             <div>
                 <div sec:authorize="isAnonymous()">
