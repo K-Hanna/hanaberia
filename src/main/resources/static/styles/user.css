@@ -32,9 +32,10 @@ header {
 	background-image: linear-gradient(to bottom right, #3300CC, #9AE9FF);
 	top: 0;
 	padding: 10px 30px;
+	text-shadow: 1px 1px 0.5px black;
 }
 section {
-	min-height: calc(100vh - 180px);
+	min-height: calc(100vh - 210px);
 }
 .hint {
     opacity: 0.5;
