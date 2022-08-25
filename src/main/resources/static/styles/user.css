@@ -30,10 +30,7 @@ main {
 }
 header {
 	background-image: linear-gradient(to bottom right, #3300CC, #9AE9FF);
-	color: white;
 	top: 0;
-	text-shadow: 1px 1px 0.5px black;
-	font-family: 'Lobster Two', Georgia, cursive;
 	padding: 10px 30px;
 }
 section {
@@ -41,15 +38,6 @@ section {
 }
 .hint {
     opacity: 0.5;
-}
-footer {
-	background-image: linear-gradient(to top left, #3300CC, #9AE9FF);
-	padding: 20px;
-	color: white;
-	font-size: 16px;
-	text-shadow: 1px 1px 0.5px black;
-	font-family: 'Lato', sans-serif;
-	text-align: right;
 }
 .total {
 	text-align: right;
@@ -94,18 +82,31 @@ footer {
     margin-right:auto;
     padding: 30px;
 }
-.element, #login, #logout{
-    color: white;
-    text-decoration: none;
+footer {
+	background-image: linear-gradient(to top left, #3300CC, #9AE9FF);
+	padding: 20px;
+	text-shadow: 1px 1px 0.5px black;
+}
+#login, #logout, .element{
+	color: white;
     border: 0;
     margin: 0;
     padding: 0 10px;
     font-size: 30px;
 }
 #copyright{
-    color: white;
-    text-decoration: none;
+	color: white;
+	text-align: right;
     margin: 0;
     padding: 10px;
     font-size: 15px;
+}
+/* mobile view */
+@media all and (max-width: 768px) and (orientation: portrait) {
+    footer{
+        padding: 10px;
+    }
+    .element{
+        padding: 0;
+    }
 }

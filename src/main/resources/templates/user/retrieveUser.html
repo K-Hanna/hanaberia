@@ -1,104 +1,103 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Hanaberia</title>
-    <link rel="icon" type="image/x-icon" href="/styles/fav.png">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
-    <link th:href="@{/styles/user.css}" rel="stylesheet" />
-</head>
-<body>
-<nav id="menu1"></nav>
-    <main>
-        <div th:insert="fragments/header :: header"></div>
-        <div th:insert="fragments/navUser :: nav"></div>
-        <section>
-        <div class="container"
-             style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
-            <br/>
-            <h4>Moje dane</h4>
-            <form class="w-50">
-                <div class="row g-2">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hanaberia</title>
+        <link rel="icon" type="image/x-icon" href="/styles/fav.png">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+        <link th:href="@{/styles/user.css}" rel="stylesheet" />
+    </head>
+    <body>
+        <nav id="menu1"></nav>
+        <main>
+            <div th:insert="fragments/header :: header"></div>
+            <div th:insert="fragments/navUser :: nav"></div>
+            <section>
+                <div class="container"
+                     style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
                     <br>
-                    <label for="userName" class="col-4 col-form-label">Login:</label>
-                    <div class="col-8">
-                        <input
-                                class="form-control-plaintext"
-                                type="text"
-                                id="userName"
-                                th:field="${users.userName}"
-                                readonly/>
-                    </div>
-                </div>
-                <div class="row g-2">
-                    <label for="contact" class="col-4 col-form-label">
-                        <div th:if="${users.contactForm.name() == 'EMAIL'}">E-mail:</div>
-                        <div th:if="${users.contactForm.name() == 'PHONE'}">Telefon:</div>
-                    </label>
-                    <div class="col-8">
-                        <input
-                                class="form-control-plaintext"
-                                type="text"
-                                id="contact"
-                                th:field="*{users.contact}"
-                                readonly/>
-                    </div>
-                </div>
-                <div class="row g-2">
-                    <br>
-                    <label for="question" class="col-4 col-form-label">Pytanie:</label>
-                    <div class="col-8">
-                        <input
-                                class="form-control-plaintext"
-                                type="text"
-                                id="question"
-                                th:field="${users.question.displayValue}"
-                                readonly/>
-                    </div>
-                </div>
-                <div class="row g-2">
-                    <br>
-                    <label for="answer" class="col-4 col-form-label">Odpowiedź:</label>
-                    <div class="col-8">
-                        <input
-                                class="form-control-plaintext"
-                                type="text"
-                                id="answer"
-                                th:field="${users.answer}"
-                                readonly/>
-                    </div>
-                </div>
-                <br>
-                <div class="modal-footer">
-                    <div class="btn-group">
-                        <a th:href="@{/users/to-edit/{id}(id=${users.id})}" class="btn btn-outline-primary">
-                            <i class="bi bi-pencil-square" title="Edytuj"></i></a>
-                        <a th:href="@{/users/to-remove/{id}(id=${users.id})}" class="btn btn-outline-danger">
-                            <i class="bi bi-x-square" title="Usuń"></i></a>
-                    </div>
-                        <!--<button type="button"
-                                class="btn btn-outline-danger"
-                                data-bs-toggle="modal"
-                                data-bs-target="#deleteUserModal">
-                            <i class="bi bi-x-square" title="Usuń"></i>
-                        </button>
-                    </div>
+                    <h4>Moje dane</h4>
+                    <form class="w-50">
+                        <div class="row g-2">
+                            <br>
+                            <label for="userName" class="col-4 col-form-label">Login:</label>
+                            <div class="col-8">
+                                <input
+                                        class="form-control-plaintext"
+                                        type="text"
+                                        id="userName"
+                                        th:field="${users.userName}"
+                                        readonly/>
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <label for="contact" class="col-4 col-form-label">
+                                <div th:if="${users.contactForm.name() == 'EMAIL'}">E-mail:</div>
+                                <div th:if="${users.contactForm.name() == 'PHONE'}">Telefon:</div>
+                            </label>
+                            <div class="col-8">
+                                <input
+                                        class="form-control-plaintext"
+                                        type="text"
+                                        id="contact"
+                                        th:field="*{users.contact}"
+                                        readonly/>
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <br>
+                            <label for="question" class="col-4 col-form-label">Pytanie:</label>
+                            <div class="col-8">
+                                <input
+                                        class="form-control-plaintext"
+                                        type="text"
+                                        id="question"
+                                        th:field="${users.question.displayValue}"
+                                        readonly/>
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <br>
+                            <label for="answer" class="col-4 col-form-label">Odpowiedź:</label>
+                            <div class="col-8">
+                                <input
+                                        class="form-control-plaintext"
+                                        type="text"
+                                        id="answer"
+                                        th:field="${users.answer}"
+                                        readonly/>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="modal-footer">
+                            <div class="btn-group">
+                                <a th:href="@{/users/to-edit/{id}(id=${users.id})}" class="btn btn-outline-primary">
+                                    <i class="bi bi-pencil-square" title="Edytuj"></i></a>
+                                <a th:href="@{/users/to-remove/{id}(id=${users.id})}" class="btn btn-outline-danger">
+                                    <i class="bi bi-x-square" title="Usuń"></i></a>
+                            </div>
+<!--                                <button type="button"
+                                        class="btn btn-outline-danger"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteUserModal">
+                                    <i class="bi bi-x-square" title="Usuń"></i>
+                                </button>
 
-                    <div
-                            th:insert="user/deleteUserModal :: modal"
-                            th:with="users=${users}"></div>-->
+                            <div
+                                    th:insert="user/deleteUserModal :: modal"
+                                    th:with="users=${users}"></div>-->
 
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-        </section>
-            <div th:insert="fragments/footer :: footer"></div>
-    </main>
-<nav id="menu2"></nav>
+            </section>
+                <div th:insert="fragments/footer :: footer"></div>
+        </main>
+        <nav id="menu2"></nav>
 
-<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+        <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
 
-</body>
+    </body>
 </html>

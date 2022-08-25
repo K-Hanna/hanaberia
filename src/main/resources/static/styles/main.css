@@ -27,13 +27,9 @@ main {
 	margin: 0 auto;
 	box-shadow: 0 0 50px;
 }
-
 header {
 	background-image: linear-gradient(to bottom right, #3300CC, #9AE9FF);
-	color: white;
 	top: 0;
-	text-shadow: 1px 1px 0.5px black;
-	font-family: 'Lobster Two', Georgia, cursive;
 	padding: 10px 30px;
 }
 article {
@@ -87,31 +83,27 @@ section {
 	background-color: #000000;
 	padding: 20px 0;
 }
+img {
+	width: 100%;
+}
 footer {
 	background-image: linear-gradient(to top left, #3300CC, #9AE9FF);
 	padding: 20px;
-	color: white;
-	font-size: 16px;
+	bottom: 0;
 	text-shadow: 1px 1px 0.5px black;
-	font-family: 'Lato', sans-serif;
-	text-align: right;
 }
-a img {
-	width: 100%;
-}
-#logo, #login, #logout{
-    color: white;
-    text-decoration: none;
+#login, #logout, .element{
+	color: white;
     border: 0;
     margin: 0;
     padding: 0 10px;
     font-size: 30px;
 }
 #copyright{
-/*    color: white;
-    text-decoration: none;
+	color: white;
+	text-align: right;
     margin: 0;
-    padding: 10px;*/
+    padding: 10px;
     font-size: 15px;
 }
 /*Menu stuff*/
@@ -362,7 +354,7 @@ a img {
 /*tablet view*/
 @media all and (max-width: 1100px){
     header{
-        padding-left: 80px;
+        padding-left: 100px;
     }
     .head {
         background-size: cover;
@@ -383,6 +375,15 @@ a img {
 
 /* mobile view */
 @media all and (max-width: 768px) and (orientation: portrait) {
+    header{
+        padding-left: 80px;
+    }
+    footer{
+        padding: 10px;
+    }
+    .element{
+        padding: 0;
+    }
 /* gallery */
 	.port img {
 	  width: 90%;

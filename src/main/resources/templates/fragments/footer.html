@@ -1,16 +1,18 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
     <body>
         <footer th:fragment="footer" class="d-flex justify-content-between">
             <div>
-                <a href="https://www.instagram.com/halia.art/" target="_blank" class="element d-inline">
+                <a href="https://www.instagram.com/halia.art/" target="_blank"
+                   class="btn-outline-primary element d-inline">
                     <i class="bi bi-instagram"></i></a>
-                <a href="https://github.com/K-Hanna/hanaberia" target="_blank" class="element d-inline">
+                <a href="https://github.com/K-Hanna/hanaberia" target="_blank"
+                   class="btn-outline-primary element d-inline">
                     <i class="bi bi-github"></i></a>
-                </a>
+                <a th:href="@{/messages/to-add}" class="btn-outline-primary element d-inline">
+                    <i class="bi bi-envelope"></i></a>
             </div>
             <div>
-                <a href="https://github.com/K-Hanna/hanaberia" target="_blank" id="copyright">
-                    Projekt i wykonanie Dong Ha Kotwa.</a>
+                <p id="copyright">Projekt i wykonanie Dong Ha Kotwa.</p>
             </div>
         </footer>
     </body>
