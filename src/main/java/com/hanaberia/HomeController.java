@@ -1,12 +1,15 @@
 package com.hanaberia;
 
 import com.hanaberia.enums.Categories;
+import com.hanaberia.enums.ContactForms;
+import com.hanaberia.model.Messages;
 import com.hanaberia.model.Products;
 import com.hanaberia.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
@@ -34,9 +37,10 @@ public class HomeController {
     }
 
     @GetMapping("/archive")
-    public String getArchive(Model model){
+    public String getArchive(Model model, @ModelAttribute Messages message){
 
         List<Products> archiveProducts = productsService.getUnavailableProducts();
+        message.setContactForm(ContactForms.EMAIL);
         model.addAttribute("products", archiveProducts);
 
         return "archive";

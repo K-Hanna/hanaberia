@@ -13,10 +13,9 @@
         <main>
             <div th:insert="fragments/header :: header"></div>
             <section>
-                <div
-                        class="container"
-                        style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
-                    <br/>
+                <div class="container"
+                     style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
+                    <br>
                     <h4>Wyślij wiadomość</h4>
                     <span th:text="${error}"></span>
                     <form
@@ -25,14 +24,14 @@
                             th:object="${messages}"
                             method="post">
                         <div class="row g-2">
-                            <label class="btn-group col-4" for="contact">
+                            <label class="btn-group col-3" for="contact">
                                 <input type="radio"
                                        class="btn-check"
                                        th:field="*{contactForm}"
                                        value="EMAIL"
                                        id="emailCheck"
                                        autocomplete="off">
-                                <label class="btn btn-outline-secondary"
+                                <label class="btn btn-outline-secondary border-0"
                                        for="emailCheck">
                                     <i class="bi bi-envelope"></i>
                                 </label>
@@ -42,15 +41,16 @@
                                        value="PHONE"
                                        id="phoneCheck"
                                        autocomplete="off">
-                                <label class="btn btn-outline-secondary"
+                                <label class="btn btn-outline-secondary border-0"
                                        for="phoneCheck">
                                     <i class="bi bi-telephone"></i>
                                 </label>
                             </label>
-                            <div class="col-8">
+                            <div class="col-9">
                                 <input
                                         class="form-control"
                                         type="text"
+                                        placeholder="Kontakt"
                                         id="contact"
                                         th:field="*{contact}"
                                         maxlength="100"
@@ -58,32 +58,25 @@
                             </div>
                         </div>
                         <div class="row g-2">
-                            <br>
-                            <label for="title" class="col-12 col-form-label">Tytuł:</label>
-                            <div class="col-12">
-                                <input
-                                        class="form-control"
-                                        type="text"
-                                        id="title"
-                                        th:field="*{title}"
-                                        maxlength="100"
-                                        required/>
-                            </div>
+                            <input
+                                    class="form-control"
+                                    type="text"
+                                    placeholder="Tytuł"
+                                    id="title"
+                                    th:field="*{title}"
+                                    maxlength="100"
+                                    required/>
                         </div>
                         <div class="row g-2">
-                            <div class="col-12">
-                                <label for="content" class="col-form-label">Treść:</label>
-                            </div>
-                            <div class="col-12">
-                                  <textarea rows = "5"
-                                            class="form-control"
-                                            id="content"
-                                            th:field="*{content}"
-                                            maxlength="255"
-                                            required>
-                                  </textarea>
-                                <br>
-                            </div>
+                            <textarea rows = "5"
+                                      placeholder="Treść"
+                                      class="form-control"
+                                      id="content"
+                                      th:field="*{content}"
+                                      maxlength="255"
+                                      required>
+                            </textarea>
+                            <p></p>
                         </div>
                         <div class="modal-footer">
                             <div class="btn-group">
