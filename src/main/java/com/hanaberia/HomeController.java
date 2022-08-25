@@ -37,10 +37,9 @@ public class HomeController {
     }
 
     @GetMapping("/archive")
-    public String getArchive(Model model, @ModelAttribute Messages message){
+    public String getArchive(Model model){
 
         List<Products> archiveProducts = productsService.getUnavailableProducts();
-        message.setContactForm(ContactForms.EMAIL);
         model.addAttribute("products", archiveProducts);
 
         return "archive";
