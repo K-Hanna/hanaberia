@@ -66,4 +66,8 @@ public class ProductsService {
     public List<Products> getByCategory(Categories category){
         return productsRepository.findByCategory(category);
     }
+
+    public boolean isProductExist(Long id){
+        return productsRepository.existsById(id);
+    }
 }

@@ -6,6 +6,7 @@ import com.hanaberia.model.Reservations;
 import com.hanaberia.model.Users;
 import com.hanaberia.repository.OrdersRepository;
 import com.hanaberia.service.*;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -192,15 +193,16 @@ public class OrdersController {
     }
 
     @PostMapping("/add-to-cart/{id}")
-    public String addToCart(Model model, @PathVariable Long orderId,  Orders modelOrder){
+    public String addToCart(@PathVariable Long id, Orders orders, Model model){
 
-        System.out.println("i'm here");
-        Orders order = ordersService.retrieve(orderId);
-        model.addAttribute("orders", order);
+        Long productId = Long.parseLong(orders.getMessage());
+        if(productsService.isProductExist(productId)){
+            Products product = productsService.retrieve(productId);
+            if(product.isAvailable())
+                ordersService.changingOrder("add", productId, id);
+        }
 
-//        ordersService.changingOrder("add", products.getId(), orderId);
-
-        return "redirect:/orders/to-edit/" + orderId;
+        return "redirect:/orders/to-edit/" + id;
     }
 
     //delete
