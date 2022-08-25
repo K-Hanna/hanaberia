@@ -58,11 +58,11 @@
                                         <span th:text="${orders[i].completedDate}"></span>.</p>
                                     <div th:unless="${orders[i].completed}" class="total">
                                         <div class="btn-group">
-                                            <!--<a th:href="@{/orders[i]s/to-edit/{id}(id=${orders[i].id})}" class="btn btn-outline-primary">
-                                                <i class="bi bi-pencil-square"></i></a>-->
+                                            <a th:href="@{/orders/to-edit/{id}(id=${orders[i].id})}" class="btn btn-outline-primary">
+                                                <i class="bi bi-pencil-square"></i></a>
                                             <a th:href="@{/orders/to-remove/{id}(id=${orders[i].id})}" class="btn btn-outline-danger">
                                                 <i class="bi bi-x-square" title="Usuń zamówienie"></i></a>
-                                            <a th:href="@{/orders/to-complete/{id}(id=${orders[i].id})}" class="btn btn-success">
+                                            <a th:if="${totals[i] != 0}" th:href="@{/orders/to-complete/{id}(id=${orders[i].id})}" class="btn btn-success">
                                                 <i class="bi bi-check2-square" title="Zrealizuj zamówienie"></i></a>
                                         </div>
                                     </div>

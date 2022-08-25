@@ -18,7 +18,7 @@
              style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
             <br/>
             <h4>Mój koszyk</h4>
-            <div class="w-100" th:if="${total != 0}">
+            <div class="w-100" th:if="${total > 0}">
                 <div class="total">
                     <button type="button"
                             class="btn btn-outline-danger"

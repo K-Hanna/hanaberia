@@ -20,7 +20,7 @@
             <h4>Moje zamówienia</h4>
             <p><span th:text="${message}"></span></p>
 
-            <div class="accordion w-100" id="accordionParent">
+            <div class="accordion w-100" id="accordionParent" th:if="${count > 0}">
                 <div class="accordion-item" th:each="i : ${#numbers.sequence(0, count)}">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button collapsed"

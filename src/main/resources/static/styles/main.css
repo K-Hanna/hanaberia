@@ -99,7 +99,7 @@ footer {
 a img {
 	width: 100%;
 }
-#logo, #login, #logout{
+.element, #login, #logout{
     color: white;
     text-decoration: none;
     border: 0;
@@ -108,10 +108,10 @@ a img {
     font-size: 30px;
 }
 #copyright{
-/*    color: white;
+    color: white;
     text-decoration: none;
     margin: 0;
-    padding: 10px;*/
+    padding: 10px;
     font-size: 15px;
 }
 /*Menu stuff*/
@@ -362,7 +362,7 @@ a img {
 /*tablet view*/
 @media all and (max-width: 1100px){
     header{
-        padding-left: 80px;
+        padding-left: 100px;
     }
     .head {
         background-size: cover;
@@ -383,6 +383,9 @@ a img {
 
 /* mobile view */
 @media all and (max-width: 768px) and (orientation: portrait) {
+    header{
+        padding-left: 80px;
+    }
 /* gallery */
 	.port img {
 	  width: 90%;

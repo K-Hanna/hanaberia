@@ -52,8 +52,10 @@ public class OrdersService {
         Orders order = retrieve(id);
         Set<Products> products = order.getProductsSet();
 
-        for(Products product : products){
-            productsService.moveProduct(true, product, null, null);
+        if(products.size() > 0) {
+            for (Products product : products) {
+                productsService.moveProduct(true, product, null, null);
+            }
         }
 
         ordersRepository.deleteById(id);
@@ -73,22 +75,22 @@ public class OrdersService {
     public void changingOrder(String direction, Long productId, Long orderId) {
 
         Products product = productsService.retrieve(productId);
-        Orders oldOrder = retrieve(orderId);
+        Orders order = retrieve(orderId);
 
         switch (direction){
             case "add":
-                productsService.moveProduct(false, product, null, oldOrder);
+                productsService.moveProduct(false, product, null, order);
                 break;
             case "remove":
                 productsService.moveProduct(true, product, null, null);
                 break;
         }
 
-        Set<Products> products = oldOrder.getProductsSet();
+        Set<Products> products = order.getProductsSet();
         products.remove(product);
 
-        oldOrder.setProductsSet(products);
+        order.setProductsSet(products);
 
-        ordersRepository.save(oldOrder);
+        ordersRepository.save(order);
     }
 }
