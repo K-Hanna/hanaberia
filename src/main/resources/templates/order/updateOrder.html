@@ -19,6 +19,36 @@
             <br/>
             <h4>Edytuj zamówienie</h4>
 
+<!--            <div class="container"
+                 style="padding-top: 5vh;">
+                <div class="total">
+                    <button type="button"
+                            class="btn btn-success"
+                            data-bs-toggle="modal"
+                            data-bs-target="#addToOrderModal">
+                        <i class="bi bi-plus-square" title="Dodaj produkt"></i>
+                    </button>
+                </div>
+
+                <div
+                        th:insert="order/addToOrderModal :: modal"
+                        th:with="orders=${orders}"></div>
+            </div>-->
+
+            <div class="w-100" th:if="${total != 0}">
+                <div class="total">
+                    <button type="button"
+                            class="btn btn-outline-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteOrderModal">
+                        <i class="bi bi-x-square" title="Usuń zamówienie"></i>
+                    </button>
+                </div>
+
+                <div
+                        th:insert="order/deleteOrderModal :: modal"
+                        th:with="orders=${orders}"></div>
+
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -44,23 +74,28 @@
                 </table>
                 <h4 class="total">Razem: <span th:text="${total}"></span>,- zł.</h4>
 
-<!--                <div class="text-center">
+                <div class="text-center">
                     <button type="button"
                             class="btn btn-success"
                             data-bs-toggle="modal"
-                            data-bs-target="#addToCartModal">
-                        Do kasy
+                            data-bs-target="#completeOrderModal">
+                        Zrealizuj
                     </button>
                 </div>
 
                 <div
-                        th:insert="order/createOrderModal :: modal"
-                        th:with="orders=${orders}"></div>-->
-            
+                        th:insert="order/completeOrderModal :: modal"
+                        th:with="orders=${orders}"></div>
+            </div>
+                <p><span th:text="${message}"></span></p>
         </div>
     </section>
     <div th:insert="fragments/footer :: footer"></div>
 </main>
 <nav id="menu2"></nav>
+
+<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+
 </body>
 </html>
