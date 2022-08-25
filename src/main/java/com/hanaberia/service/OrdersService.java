@@ -2,8 +2,6 @@ package com.hanaberia.service;
 
 import com.hanaberia.model.Orders;
 import com.hanaberia.model.Products;
-import com.hanaberia.model.Reservations;
-import com.hanaberia.model.Users;
 import com.hanaberia.repository.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,18 +74,18 @@ public class OrdersService {
 
         Products product = productsService.retrieve(productId);
         Orders order = retrieve(orderId);
+        Set<Products> products = order.getProductsSet();
 
         switch (direction){
             case "add":
                 productsService.moveProduct(false, product, null, order);
+                products.remove(product);
                 break;
             case "remove":
                 productsService.moveProduct(true, product, null, null);
+                products.add(product);
                 break;
         }
-
-        Set<Products> products = order.getProductsSet();
-        products.remove(product);
 
         order.setProductsSet(products);
 
