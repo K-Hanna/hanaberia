@@ -24,6 +24,8 @@ body{
 }
 main {
 	max-width: 1100px;
+	min-height: 100vh;
+	position: relative;
 	margin: 0 auto;
 	box-shadow: 0 0 50px;
 	background-color: white;
@@ -35,7 +37,7 @@ header {
 	text-shadow: 1px 1px 0.5px black;
 }
 section {
-	min-height: calc(100vh - 210px);
+    padding-bottom: 100px;
 }
 .tableView {
     width: 50%;
@@ -90,6 +92,9 @@ footer {
 	background-image: linear-gradient(to top left, #3300CC, #9AE9FF);
 	padding: 20px;
 	text-shadow: 1px 1px 0.5px black;
+	position: absolute;
+    bottom: 0;
+    width: 1100px;
 }
 #login, #logout, .element{
 	color: white;
@@ -105,6 +110,12 @@ footer {
     padding: 10px;
     font-size: 15px;
 }
+/*tablet view*/
+@media all and (max-width: 1100px){
+    footer{
+        width: 100%;
+    }
+}
 /* mobile view */
 @media all and (max-width: 768px) and (orientation: portrait) {
     footer{
@@ -115,8 +126,5 @@ footer {
     }
     .tableView {
         width: 100%;
-    }
-    section {
-    	min-height: calc(100vh - 190px);
     }
 }

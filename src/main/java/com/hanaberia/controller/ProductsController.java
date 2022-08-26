@@ -35,11 +35,6 @@ public class ProductsController {
         return "product/retrieveProducts";
     }
 
-    @GetMapping("/to-add")
-    public String productToAdd(Products product){
-        return "product/createProduct";
-    }
-
     @PostMapping("/add")
     public String productAdd(@ModelAttribute Products product){
 
