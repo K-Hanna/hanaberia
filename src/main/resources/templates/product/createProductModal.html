@@ -1,0 +1,89 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <div
+            class="modal fade"
+            th:fragment="modal"
+            id="createProductModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="createProductModalTitle"
+            aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createProductModalTitle">
+              Dodaj produkt
+            </h5>
+          </div>
+          <div class="modal-body">
+            <form   th:action="@{/products/add}"
+                    th:object="${products}"
+                    method="post">
+              <div class="form-outline">
+                <textarea rows = "1"
+                          placeholder="Zdjęcie"
+                          class="form-control"
+                          id="image"
+                          th:field="*{imageName}"
+                          maxlength="100"
+                          required></textarea>
+              </div>
+              <div class="form-outline">
+                <select
+                        class="form-control"
+                        id="type-select"
+                        th:field="*{category}">
+                  <option th:each="cat : ${T(com.hanaberia.enums.Categories).values()}"
+                          th:value="${cat}" th:text="${cat.displayValue}"></option>
+                </select>
+              </div>
+              <div class="form-outline">
+                <textarea rows = "1"
+                          placeholder="Nazwa"
+                          class="form-control"
+                          id="name"
+                          th:field="*{name}"
+                          maxlength="100"
+                          required></textarea>
+              </div>
+              <div class="form-outline">
+                <textarea rows = "5"
+                          placeholder="Opis"
+                          class="form-control"
+                          id="description"
+                          th:field="*{description}"
+                          maxlength="255"
+                          required></textarea>
+              </div>
+              <div class="form-outline">
+                  <input
+                          class="form-control"
+                          type="number"
+                          placeholder="Cena"
+                          id="price"
+                          th:field="*{price}"
+                          required/>
+              </div>
+              <br>
+              <div class="modal-footer">
+                <div class="btn-group">
+                  <button
+                          type="button"
+                          class="btn btn-outline-secondary"
+                          data-bs-dismiss="modal">
+                    <i class="bi bi-x-square"></i>
+                  </button>
+                  <button type="submit"
+                          class="btn btn-success"
+                          value="Submit">
+                    <i class="bi bi-check2-square"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
