@@ -53,9 +53,12 @@
                                     <p><span th:text="${orders[i].message}"></span></p>
                                 </div>
                                 <div class="w-50">
-                                    <p class="total">Suma: <span th:text="${total[i]}"></span>,- zł</p>
-                                    <p class="total" th:if="${orders[i].completed}">Zrealizowano:
-                                        <span th:text="${orders[i].completedDate}"></span>.</p>
+                                    <p class="total">
+                                        <i class="bi bi-calculator"></i>
+                                        <span th:text="${total[i]}"></span>,- zł</p>
+                                    <p class="total" th:if="${orders[i].completed}">
+                                        <i class="bi bi-check2-all"></i>
+                                        <span th:text="${orders[i].completedDate}"></span></p>
                                 </div>
                             </div>
                         </div>
