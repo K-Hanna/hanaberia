@@ -21,10 +21,14 @@ body{
 	background-position: left top, right bottom;
 	background-size: 13%, 13%;
 	background-attachment: fixed, fixed;
+	min-height: 100vh;
 }
 main {
-	max-width: 1100px;
+    max-width: 1100px;
+    min-height: 100vh;
+    position: relative;
 	margin: 0 auto;
+	background-color: white;
 	box-shadow: 0 0 50px;
 }
 header {
@@ -82,10 +86,9 @@ p {
 }
 section {
 	background-color: #000000;
-	padding: 20px 0;
+	padding: 20px 0 100px;
 }
 .messages {
-    min-height: calc(100vh - 169px);
     background-color: #fff;
 }
 img {
@@ -94,7 +97,9 @@ img {
 footer {
 	background-image: linear-gradient(to top left, #3300CC, #9AE9FF);
 	padding: 20px;
-	bottom: 0;
+	position: absolute;
+    bottom: 0;
+    width: 1100px;
 	text-shadow: 1px 1px 0.5px black;
 }
 #login, #logout, .element{
@@ -371,6 +376,9 @@ footer {
 	p {
 	    text-align: left;
 	}
+    footer{
+        width: 100%;
+    }
 /* gallery */
     .port {
       width: 100%;
