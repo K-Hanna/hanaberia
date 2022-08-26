@@ -37,6 +37,9 @@ header {
 section {
 	min-height: calc(100vh - 210px);
 }
+.tableView {
+    width: 50%;
+}
 .hint {
     opacity: 0.5;
 }
@@ -109,5 +112,11 @@ footer {
     }
     .element{
         padding: 0;
+    }
+    .tableView {
+        width: 100%;
+    }
+    section {
+    	min-height: calc(100vh - 190px);
     }
 }
