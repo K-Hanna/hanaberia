@@ -20,14 +20,17 @@
                     <h4>Moje dane</h4>
                     <div class="modal-body tableView">
                         <p class="accountData">
-                            Login: <span th:text="${users.userName}"></span><br>
+                            <i class="bi bi-person"></i>
+                                <span th:text="${users.userName}"></span><br>
                             <span th:if="${users.contactForm.name() == 'EMAIL'}">
                                 <i class="bi bi-envelope" title="e-mail"></i></span>
                             <span th:if="${users.contactForm.name() == 'PHONE'}">
                                 <i class="bi bi-telephone" title="sms"></i></span>
-                            <span th:text="${users.contact}"></span><br>
-                            <span th:text="${users.question.displayValue}"></span><br>
-                            Odp: <span th:text="${users.answer}"></span>
+                                <span th:text="${users.contact}"></span><br>
+                            <i class="bi bi-question-lg"></i>
+                                <span th:text="${users.question.displayValue}"></span><br>
+                            <i class="bi bi-check2"></i>
+                                <span th:text="${users.answer}"></span>
                         </p>
                     </div>
                     <div class="modal-footer tableView">
