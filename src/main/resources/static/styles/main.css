@@ -82,7 +82,7 @@ p {
 }
 section {
 	background-color: #000000;
-	padding: 20px 0;
+	padding: 10px 0;
 }
 .messages {
     min-height: calc(100vh - 169px);
@@ -96,6 +96,9 @@ footer {
 	padding: 20px;
 	bottom: 0;
 	text-shadow: 1px 1px 0.5px black;
+}
+#space {
+	padding: 20px 0;
 }
 #login, #logout, .element{
 	color: white;
@@ -371,6 +374,9 @@ footer {
 	p {
 	    text-align: left;
 	}
+	.messages {
+        height: calc(100vh - 164px);
+    }
 /* gallery */
     .port {
       width: 100%;
@@ -392,6 +398,9 @@ footer {
     }
     .element{
         padding: 0;
+    }
+    .messages {
+        height: calc(100vh - 143px);
     }
 /* gallery */
 	.port img {
