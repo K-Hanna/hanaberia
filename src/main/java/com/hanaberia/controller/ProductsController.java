@@ -21,7 +21,7 @@ public class ProductsController {
     private ProductsService productsService;
 
     @GetMapping()
-    public String allProducts(Model model){
+    public String allProducts(Model model, Products product){
 
         Map<Categories, List<Products>> productsByCategories = new HashMap<>();
 
@@ -33,11 +33,6 @@ public class ProductsController {
         model.addAttribute("productsByCategories", productsByCategories);
 
         return "product/retrieveProducts";
-    }
-
-    @GetMapping("/to-add")
-    public String productToAdd(Products product){
-        return "product/createProduct";
     }
 
     @PostMapping("/add")

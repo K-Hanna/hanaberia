@@ -1,102 +1,92 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Hanaberia</title>
-    <link rel="icon" type="image/x-icon" href="/styles/fav.png">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
-    <link th:href="@{/styles/user.css}" rel="stylesheet" />
-</head>
-<body>
-<nav id="menu1"></nav>
-<main>
-    <div th:insert="fragments/header :: header"></div>
-    <div th:insert="fragments/navProducts :: nav"></div>
-    <section>
-        <div
-                class="container"
-                style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
-            <br/>
-            <h4>Edytuj produkt</h4>
-            <form   th:action="@{'/products/edit/' + ${products.getId()}}"
-                    th:object="${products}"
-                    method="post"
-                    class="w-75">
-                <div class="row g-2">
-                    <label for="image" class="col-3 col-form-label">Zdjęcie</label>
-                    <div class="col-9">
-                        <input
-                                class="form-control"
-                                type="text"
-                                id="image"
-                                th:field="*{imageName}"
-                                maxlength="100"
-                                required/>
-                    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hanaberia</title>
+        <link rel="icon" type="image/x-icon" href="/styles/fav.png">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+        <link th:href="@{/styles/user.css}" rel="stylesheet" />
+    </head>
+    <body>
+        <nav id="menu1"></nav>
+        <main>
+            <div th:insert="fragments/header :: header"></div>
+            <div th:insert="fragments/navProducts :: nav"></div>
+            <section>
+                <div
+                        class="container"
+                        style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
+                    <br/>
+                    <h4>Edytuj produkt</h4>
+                    <br>
+                    <form   th:action="@{'/products/edit/' + ${products.getId()}}"
+                            th:object="${products}"
+                            method="post"
+                            class="tableView">
+                        <div class="form-outline">
+                            <input
+                                    class="form-control"
+                                    type="text"
+                                    placeholder="Zdjęcie"
+                                    id="image"
+                                    th:field="*{imageName}"
+                                    maxlength="100"
+                                    required/>
+                        </div>
+                        <div class="form-outline">
+                            <select
+                                    class="form-control"
+                                    id="type-select"
+                                    th:field="*{category}">
+                                <option th:each="cat : ${T(com.hanaberia.enums.Categories).values()}"
+                                        th:value="${cat}" th:text="${cat.displayValue}"></option>
+                            </select>
+                        </div>
+                        <div class="form-outline">
+                            <input
+                                    class="form-control"
+                                    type="text"
+                                    placeholder="Nazwa"
+                                    id="name"
+                                    th:field="*{name}"
+                                    required/>
+                        </div>
+                        <div class="form-outline">
+                            <textarea rows = "2"
+                                    class="form-control"
+                                    placeholder="Opis"
+                                    id="description"
+                                    th:field="*{description}"
+                                    maxlength="255"
+                                    required></textarea>
+                        </div>
+                        <div class="form-outline">
+                            <input
+                                    class="form-control"
+                                    type="number"
+                                    placeholder="Cena"
+                                    id="price"
+                                    th:field="*{price}"
+                                    required/>
+                        </div>
+                        <br>
+                        <div class="modal-footer">
+                            <div class="btn-group">
+                                <a th:href="@{/products}" class="btn btn-outline-secondary">
+                                    <i class="bi bi-x-square"></i></a>
+                                <button type="submit"
+                                        class="btn btn-success"
+                                        value="Submit">
+                                    <i class="bi bi-check2-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="row g-2">
-                    <label for="type-select" class="col-3 col-form-label">Kategoria</label>
-                    <div class="col-9">
-                        <select
-                                class="form-control"
-                                id="type-select"
-                                th:field="*{category}">
-                            <option th:each="cat : ${T(com.hanaberia.enums.Categories).values()}"
-                                    th:value="${cat}" th:text="${cat.displayValue}"></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row g-2">
-                    <label for="name" class="col-3 col-form-label">Nazwa</label>
-                    <div class="col-9">
-                        <input
-                                class="form-control"
-                                type="text"
-                                id="name"
-                                th:field="*{name}"
-                                required/>
-                    </div>
-                </div>
-                <div class="row g-2">
-                    <label for="description" class="col-3 col-form-label">Opis</label>
-                    <div class="col-9">
-                        <textarea rows = "2"
-                                class="form-control"
-                                id="description"
-                                th:field="*{description}"
-                                maxlength="255"
-                                required>
-                        </textarea>
-                    </div>
-                </div>
-                <div class="row g-2">
-                    <label for="price" class="col-3 col-form-label">Cena</label>
-                    <div class="col-9">
-                        <input
-                                class="form-control"
-                                type="number"
-                                id="price"
-                                th:field="*{price}"
-                                required/>
-                    </div>
-                </div>
-                <br>
-                <div class="modal-footer">
-                    <div class="btn-group">
-                        <a th:href="@{/products}" class="btn btn-outline-secondary"><i class="bi bi-x-square"></i></a>
-                        <button type="submit"
-                                class="btn btn-success"
-                                value="Submit">
-                            <i class="bi bi-check2-square"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
-    <div th:insert="fragments/footer :: footer"></div>
-</main>
-<nav id="menu2"></nav>
-</body>
+            </section>
+            <div th:insert="fragments/footer :: footer"></div>
+        </main>
+        <nav id="menu2"></nav>
+    </body>
 </html>

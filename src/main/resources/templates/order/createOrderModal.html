@@ -23,19 +23,14 @@
                         th:object="${orders}"
                         method="post">
                     Całkowita wartość zamówienia: <span th:text="${total}"></span>,- zł.
-                    <div class="row g-2">
-                        <div class="col-12">
-                            <label for="message" class="col-form-label">Wiadomość dla sprzedawcy:</label>
-                        </div>
-                        <div class="col-12">
+                    <div class="form-outline">
                         <textarea rows = "2"
                                   class="form-control"
+                                  placeholder="Wiadomość dla sprzedawcy"
                                   id="message"
                                   th:field="*{message}"
-                                  maxlength="255">
-                        </textarea>
-                            <br>
-                        </div>
+                                  maxlength="255"></textarea>
+                        <br>
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group">

@@ -18,67 +18,29 @@
                      style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
                     <br>
                     <h4>Moje dane</h4>
-                    <form class="w-50">
-                        <div class="row g-2">
-                            <br>
-                            <label for="userName" class="col-4 col-form-label">Login:</label>
-                            <div class="col-8">
-                                <input
-                                        class="form-control-plaintext"
-                                        type="text"
-                                        id="userName"
-                                        th:field="${users.userName}"
-                                        readonly/>
-                            </div>
+                    <div class="modal-body tableView">
+                        <p class="accountData">
+                            <i class="bi bi-person"></i>
+                                <span th:text="${users.userName}"></span><br>
+                            <span th:if="${users.contactForm.name() == 'EMAIL'}">
+                                <i class="bi bi-envelope" title="e-mail"></i></span>
+                            <span th:if="${users.contactForm.name() == 'PHONE'}">
+                                <i class="bi bi-telephone" title="sms"></i></span>
+                                <span th:text="${users.contact}"></span><br>
+                            <i class="bi bi-question-lg"></i>
+                                <span th:text="${users.question.displayValue}"></span><br>
+                            <i class="bi bi-check2"></i>
+                                <span th:text="${users.answer}"></span>
+                        </p>
+                    </div>
+                    <div class="modal-footer tableView">
+                        <div class="btn-group">
+                            <a th:href="@{/users/to-edit/{id}(id=${users.id})}" class="btn btn-outline-primary">
+                                <i class="bi bi-pencil-square" title="Edytuj"></i></a>
+                            <a th:href="@{/users/to-remove/{id}(id=${users.id})}" class="btn btn-outline-danger">
+                                <i class="bi bi-x-square" title="Usuń"></i></a>
                         </div>
-                        <div class="row g-2">
-                            <label for="contact" class="col-4 col-form-label">
-                                <div th:if="${users.contactForm.name() == 'EMAIL'}">E-mail:</div>
-                                <div th:if="${users.contactForm.name() == 'PHONE'}">Telefon:</div>
-                            </label>
-                            <div class="col-8">
-                                <input
-                                        class="form-control-plaintext"
-                                        type="text"
-                                        id="contact"
-                                        th:field="*{users.contact}"
-                                        readonly/>
-                            </div>
-                        </div>
-                        <div class="row g-2">
-                            <br>
-                            <label for="question" class="col-4 col-form-label">Pytanie:</label>
-                            <div class="col-8">
-                                <input
-                                        class="form-control-plaintext"
-                                        type="text"
-                                        id="question"
-                                        th:field="${users.question.displayValue}"
-                                        readonly/>
-                            </div>
-                        </div>
-                        <div class="row g-2">
-                            <br>
-                            <label for="answer" class="col-4 col-form-label">Odpowiedź:</label>
-                            <div class="col-8">
-                                <input
-                                        class="form-control-plaintext"
-                                        type="text"
-                                        id="answer"
-                                        th:field="${users.answer}"
-                                        readonly/>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="modal-footer">
-                            <div class="btn-group">
-                                <a th:href="@{/users/to-edit/{id}(id=${users.id})}" class="btn btn-outline-primary">
-                                    <i class="bi bi-pencil-square" title="Edytuj"></i></a>
-                                <a th:href="@{/users/to-remove/{id}(id=${users.id})}" class="btn btn-outline-danger">
-                                    <i class="bi bi-x-square" title="Usuń"></i></a>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </section>
                 <div th:insert="fragments/footer :: footer"></div>
