@@ -241,6 +241,7 @@ footer {
 .gallery ul {
   padding-top: 20px;
   position: relative;
+  width: 100%;
 }
 .gallery ul li {
   width: 225px;
