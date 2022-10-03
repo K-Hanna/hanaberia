@@ -147,6 +147,8 @@ public class OrdersController {
         Orders order = ordersService.retrieve(id);
         order.setCompletedDate(LocalDate.now());
         model.addAttribute("orders", order);
+        model.addAttribute("startDate", LocalDate.now().minusDays(30));
+        model.addAttribute("endDate", LocalDate.now());
 
         return "order/completeOrder";
     }

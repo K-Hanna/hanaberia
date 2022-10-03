@@ -34,8 +34,8 @@
                                 id="complete-date"
                                 name="trip-start"
                                 th:field="*{completedDate}"
-                                min="2022-05-31"
-                                th:max="${#dates.format(#dates.createNow(),'yyyy-MM-dd')}"
+                                th:min="${startDate}"
+                                th:max="${endDate}"
                                 required/>
                         <br>
                     </div>

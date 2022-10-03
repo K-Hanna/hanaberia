@@ -47,7 +47,9 @@
                             <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
                         </td>
                         <td th:text="${product.name}"></td>
-                        <td th:text="${product.price}"></td>
+                        <td>
+                            <span th:text="${product.price}"></span>,- zł
+                        </td>
                         <td>
                             <a th:href="@{/reservations/remove-from-cart/{id}(id=${product.id})}" class="btn btn-outline-danger">
                                 <i class="bi bi-x-square"></i></a>
