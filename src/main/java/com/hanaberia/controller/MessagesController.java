@@ -20,20 +20,7 @@ public class MessagesController {
     @Autowired
     private MessagesService messagesService;
 
-    @GetMapping("/all")
-    public String getAllMessages(Model model){
-        List<Messages> messages = messagesService.getAllMessages();
-        messages.sort(Comparator.comparing(Messages:: getId).reversed());
-
-        if(messages.isEmpty()){
-            model.addAttribute("info", "Nie ma żadnych wiadomości.");
-        }
-
-        model.addAttribute("messages", messages);
-
-        return "message/retrieveAllMessages";
-    }
-
+    //create
     @GetMapping("/to-add")
     public String messageToAdd(@ModelAttribute Messages messages){
 
@@ -52,6 +39,21 @@ public class MessagesController {
         }
     }
 
+    //retrieve
+    @GetMapping("/all")
+    public String getAllMessages(Model model){
+        List<Messages> messages = messagesService.getAllMessages();
+        messages.sort(Comparator.comparing(Messages:: getId).reversed());
+
+        if(messages.isEmpty()){
+            model.addAttribute("info", "Nie ma żadnych wiadomości.");
+        }
+
+        model.addAttribute("messages", messages);
+
+        return "message/retrieveAllMessages";
+    }
+
     @GetMapping("/read/{id}")
     public String readMessage(@PathVariable Long id){
 
@@ -61,6 +63,7 @@ public class MessagesController {
         return "redirect:/messages/all";
     }
 
+    //validation
     private int validate(Model model, Messages messages){
         Validator validator = new Validator();
         int errors = 0;
