@@ -16,7 +16,7 @@ public class ProductsRestController {
     private ProductsService productsService;
 
     @PostMapping
-    public void addNewProduct(@RequestBody Products product){
+    public void createProduct(@RequestBody Products product){
         productsService.create(product);
     }
 
@@ -25,16 +25,23 @@ public class ProductsRestController {
         return productsService.getAllProducts();
     }
 
-    @GetMapping("/bracelet")
-    public List<Products> showBracelets(){
-        List<Products> bracelets = productsService.getByCategory(Categories.BRACELET);
-        System.out.println(bracelets.size());
-
-        return bracelets;
+    @GetMapping("/show/{category}")
+    public List<Products> showByCategory(@PathVariable Categories category){
+        return productsService.getByCategory(category);
     }
 
     @GetMapping("/{id}")
-    public Products showProduct(@PathVariable Long id){
+    public Products readProduct(@PathVariable Long id){
         return productsService.retrieve(id);
+    }
+
+    @PutMapping("/{id}")
+    public Products updateProduct(@PathVariable Long id, @RequestBody Products product){
+        return productsService.update(id, product);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable Long id){
+        productsService.delete(id);
     }
 }

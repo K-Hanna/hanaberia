@@ -38,7 +38,7 @@ public class Reservations {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
-    @JsonBackReference(value = "pUser")
+    @JsonBackReference(value = "rUser")
     private Users user;
 
     @OneToMany(mappedBy = "reservation", fetch = FetchType.EAGER)

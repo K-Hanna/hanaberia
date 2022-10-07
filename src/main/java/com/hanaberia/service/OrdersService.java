@@ -91,4 +91,18 @@ public class OrdersService {
 
         ordersRepository.save(order);
     }
+
+    public Orders update(Long id, Orders order) {
+        Orders oldOrder = retrieve(id);
+
+        String message = order.getMessage().replaceAll("[\\t\\n\\r]+", " ");
+        oldOrder.setMessage(message);
+
+        if(order.getCompletedDate() != null){
+            oldOrder.setCompletedDate(order.getCompletedDate());
+            oldOrder.setCompleted(true);
+        }
+
+        return ordersRepository.save(oldOrder);
+    }
 }
