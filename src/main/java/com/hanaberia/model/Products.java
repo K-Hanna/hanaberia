@@ -2,6 +2,7 @@ package com.hanaberia.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hanaberia.enums.Categories;
 import lombok.*;
 
@@ -45,12 +46,14 @@ public class Products {
     @Column(nullable = false)
     private boolean available;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "reservations_id")
+    @JsonBackReference(value = "pReservation")
     private Reservations reservation;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "orders_id")
+    @JsonBackReference(value = "pOrder")
     private Orders order;
 
     @Override

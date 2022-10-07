@@ -2,6 +2,8 @@ package com.hanaberia.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hanaberia.enums.ContactForms;
 import com.hanaberia.enums.Questions;
 import com.hanaberia.enums.Roles;
@@ -57,9 +59,16 @@ public class Users {
     private String answer;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonIgnore
     private Reservations reservations;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Orders> orders;
+
+    @Override
+    public String toString(){
+        return id + ". " + userName;
+    }
 
 }

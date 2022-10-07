@@ -1,5 +1,8 @@
 package com.hanaberia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,8 +38,10 @@ public class Reservations {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
+    @JsonBackReference(value = "pUser")
     private Users user;
 
     @OneToMany(mappedBy = "reservation", fetch = FetchType.EAGER)
+    @JsonManagedReference(value = "pReservation")
     private Set<Products> productsSet = new HashSet<>();
 }

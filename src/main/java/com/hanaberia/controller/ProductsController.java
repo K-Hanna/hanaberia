@@ -20,6 +20,15 @@ public class ProductsController {
     @Autowired
     private ProductsService productsService;
 
+    //create
+    @PostMapping("/add")
+    public String productAdd(@ModelAttribute Products product){
+
+        productsService.create(product);
+        return "redirect:/products";
+    }
+
+    //retrieve
     @GetMapping()
     public String allProducts(Model model, Products product){
 
@@ -35,13 +44,7 @@ public class ProductsController {
         return "product/retrieveProducts";
     }
 
-    @PostMapping("/add")
-    public String productAdd(@ModelAttribute Products product){
-
-        productsService.create(product);
-        return "redirect:/products";
-    }
-
+    //update
     @GetMapping("/to-edit/{id}")
     public String productToEdit(@PathVariable("id") Long id, Model model){
         Products product = productsService.retrieve(id);
@@ -59,6 +62,7 @@ public class ProductsController {
         return "redirect:/products";
     }
 
+    //delete
     @GetMapping("/to-remove/{id}")
     public String productToRemove(@PathVariable("id") Long id, Model model) {
 
