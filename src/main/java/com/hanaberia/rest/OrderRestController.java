@@ -1,7 +1,9 @@
 package com.hanaberia.rest;
 
 import com.hanaberia.model.Orders;
+import com.hanaberia.model.Users;
 import com.hanaberia.service.OrdersService;
+import com.hanaberia.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,23 +16,32 @@ public class OrderRestController {
     @Autowired
     private OrdersService ordersService;
 
-    @PostMapping
-    public Orders createNewOrder(@RequestBody Orders order){
-        return ordersService.create(order);
-    }
+    @Autowired
+    private UsersService usersService;
 
     @GetMapping("/{id}")
-    public Orders getOrder(@PathVariable("id") Long id){
+    public Orders readOrder(@PathVariable Long id){
         return ordersService.retrieve(id);
     }
 
     @GetMapping
-    public List<Orders> showAllOrders(){
+    public List<Orders> readAllOrders(){
         return ordersService.getAllOrders();
     }
 
+    @GetMapping("/user-{id}")
+    public List<Orders> getUsersOrders(@PathVariable Long id){
+        Users user = usersService.retrieve(id);
+        return user.getOrders();
+    }
+
+    @PutMapping("/{id}")
+    public Orders updateOrder(@PathVariable Long id, @RequestBody Orders order){
+        return ordersService.update(id, order);
+    }
+
     @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable("id") Long id){
+    public void deleteOrder(@PathVariable Long id){
         ordersService.delete(id);
     }
 }

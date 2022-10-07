@@ -59,11 +59,11 @@ public class Users {
     private String answer;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
-    @JsonIgnore
+    @JsonManagedReference(value = "rUser")
     private Reservations reservations;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    @JsonIgnore
+    @JsonManagedReference(value = "oUser")
     private List<Orders> orders;
 
     @Override
