@@ -19,6 +19,12 @@ public class OrderRestController {
     @Autowired
     private UsersService usersService;
 
+    @PostMapping("/user-{id}")
+    public Orders createOrder(@PathVariable Long id, @RequestBody Orders orders){
+        Users user = usersService.retrieve(id);
+        return ordersService.create(orders, user);
+    }
+
     @GetMapping("/{id}")
     public Orders readOrder(@PathVariable Long id){
         return ordersService.retrieve(id);
