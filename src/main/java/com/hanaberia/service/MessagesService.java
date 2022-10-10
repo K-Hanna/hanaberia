@@ -29,11 +29,36 @@ public class MessagesService{
     }
 
     public Messages retrieve(Long id){
-        return messagesRepository.findById(id).orElseThrow(null);
+        return messagesRepository.findById(id).orElse(null);
     }
-    public Messages read(Messages message){
+    public void read(Messages message){
         message.setRead(true);
-        return messagesRepository.save(message);
+        messagesRepository.save(message);
     }
 
+    public Messages update(Long id, Messages message){
+
+        Messages oldMessage = retrieve(id);
+
+        if(message.getContactForm() != null)
+            oldMessage.setContactForm(message.getContactForm());
+        if(message.getContact() != null)
+            oldMessage.setContact(message.getContact());
+        if(message.getTitle() != null)
+            oldMessage.setTitle(message.getTitle());
+        if(message.getContent() != null)
+            oldMessage.setContent(message.getContent());
+        if(message.getSentDate() != null)
+            oldMessage.setSentDate(message.getSentDate());
+        if(message.isRead())
+            oldMessage.setRead(message.isRead());
+
+        return messagesRepository.save(oldMessage);
+
+    }
+
+    public void delete(Long id){
+        Messages messages = retrieve(id);
+        messagesRepository.delete(messages);
+    }
 }

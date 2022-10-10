@@ -6,7 +6,6 @@ import com.hanaberia.model.Reservations;
 import com.hanaberia.model.Users;
 import com.hanaberia.repository.OrdersRepository;
 import com.hanaberia.service.*;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,9 +23,6 @@ import java.util.Set;
 @Controller
 @RequestMapping(value = "/orders")
 public class OrdersController {
-
-    @Autowired
-    private OrdersRepository ordersRepository;
 
     @Autowired
     private OrdersService ordersService;
@@ -124,19 +120,7 @@ public class OrdersController {
     @PostMapping("/add")
     public String orderAdd(@ModelAttribute Orders order,  @SessionAttribute("user") Users user){
 
-        order.setUser(user);
-        ordersService.create(order);
-        List<Orders> usersOrders = user.getOrders();
-        usersOrders.add(order);
-        user.setOrders(usersOrders);
-
-        Reservations reservation = user.getReservations();
-        Set<Products> products = reservation.getProductsSet();
-        for(Products product : products){
-            productsService.moveProduct(false, product, null, order);
-        }
-        order.setProductsSet(products);
-        reservationsService.deleteEmptyReservation(reservation);
+        ordersService.create(order, user);
 
         return "redirect:/orders";
     }

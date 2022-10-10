@@ -17,7 +17,7 @@ public class ProductsService {
     @Autowired
     private ProductsRepository productsRepository;
 
-    public List<Products> findAll() {
+    public List<Products> getAllProducts() {
         return productsRepository.findAll();
     }
 
@@ -33,18 +33,24 @@ public class ProductsService {
         return productsRepository.findById(id).orElseThrow(null);
     }
 
-    public void update(final Long id, final Products newProduct) {
+    public Products update(final Long id, final Products newProduct) {
 
-        Products oldProduct = productsRepository.findById(id).orElseThrow(null);
+        Products oldProduct = retrieve(id);
         String covertDesc = newProduct.getDescription().replaceAll("[\\t\\n\\r]+", " ");
-        oldProduct.setImageName(newProduct.getImageName());
-        oldProduct.setName(newProduct.getName());
-        oldProduct.setDescription(covertDesc);
-        oldProduct.setPrice(newProduct.getPrice());
+
+        if(newProduct.getImageName() != null)
+            oldProduct.setImageName(newProduct.getImageName());
+        if(newProduct.getName() != null)
+            oldProduct.setName(newProduct.getName());
+        if(newProduct.getDescription() != null)
+            oldProduct.setDescription(covertDesc);
+        if(newProduct.getPrice() != null)
+            oldProduct.setPrice(newProduct.getPrice());
+        if(newProduct.getCategory() != null)
         oldProduct.setCategory(newProduct.getCategory());
         oldProduct.setAvailable(true);
 
-        productsRepository.save(oldProduct);
+        return productsRepository.save(oldProduct);
     }
 
     public void moveProduct(boolean available, Products product, Reservations reservation, Orders order){

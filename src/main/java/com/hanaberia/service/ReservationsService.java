@@ -89,4 +89,13 @@ public class ReservationsService {
     public void deleteEmptyReservation(Reservations reservation){
         reservationsRepository.delete(reservation);
     }
+
+    public Reservations update(Long id, Reservations reservation) {
+        Reservations oldReservation = retrieve(id);
+
+        if(reservation.getExpiringDate() != null)
+            oldReservation.setExpiringDate(reservation.getExpiringDate());
+
+        return reservationsRepository.save(oldReservation);
+    }
 }

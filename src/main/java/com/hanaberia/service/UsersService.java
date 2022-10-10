@@ -49,19 +49,26 @@ public class UsersService {
         return usersRepository.findUserByContact(contact);
     }
 
-    public void update(final Long id, final Users user) {
+    public Users update(final Long id, final Users user) {
 
-        Users oldUser = usersRepository.findById(id).orElseThrow(null);
+        Users oldUser = retrieve(id);
 
-        oldUser.setUserName(user.getUserName());
-        oldUser.setContact(user.getContact());
-        oldUser.setContactForm(user.getContactForm());
-        oldUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        oldUser.setConfirm(bCryptPasswordEncoder.encode(user.getConfirm()));
-        oldUser.setQuestion(user.getQuestion());
-        oldUser.setAnswer(user.getAnswer());
+        if(user.getUserName() != null)
+            oldUser.setUserName(user.getUserName());
+        if(user.getContact() != null)
+            oldUser.setContact(user.getContact());
+        if(user.getContactForm() != null)
+            oldUser.setContactForm(user.getContactForm());
+        if(user.getPassword() != null)
+            oldUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if(user.getConfirm() != null)
+            oldUser.setConfirm(bCryptPasswordEncoder.encode(user.getConfirm()));
+        if(user.getQuestion() != null)
+            oldUser.setQuestion(user.getQuestion());
+        if(user.getAnswer() != null)
+            oldUser.setAnswer(user.getAnswer());
 
-        usersRepository.save(oldUser);
+        return usersRepository.save(oldUser);
     }
 
     public void changePassword(final Long id, final Users user){
