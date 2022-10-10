@@ -8,6 +8,7 @@ import com.hanaberia.repository.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -37,6 +38,9 @@ public class OrdersService {
         ordersRepository.save(order);
 
         List<Orders> usersOrders = user.getOrders();
+        if(usersOrders.isEmpty()){
+            usersOrders = new ArrayList<>();
+        }
         usersOrders.add(order);
         user.setOrders(usersOrders);
 
@@ -46,18 +50,18 @@ public class OrdersService {
             productsService.moveProduct(false, product, null, order);
         }
         order.setProductsSet(products);
-        reservationsService.deleteEmptyReservation(reservation);
+        reservationsService.deleteEmptyReservation(reservation.getId());
 
         return order;
     }
 
-    public Orders retrieve(final Long id) {
+    public Orders read(final Long id) {
         return ordersRepository.findById(id).orElseThrow(null);
     }
 
     public void complete(final Long id, Orders orders) {
 
-        Orders order = retrieve(id);
+        Orders order = read(id);
         order.setCompleted(true);
         order.setCompletedDate(orders.getCompletedDate());
 
@@ -65,7 +69,7 @@ public class OrdersService {
     }
 
     public void delete(final Long id) {
-        Orders order = retrieve(id);
+        Orders order = read(id);
         Set<Products> products = order.getProductsSet();
 
         if(products.size() > 0) {
@@ -78,7 +82,7 @@ public class OrdersService {
     }
 
     public void deleteCompletedOrders(final Long id){
-        Orders order = retrieve(id);
+        Orders order = read(id);
         Set<Products> products = order.getProductsSet();
 
         for(Products product : products){
@@ -90,8 +94,8 @@ public class OrdersService {
 
     public void changingOrder(String direction, Long productId, Long orderId) {
 
-        Products product = productsService.retrieve(productId);
-        Orders order = retrieve(orderId);
+        Products product = productsService.read(productId);
+        Orders order = read(orderId);
         Set<Products> products = order.getProductsSet();
 
         switch (direction){
@@ -111,7 +115,7 @@ public class OrdersService {
     }
 
     public Orders update(Long id, Orders order) {
-        Orders oldOrder = retrieve(id);
+        Orders oldOrder = read(id);
 
         if(order.getMessage() != null) {
             String message = order.getMessage().replaceAll("[\\t\\n\\r]+", " ");

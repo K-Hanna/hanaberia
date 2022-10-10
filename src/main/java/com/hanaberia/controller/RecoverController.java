@@ -25,12 +25,12 @@ public class RecoverController {
 
         Users userFound;
         if (usersService.userNameExists(user.getContact())){
-            userFound = usersService.retrieveByName(user.getContact());
+            userFound = usersService.readByName(user.getContact());
             model.addAttribute("users", userFound);
 
             return "recover/stepTwo";
         } else if (usersService.contactExists(user.getContact())){
-            userFound = usersService.retrieveByContact(user.getContact());
+            userFound = usersService.readByContact(user.getContact());
             model.addAttribute("users", userFound);
 
             return "recover/stepTwo";
@@ -44,7 +44,7 @@ public class RecoverController {
     @GetMapping("/stepTwo/{id}")
     public String stepThree(Model model, @PathVariable Long id, Users user) {
 
-        Users userFound = usersService.retrieve(id);
+        Users userFound = usersService.read(id);
         model.addAttribute("users", userFound);
 
         if (!userFound.getAnswer().equals(user.getAnswer())) {
@@ -61,7 +61,7 @@ public class RecoverController {
     public String saveData(Model model, @PathVariable("id") Long id, Users user){
 
         if(!user.getPassword().equals(user.getConfirm())){
-            Users userFound = usersService.retrieve(id);
+            Users userFound = usersService.read(id);
             model.addAttribute("users", userFound);
             model.addAttribute("message", "Hasła nie pasują.");
 

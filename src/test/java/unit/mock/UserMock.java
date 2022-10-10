@@ -2,6 +2,8 @@ package unit.mock;
 
 import com.hanaberia.enums.ContactForms;
 import com.hanaberia.enums.Roles;
+import com.hanaberia.model.Orders;
+import com.hanaberia.model.Reservations;
 import com.hanaberia.model.Users;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -11,6 +13,8 @@ import java.util.List;
 public class UserMock {
 
     private static final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    private static final Reservations reservationOne = ReservationMock.mockedReservationOne();
+    private static final List<Orders> orders = OrderMock.ordersList();
 
     public static Users mockedUserOne(){
 
@@ -22,6 +26,8 @@ public class UserMock {
                 .password(bCryptPasswordEncoder.encode("12345"))
                 .confirm(bCryptPasswordEncoder.encode("12345"))
                 .roles(Roles.USER)
+                .reservations(reservationOne)
+                .orders(orders)
                 .build();
     }
 

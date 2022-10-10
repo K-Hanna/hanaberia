@@ -29,13 +29,13 @@ public class ProductsService {
         return productsRepository.save(product);
     }
 
-    public Products retrieve(final Long id) {
+    public Products read(final Long id) {
         return productsRepository.findById(id).orElseThrow(null);
     }
 
     public Products update(final Long id, final Products newProduct) {
 
-        Products oldProduct = retrieve(id);
+        Products oldProduct = read(id);
         String covertDesc = newProduct.getDescription().replaceAll("[\\t\\n\\r]+", " ");
 
         if(newProduct.getImageName() != null)

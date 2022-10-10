@@ -37,21 +37,21 @@ public class UsersService {
         return usersRepository.save(user);
     }
 
-    public Users retrieve(final Long id) {
+    public Users read(final Long id) {
         return usersRepository.findById(id).orElseThrow(null);
     }
 
-    public Users retrieveByName(String name) {
+    public Users readByName(String name) {
         return usersRepository.findUserByUserName(name);
     }
 
-    public Users retrieveByContact(String contact){
+    public Users readByContact(String contact){
         return usersRepository.findUserByContact(contact);
     }
 
     public Users update(final Long id, final Users user) {
 
-        Users oldUser = retrieve(id);
+        Users oldUser = read(id);
 
         if(user.getUserName() != null)
             oldUser.setUserName(user.getUserName());
@@ -81,7 +81,7 @@ public class UsersService {
 
     public void delete(final Long id) {
 
-        Users user = retrieve(id);
+        Users user = read(id);
         Reservations reservations = user.getReservations();
         List<Orders> orders = user.getOrders();
 

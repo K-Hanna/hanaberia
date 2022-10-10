@@ -50,23 +50,33 @@ public class UsersServiceTest {
     }
 
     @Test
-    void retrieveUserTest(){
+    void readUserTest(){
         when(usersRepository.findById(userOne.getId())).thenReturn(Optional.of(userOne));
 
-        Users expectedUser = usersService.retrieve(userOne.getId());
+        Users expectedUser = usersService.read(userOne.getId());
         assertEquals(expectedUser, userOne);
 
         verify(usersRepository).findById(userOne.getId());
     }
 
     @Test
-    void retrieveByNameTest(){
+    void readByNameTest(){
         when(usersRepository.findUserByUserName(userOne.getUserName())).thenReturn(userOne);
 
-        Users expectedUser = usersService.retrieveByName(userOne.getUserName());
+        Users expectedUser = usersService.readByName(userOne.getUserName());
         assertEquals(expectedUser, userOne);
 
         verify(usersRepository).findUserByUserName(userOne.getUserName());
+    }
+
+    @Test
+    void readByContactTest(){
+        when(usersRepository.findUserByContact(userOne.getContact())).thenReturn(userOne);
+
+        Users expectedUser = usersService.readByContact(userOne.getContact());
+        assertEquals(expectedUser, userOne);
+
+        verify(usersRepository).findUserByContact(userOne.getContact());
     }
 
     @Test

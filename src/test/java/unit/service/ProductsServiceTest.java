@@ -32,16 +32,16 @@ public class ProductsServiceTest {
     private ProductsService productsService;
 
     private final Products productOne = ProductMock.mockedProductOne();
-    private final List<Products> productsList = ProductMock.productList();
+    private final List<Products> productsList = ProductMock.productsList();
 
     private final Reservations reservation = ReservationMock.mockedReservationOne();
     private final Orders order = OrderMock.mockedOrderNotCompleted();
 
     @Test
-    void findAllProductsTest(){
+    void getAllProductsTest(){
         when(productsRepository.findAll()).thenReturn(productsList);
 
-        List<Products> expectedProducts = productsService.findAll();
+        List<Products> expectedProducts = productsService.getAllProducts();
         assertEquals(expectedProducts, productsList);
 
         verify(productsRepository).findAll();
@@ -58,10 +58,10 @@ public class ProductsServiceTest {
     }
 
     @Test
-    void retrieveProductTest(){
+    void readProductTest(){
         when(productsRepository.findById(productOne.getId())).thenReturn(Optional.of(productOne));
 
-        Products expectedProduct = productsService.retrieve(productOne.getId());
+        Products expectedProduct = productsService.read(productOne.getId());
         assertEquals(expectedProduct, productOne);
 
         verify(productsRepository).findById(productOne.getId());
@@ -109,6 +109,17 @@ public class ProductsServiceTest {
         productsService.moveProduct(false, tempProduct, null, order);
         assertEquals(tempProduct.getOrder(), order);
         assertFalse(tempProduct.isAvailable());
+    }
+
+    @Test
+    void releaseProductTest(){
+        Products tempProduct = Products.builder().build();
+        when(productsRepository.findById(tempProduct.getId())).thenReturn(Optional.of(tempProduct));
+
+        productsService.moveProduct(true, tempProduct, null, null);
+        assertNull(tempProduct.getOrder());
+        assertNull(tempProduct.getReservation());
+        assertTrue(tempProduct.isAvailable());
     }
 
     @Test

@@ -2,7 +2,6 @@ package com.hanaberia.controller;
 
 import com.hanaberia.enums.ContactForms;
 import com.hanaberia.model.Users;
-import com.hanaberia.repository.UsersRepository;
 import com.hanaberia.service.MyUserDetail;
 import com.hanaberia.service.UsersService;
 import com.hanaberia.validator.Validator;
@@ -50,7 +49,7 @@ public class UsersController {
 
         MyUserDetail principal = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = principal.getUsername();
-        Users retrievedUser = usersService.retrieveByName(name);
+        Users retrievedUser = usersService.readByName(name);
 
         session.setAttribute("users", retrievedUser);
         model.addAttribute("users", retrievedUser);
@@ -62,7 +61,7 @@ public class UsersController {
     @GetMapping("/to-edit/{id}")
     public String userToEdit(@PathVariable("id") Long id, Model model){
 
-        Users user = usersService.retrieve(id);
+        Users user = usersService.read(id);
         model.addAttribute("users", user);
 
         return "user/updateUser";
@@ -71,7 +70,7 @@ public class UsersController {
     @PostMapping("/edit/{id}")
     public String userEdit(Model model, @PathVariable("id") Long id, @RequestBody Users user, HttpServletRequest request) {
 
-        Users oldUser = usersService.retrieve(id);
+        Users oldUser = usersService.read(id);
         model.addAttribute("users", oldUser);
 
         if(validate(model, user, oldUser) > 0){
@@ -91,7 +90,7 @@ public class UsersController {
     @GetMapping("/to-remove/{id}")
     public String userToRemove(@PathVariable("id") Long id, Model model){
 
-        Users user = usersService.retrieve(id);
+        Users user = usersService.read(id);
         model.addAttribute("users", user);
 
         return "user/deleteUser";

@@ -39,7 +39,7 @@ public class ReservationsController {
 
         MyUserDetail principal = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = principal.getUsername();
-        Users user = usersService.retrieveByName(name);
+        Users user = usersService.readByName(name);
 
         if (user != null) {
             session.setAttribute("user", user);
@@ -73,7 +73,7 @@ public class ReservationsController {
 
         MyUserDetail principal = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = principal.getUsername();
-        Users user = usersService.retrieveByName(name);
+        Users user = usersService.readByName(name);
 
         session.setAttribute("user", user);
         reservationsService.addToCart(id, user);

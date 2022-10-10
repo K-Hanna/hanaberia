@@ -4,7 +4,6 @@ import com.hanaberia.model.Orders;
 import com.hanaberia.model.Products;
 import com.hanaberia.model.Reservations;
 import com.hanaberia.model.Users;
-import com.hanaberia.repository.OrdersRepository;
 import com.hanaberia.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,7 +39,7 @@ public class OrdersController {
     @GetMapping("/all")
     public String getAllOrders(Model model){
 
-        List<Reservations> allReservations = reservationsService.retrieveAllReservations();
+        List<Reservations> allReservations = reservationsService.readAllReservations();
         for(Reservations reservation : allReservations){
             if(reservation.getExpiringDate().isBefore(LocalDate.now()))
                 reservationsService.delete(reservation.getId());
@@ -57,7 +56,7 @@ public class OrdersController {
         } else {
             for(Orders order : allOrders){
 
-                String usersName = usersService.retrieve(order.getUser().getId()).getUserName();
+                String usersName = usersService.read(order.getUser().getId()).getUserName();
                 Set<Products> products = order.getProductsSet();
                 int total = 0;
                 for(Products product : products){
@@ -82,7 +81,7 @@ public class OrdersController {
 
         MyUserDetail principal = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = principal.getUsername();
-        Users user = usersService.retrieveByName(name);
+        Users user = usersService.readByName(name);
 
         if (user != null) {
             session.setAttribute("user", user);
@@ -128,7 +127,7 @@ public class OrdersController {
     @GetMapping("/to-complete/{id}")
     public String orderToComplete(@PathVariable Long id, Model model){
 
-        Orders order = ordersService.retrieve(id);
+        Orders order = ordersService.read(id);
         order.setCompletedDate(LocalDate.now());
         model.addAttribute("orders", order);
         model.addAttribute("startDate", LocalDate.now().minusDays(30));
@@ -148,7 +147,7 @@ public class OrdersController {
     @GetMapping("/to-edit/{id}")
     public String orderToEdit(@PathVariable("id") Long id, Model model, @ModelAttribute Orders modelOrder){
 
-        Orders order = ordersService.retrieve(id);
+        Orders order = ordersService.read(id);
 
         Set<Products> products = order.getProductsSet();
         int total = 0;
@@ -169,7 +168,7 @@ public class OrdersController {
     @GetMapping("/remove-from-cart/{id}")
     public String removeFromCart(@PathVariable Long id,  Model model){
 
-        Products product = productsService.retrieve(id);
+        Products product = productsService.read(id);
         Orders order = product.getOrder();
 
         ordersService.changingOrder("remove", id, order.getId());
@@ -183,7 +182,7 @@ public class OrdersController {
 
         Long productId = Long.parseLong(orders.getMessage());
         if(productsService.isProductExist(productId)){
-            Products product = productsService.retrieve(productId);
+            Products product = productsService.read(productId);
             if(product.isAvailable())
                 ordersService.changingOrder("add", productId, id);
         }
@@ -195,7 +194,7 @@ public class OrdersController {
     @GetMapping("/to-remove/{id}")
     public String orderToRemove(@PathVariable("id") Long id, Model model) {
 
-        Orders order = ordersService.retrieve(id);
+        Orders order = ordersService.read(id);
         model.addAttribute("orders", order);
         return "order/deleteOrder";
     }

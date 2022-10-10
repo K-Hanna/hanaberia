@@ -4,7 +4,9 @@ import com.hanaberia.enums.Categories;
 import com.hanaberia.model.Products;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ProductMock {
     
@@ -46,7 +48,16 @@ public class ProductMock {
                 .build();
     }
 
-    public static List<Products> productList(){
+    public static Set<Products> productSet(){
+        Set<Products> productsSet = new HashSet<>();
+        productsSet.add(mockedProductOne());
+        productsSet.add(mockedProductTwo());
+        productsSet.add(mockedProductThree());
+
+        return productsSet;
+    }
+
+    public static List<Products> productsList(){
         return Arrays.asList(mockedProductOne(), mockedProductTwo(), mockedProductThree());
     }
 }

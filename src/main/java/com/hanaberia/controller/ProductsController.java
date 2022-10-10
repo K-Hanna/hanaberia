@@ -47,7 +47,7 @@ public class ProductsController {
     //update
     @GetMapping("/to-edit/{id}")
     public String productToEdit(@PathVariable("id") Long id, Model model){
-        Products product = productsService.retrieve(id);
+        Products product = productsService.read(id);
         model.addAttribute("products", product);
 
         return "product/updateProduct";
@@ -66,7 +66,7 @@ public class ProductsController {
     @GetMapping("/to-remove/{id}")
     public String productToRemove(@PathVariable("id") Long id, Model model) {
 
-        Products product = productsService.retrieve(id);
+        Products product = productsService.read(id);
         model.addAttribute("products", product);
         return "product/deleteProduct";
     }

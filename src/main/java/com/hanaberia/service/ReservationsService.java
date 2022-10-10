@@ -30,11 +30,11 @@ public class ReservationsService {
         return reservationsRepository.save(reservation);
     }
 
-    public Reservations retrieve(final Long id) {
+    public Reservations read(final Long id) {
         return reservationsRepository.findById(id).orElseThrow(null);
     }
 
-    public List<Reservations> retrieveAllReservations(){
+    public List<Reservations> readAllReservations(){
         return reservationsRepository.findAll();
     }
 
@@ -48,7 +48,7 @@ public class ReservationsService {
             reservation.setExpiringDate(LocalDate.now().plusDays(7));
         }
 
-        Products product = productsService.retrieve(id);
+        Products product = productsService.read(id);
         productsService.moveProduct(false, product, reservation, null);
 
         Set<Products> products = reservation.getProductsSet();
@@ -59,10 +59,10 @@ public class ReservationsService {
 
     public void removeFromCart(final Long productId, Long reservationId) {
 
-        Reservations reservation = retrieve(reservationId);
+        Reservations reservation = read(reservationId);
         reservation.setExpiringDate(LocalDate.now().plusDays(7));
 
-        Products product = productsService.retrieve(productId);
+        Products product = productsService.read(productId);
         productsService.moveProduct(true, product, null, null);
 
         Set<Products> products = reservation.getProductsSet();
@@ -76,7 +76,7 @@ public class ReservationsService {
 
     public void delete(final Long id) {
 
-        Reservations reservation = retrieve(id);
+        Reservations reservation = read(id);
         Set<Products> products = reservation.getProductsSet();
 
         for(Products product : products){
@@ -86,12 +86,16 @@ public class ReservationsService {
         reservationsRepository.deleteById(id);
     }
 
-    public void deleteEmptyReservation(Reservations reservation){
-        reservationsRepository.delete(reservation);
+    public void deleteEmptyReservation(Long id){
+        reservationsRepository.deleteById(id);
     }
 
     public Reservations update(Long id, Reservations reservation) {
-        Reservations oldReservation = retrieve(id);
+        Reservations oldReservation = read(id);
+
+        if(reservation.getUser() != null){
+            oldReservation.setUser(reservation.getUser());
+        }
 
         if(reservation.getExpiringDate() != null)
             oldReservation.setExpiringDate(reservation.getExpiringDate());

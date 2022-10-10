@@ -58,7 +58,6 @@ public class MessagesService{
     }
 
     public void delete(Long id){
-        Messages messages = retrieve(id);
-        messagesRepository.delete(messages);
+        messagesRepository.deleteById(id);
     }
 }
