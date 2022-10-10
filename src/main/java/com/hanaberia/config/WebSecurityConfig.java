@@ -1,8 +1,6 @@
 package com.hanaberia.config;
 
 import com.hanaberia.service.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,6 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/index.html").permitAll()
                 .logoutSuccessUrl("/").and()
                 .exceptionHandling().accessDeniedPage("/403");
+
+        http
+                .csrf().disable();
     }
 
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
