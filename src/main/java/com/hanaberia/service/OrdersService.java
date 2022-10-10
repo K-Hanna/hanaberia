@@ -2,6 +2,8 @@ package com.hanaberia.service;
 
 import com.hanaberia.model.Orders;
 import com.hanaberia.model.Products;
+import com.hanaberia.model.Reservations;
+import com.hanaberia.model.Users;
 import com.hanaberia.repository.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,12 +27,28 @@ public class OrdersService {
         return ordersRepository.findAll();
     }
 
-    public Orders create(final Orders order) {
+    public Orders create(final Orders order, Users user) {
 
-        String message = order.getMessage().replaceAll("[\\t\\n\\r]+", " ");
-        order.setMessage(message);
+        order.setUser(user);
+        if(order.getMessage() != null) {
+            String message = order.getMessage().replaceAll("[\\t\\n\\r]+", " ");
+            order.setMessage(message);
+        }
+        ordersRepository.save(order);
 
-        return ordersRepository.save(order);
+        List<Orders> usersOrders = user.getOrders();
+        usersOrders.add(order);
+        user.setOrders(usersOrders);
+
+        Reservations reservation = user.getReservations();
+        Set<Products> products = reservation.getProductsSet();
+        for(Products product : products){
+            productsService.moveProduct(false, product, null, order);
+        }
+        order.setProductsSet(products);
+        reservationsService.deleteEmptyReservation(reservation);
+
+        return order;
     }
 
     public Orders retrieve(final Long id) {
@@ -95,12 +113,16 @@ public class OrdersService {
     public Orders update(Long id, Orders order) {
         Orders oldOrder = retrieve(id);
 
-        String message = order.getMessage().replaceAll("[\\t\\n\\r]+", " ");
-        oldOrder.setMessage(message);
+        if(order.getMessage() != null) {
+            String message = order.getMessage().replaceAll("[\\t\\n\\r]+", " ");
+            oldOrder.setMessage(message);
+        }
 
         if(order.getCompletedDate() != null){
             oldOrder.setCompletedDate(order.getCompletedDate());
             oldOrder.setCompleted(true);
+        } else {
+            oldOrder.setCompleted(false);
         }
 
         return ordersRepository.save(oldOrder);
