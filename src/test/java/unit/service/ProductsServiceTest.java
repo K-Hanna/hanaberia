@@ -92,7 +92,7 @@ public class ProductsServiceTest {
     }
 
     @Test
-    void moveToReserved(){
+    void moveToReservedTest(){
         Products tempProduct = Products.builder().build();
         when(productsRepository.findById(tempProduct.getId())).thenReturn(Optional.of(tempProduct));
 
@@ -102,7 +102,7 @@ public class ProductsServiceTest {
     }
 
     @Test
-    void moveToOrdered(){
+    void moveToOrderedTest(){
         Products tempProduct = Products.builder().build();
         when(productsRepository.findById(tempProduct.getId())).thenReturn(Optional.of(tempProduct));
 
@@ -141,4 +141,5 @@ public class ProductsServiceTest {
 
         verify(productsRepository).findByCategory(Categories.BRACELET);
     }
+
 }

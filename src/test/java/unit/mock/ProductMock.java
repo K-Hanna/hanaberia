@@ -30,8 +30,7 @@ public class ProductMock {
                 .description("description")
                 .price(10)
                 .category(Categories.NECKLACE)
-                .reservation(ReservationMock.mockedReservationOne())
-                .available(false)
+                .available(true)
                 .build();
     }
 
@@ -43,8 +42,7 @@ public class ProductMock {
                 .description("description")
                 .price(10)
                 .category(Categories.EARRINGS)
-                .order(OrderMock.mockedOrderNotCompleted())
-                .available(false)
+                .available(true)
                 .build();
     }
 

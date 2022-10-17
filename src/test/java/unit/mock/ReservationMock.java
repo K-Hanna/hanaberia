@@ -11,25 +11,21 @@ public class ReservationMock {
     public static Reservations mockedReservationOne(){
         return Reservations.builder()
                 .id(7L)
-                .expiringDate(LocalDate.now())
-                .user(UserMock.mockedUserOne())
-                .productsSet(ProductMock.productSet())
+                .expiringDate(LocalDate.parse("2022-12-12"))
                 .build();
     }
 
     public static Reservations mockedReservationTwo(){
         return Reservations.builder()
                 .id(8L)
-                .expiringDate(LocalDate.now())
-                .user(UserMock.mockedUserTwo())
+                .expiringDate(LocalDate.parse("2022-12-12"))
                 .build();
     }
 
     public static Reservations mockedReservationThree(){
         return Reservations.builder()
                 .id(9L)
-                .expiringDate(LocalDate.now())
-                .user(UserMock.mockedUserOne())
+                .expiringDate(LocalDate.parse("2022-12-12"))
                 .build();
     }
 

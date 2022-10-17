@@ -25,9 +25,9 @@ public class UserMock {
                 .contact("anna@wp.pl")
                 .password(bCryptPasswordEncoder.encode("12345"))
                 .confirm(bCryptPasswordEncoder.encode("12345"))
-                .roles(Roles.USER)
                 .reservations(reservationOne)
                 .orders(orders)
+                .roles(Roles.USER)
                 .build();
     }
 
