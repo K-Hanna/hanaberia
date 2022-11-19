@@ -1,0 +1,56 @@
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <div
+            class="modal fade"
+            th:fragment="modal"
+            id="addToOrderModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="addToOrderModalTitle"
+            aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addToOrderModalTitle">
+              Dodaj do zamówienia
+            </h5>
+          </div>
+
+          <div class="modal-body">
+            <form   th:action="@{/orders/add-to-cart/{id}(id=${orders.id})}"
+                    th:object="${orders}"
+                    method="post">
+              <br>
+              <div class="form-group row">
+                  <input
+                      class="form-control"
+                      type="number"
+                      placeholder="Id produktu"
+                      id="productId"
+                      th:field="*{message}"
+                      required/>
+                  <br>
+              </div>
+              <div class="modal-footer">
+                <div class="btn-group">
+                  <button
+                          type="button"
+                          class="btn btn-outline-danger"
+                          data-bs-dismiss="modal"
+                          aria-label="Close">
+                    <i class="bi bi-x-square"></i>
+                  </button>
+                  <button type="submit"
+                          class="btn btn-success"
+                          value="Submit">
+                    <i class="bi bi-check2-square"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

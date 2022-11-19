@@ -2,7 +2,10 @@ package com.hanaberia.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hanaberia.enums.ContactForms;
+import com.hanaberia.enums.Questions;
 import com.hanaberia.enums.Roles;
 import lombok.*;
 
@@ -22,13 +25,10 @@ public class Users {
     @SequenceGenerator(
             name = "primary_sequence",
             sequenceName = "primary_sequence",
-            allocationSize = 1,
-            initialValue = 1
-    )
+            allocationSize = 1)
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "primary_sequence"
-    )
+            generator = "primary_sequence")
     private Long id;
 
     @Column(nullable = false)
@@ -51,10 +51,24 @@ public class Users {
     @Column
     private Roles roles;
 
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Questions question;
+
+    @Column
+    private String answer;
+
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonManagedReference(value = "rUser")
     private Reservations reservations;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonManagedReference(value = "oUser")
     private List<Orders> orders;
+
+    @Override
+    public String toString(){
+        return id + ". " + userName;
+    }
 
 }

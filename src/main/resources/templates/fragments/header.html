@@ -1,21 +1,22 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<body>
-    <header th:fragment="header" class="d-flex justify-content-between">
-        <div>
-            <h1><a href="/" class="element">Hanaberia</a></h1>
-        </div>
-        <div>
-            <div sec:authorize="isAnonymous()">
-                <a th:href="@{/login}" class="btn btn-outline-primary" role="button" id="login">
-                    <i class="bi bi-box-arrow-in-right" title="Zaloguj się"></i></a>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <body>
+        <header th:fragment="header" class="d-flex justify-content-between">
+            <div>
+                <h1><a href="/" id="logo">
+                    <img src="/styles/logo.png" height="50px" alt="Hanaberia logo"></a></h1>
             </div>
-            <div sec:authorize="isAuthenticated()">
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn btn-outline-primary" id="logout">
-                        <i class="bi bi-box-arrow-right" title="Wyloguj się"></i></button>
-                </form>
+            <div>
+                <div sec:authorize="isAnonymous()">
+                    <a th:href="@{/login}" class="btn btn-outline-primary" id="login">
+                        <i class="bi bi-box-arrow-in-right" title="Zaloguj się"></i></a>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="btn btn-outline-primary" id="logout">
+                            <i class="bi bi-box-arrow-right" title="Wyloguj się"></i></button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </header>
-</body>
+        </header>
+    </body>
 </html>

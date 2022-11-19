@@ -27,12 +27,28 @@ public class OrdersService {
         return ordersRepository.findAll();
     }
 
-    public Orders create(final Orders order) {
+    public Orders create(final Orders order, Users user) {
 
-        String message = order.getMessage().replaceAll("[\\t\\n\\r]+", " ");
-        order.setMessage(message);
+        order.setUser(user);
+        if(order.getMessage() != null) {
+            String message = order.getMessage().replaceAll("[\\t\\n\\r]+", " ");
+            order.setMessage(message);
+        }
+        ordersRepository.save(order);
 
-        return ordersRepository.save(order);
+        List<Orders> usersOrders = user.getOrders();
+        usersOrders.add(order);
+        user.setOrders(usersOrders);
+
+        Reservations reservation = user.getReservations();
+        Set<Products> products = reservation.getProductsSet();
+        for(Products product : products){
+            productsService.moveProduct(false, product, null, order);
+        }
+        order.setProductsSet(products);
+        reservationsService.deleteEmptyReservation(reservation);
+
+        return order;
     }
 
     public Orders retrieve(final Long id) {
@@ -52,8 +68,10 @@ public class OrdersService {
         Orders order = retrieve(id);
         Set<Products> products = order.getProductsSet();
 
-        for(Products product : products){
-            productsService.moveProduct(true, product, null, null);
+        if(products.size() > 0) {
+            for (Products product : products) {
+                productsService.moveProduct(true, product, null, null);
+            }
         }
 
         ordersRepository.deleteById(id);
@@ -73,22 +91,40 @@ public class OrdersService {
     public void changingOrder(String direction, Long productId, Long orderId) {
 
         Products product = productsService.retrieve(productId);
-        Orders oldOrder = retrieve(orderId);
+        Orders order = retrieve(orderId);
+        Set<Products> products = order.getProductsSet();
 
         switch (direction){
             case "add":
-                productsService.moveProduct(false, product, null, oldOrder);
+                productsService.moveProduct(false, product, null, order);
+                products.remove(product);
                 break;
             case "remove":
                 productsService.moveProduct(true, product, null, null);
+                products.add(product);
                 break;
         }
 
-        Set<Products> products = oldOrder.getProductsSet();
-        products.remove(product);
+        order.setProductsSet(products);
 
-        oldOrder.setProductsSet(products);
+        ordersRepository.save(order);
+    }
 
-        ordersRepository.save(oldOrder);
+    public Orders update(Long id, Orders order) {
+        Orders oldOrder = retrieve(id);
+
+        if(order.getMessage() != null) {
+            String message = order.getMessage().replaceAll("[\\t\\n\\r]+", " ");
+            oldOrder.setMessage(message);
+        }
+
+        if(order.getCompletedDate() != null){
+            oldOrder.setCompletedDate(order.getCompletedDate());
+            oldOrder.setCompleted(true);
+        } else {
+            oldOrder.setCompleted(false);
+        }
+
+        return ordersRepository.save(oldOrder);
     }
 }

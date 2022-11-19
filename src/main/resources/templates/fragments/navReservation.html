@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<body>
-<div th:fragment="nav">
-    <ul class="nav nav-tabs">
-        <li class="nav-item ">
-            <a class="nav-link" th:href="@{/}"><i class="bi bi-house"></i></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/users}">Moje dane</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" th:href="@{/reservations}">Rezerwacje</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/orders}">Zamówienia</a>
-        </li>
-    </ul>
-</div>
-</body>
+    <body>
+        <div th:fragment="nav">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/users}">
+                        <i class="bi bi-person-circle"></i>&nbsp;Moje dane</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/reservations}">
+                        <i class="bi bi-basket2"></i>&nbsp;Rezerwacje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/orders}">
+                        <i class="bi bi-card-checklist"></i>&nbsp;Zamówienia</a>
+                </li>
+            </ul>
+        </div>
+    </body>
 </html>

@@ -45,13 +45,34 @@ public class UsersService {
         return usersRepository.findUserByUserName(name);
     }
 
-    public void update(final Long id, final Users user) {
+    public Users retrieveByContact(String contact){
+        return usersRepository.findUserByContact(contact);
+    }
 
+    public Users update(final Long id, final Users user) {
+
+        Users oldUser = retrieve(id);
+
+        if(user.getUserName() != null)
+            oldUser.setUserName(user.getUserName());
+        if(user.getContact() != null)
+            oldUser.setContact(user.getContact());
+        if(user.getContactForm() != null)
+            oldUser.setContactForm(user.getContactForm());
+        if(user.getPassword() != null)
+            oldUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if(user.getConfirm() != null)
+            oldUser.setConfirm(bCryptPasswordEncoder.encode(user.getConfirm()));
+        if(user.getQuestion() != null)
+            oldUser.setQuestion(user.getQuestion());
+        if(user.getAnswer() != null)
+            oldUser.setAnswer(user.getAnswer());
+
+        return usersRepository.save(oldUser);
+    }
+
+    public void changePassword(final Long id, final Users user){
         Users oldUser = usersRepository.findById(id).orElseThrow(null);
-
-        oldUser.setUserName(user.getUserName());
-        oldUser.setContact(user.getContact());
-        oldUser.setContactForm(user.getContactForm());
         oldUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         oldUser.setConfirm(bCryptPasswordEncoder.encode(user.getConfirm()));
 

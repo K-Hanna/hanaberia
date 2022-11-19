@@ -3,34 +3,30 @@
 <div
         class="modal fade"
         th:fragment="modal"
-        id="createOrderModal"
+        id="deleteOrderModal"
         tabindex="-1"
         role="dialog"
-        aria-labelledby="createOrderModalTitle"
+        aria-labelledby="deleteOrderModalTitle"
         aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createOrderModalTitle">
-                    Złóż zamówienie
+                <h5 class="modal-title" id="deleteOrderModalTitle">
+                    Usuń zamówienie
                 </h5>
             </div>
 
             <div class="modal-body">
                 <form
                         action="#"
-                        th:action="@{/orders/add}"
+                        th:action="@{/orders/remove/{id}(id=${orders.id})}"
                         th:object="${orders}"
-                        method="post">
-                    Całkowita wartość zamówienia: <span th:text="${total}"></span>,- zł.
-                    <div class="form-outline">
-                        <textarea rows = "2"
-                                  class="form-control"
-                                  placeholder="Wiadomość dla sprzedawcy"
-                                  id="message"
-                                  th:field="*{message}"
-                                  maxlength="255"></textarea>
+                        method="get">
+
+                    <div class="row g-2">
                         <br>
+                        Czy na pewno chcesz usunąć to zamówienie?
+                        <br><br>
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group">
@@ -41,7 +37,7 @@
                                 <i class="bi bi-x-square"></i>
                             </button>
                             <button type="submit"
-                                    class="btn btn-success"
+                                    class="btn btn-danger"
                                     value="Submit">
                                 <i class="bi bi-check2-square"></i>
                             </button>
