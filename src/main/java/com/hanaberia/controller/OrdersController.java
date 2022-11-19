@@ -52,7 +52,7 @@ public class OrdersController {
         List<String> usersOrders = new ArrayList<>();
         List<Integer> totals = new ArrayList<>();
 
-        if(allOrders.isEmpty()){
+        if(allOrders.size() == 0){
             model.addAttribute("message", "Nie ma żadnych zamówień.");
         } else {
             for(Orders order : allOrders){
