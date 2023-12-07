@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -30,14 +31,11 @@ public class ReservationsService {
     }
 
     public Reservations retrieve(final Long id) {
-        Reservations reservation = reservationsRepository.findById(id).orElseThrow(null);
+        return reservationsRepository.findById(id).orElseThrow(null);
+    }
 
-        if(reservation.getExpiringDate().isBefore(LocalDate.now())){
-            reservationsRepository.deleteById(id);
-            return null;
-        } else {
-            return reservation;
-        }
+    public List<Reservations> retrieveAllReservations(){
+        return reservationsRepository.findAll();
     }
 
     public Reservations addToCart(final Long id, final Users user) {
@@ -90,5 +88,14 @@ public class ReservationsService {
 
     public void deleteEmptyReservation(Reservations reservation){
         reservationsRepository.delete(reservation);
+    }
+
+    public Reservations update(Long id, Reservations reservation) {
+        Reservations oldReservation = retrieve(id);
+
+        if(reservation.getExpiringDate() != null)
+            oldReservation.setExpiringDate(reservation.getExpiringDate());
+
+        return reservationsRepository.save(oldReservation);
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -22,9 +23,6 @@ import java.util.Set;
 @Controller
 @RequestMapping(value = "/orders")
 public class OrdersController {
-
-    @Autowired
-    private OrdersRepository ordersRepository;
 
     @Autowired
     private OrdersService ordersService;
@@ -38,17 +36,26 @@ public class OrdersController {
     @Autowired
     private ReservationsService reservationsService;
 
+    //retrieve
     @GetMapping("/all")
     public String getAllOrders(Model model){
 
+        List<Reservations> allReservations = reservationsService.retrieveAllReservations();
+        for(Reservations reservation : allReservations){
+            if(reservation.getExpiringDate().isBefore(LocalDate.now()))
+                reservationsService.delete(reservation.getId());
+        }
+
         List<Orders> allOrders = ordersService.getAllOrders();
         allOrders.sort(Comparator.comparing(Orders :: getId).reversed());
-        model.addAttribute("orders", allOrders);
 
-        if(allOrders.isEmpty()){
+        List<String> usersOrders = new ArrayList<>();
+        List<Integer> totals = new ArrayList<>();
+
+        if(allOrders.size() == 0){
             model.addAttribute("message", "Nie ma żadnych zamówień.");
         } else {
-            for(Orders order :allOrders){
+            for(Orders order : allOrders){
 
                 String usersName = usersService.retrieve(order.getUser().getId()).getUserName();
                 Set<Products> products = order.getProductsSet();
@@ -57,10 +64,15 @@ public class OrdersController {
                     total += product.getPrice();
                 }
 
-                model.addAttribute("name", usersName);
-                model.addAttribute("total", total);
+                usersOrders.add(usersName);
+                totals.add(total);
             }
         }
+
+        model.addAttribute("orders", allOrders);
+        model.addAttribute("totalOrders", allOrders.size() - 1);
+        model.addAttribute("users", usersOrders);
+        model.addAttribute("totals", totals);
 
         return "order/retrieveAllOrders";
     }
@@ -78,9 +90,11 @@ public class OrdersController {
             List<Orders> orders = user.getOrders();
             orders.sort(Comparator.comparing(Orders :: getId).reversed());
 
+            List<Integer> totals = new ArrayList<>();
+
             model.addAttribute("orders", orders);
 
-            if(orders.isEmpty()){
+            if(orders.size() == 0){
                 model.addAttribute("message", "Nie ma żadnych zamówień.");
             }
 
@@ -90,30 +104,23 @@ public class OrdersController {
                 for(Products product : products){
                     total += product.getPrice();
                 }
-                model.addAttribute("total", total);
+
+                totals.add(total);
             }
+
+            model.addAttribute("count", orders.size() - 1);
+            model.addAttribute("total", totals);
 
             return "order/retrieveOrder";
         }
         return "index";
     }
 
+    //create
     @PostMapping("/add")
     public String orderAdd(@ModelAttribute Orders order,  @SessionAttribute("user") Users user){
 
-        order.setUser(user);
-        ordersService.create(order);
-        List<Orders> usersOrders = user.getOrders();
-        usersOrders.add(order);
-        user.setOrders(usersOrders);
-
-        Reservations reservation = user.getReservations();
-        Set<Products> products = reservation.getProductsSet();
-        for(Products product : products){
-            productsService.moveProduct(false, product, null, order);
-        }
-        order.setProductsSet(products);
-        reservationsService.deleteEmptyReservation(reservation);
+        ordersService.create(order, user);
 
         return "redirect:/orders";
     }
@@ -124,6 +131,8 @@ public class OrdersController {
         Orders order = ordersService.retrieve(id);
         order.setCompletedDate(LocalDate.now());
         model.addAttribute("orders", order);
+        model.addAttribute("startDate", LocalDate.now().minusDays(30));
+        model.addAttribute("endDate", LocalDate.now());
 
         return "order/completeOrder";
     }
@@ -135,8 +144,9 @@ public class OrdersController {
         return "redirect:/orders/all";
     }
 
+    //update
     @GetMapping("/to-edit/{id}")
-    public String orderToEdit(@PathVariable("id") Long id, Model model){
+    public String orderToEdit(@PathVariable("id") Long id, Model model, @ModelAttribute Orders modelOrder){
 
         Orders order = ordersService.retrieve(id);
 
@@ -146,42 +156,42 @@ public class OrdersController {
             total += product.getPrice();
         }
 
+        if(total == 0) {
+            model.addAttribute("message", "Lista jest pusta.");
+        }
+
         model.addAttribute("total", total);
         model.addAttribute("orders", order);
 
         return "order/updateOrder";
     }
 
-    @PostMapping("/edit/{id}")
-    public String orderEdit(Model model, @PathVariable("id") Long id, @Valid Orders order) {
-
-/*        model.addAttribute("orders", order);
-        ordersService.update(id, order);*/
-
-        return "redirect:/orders/all";
-    }
-
     @GetMapping("/remove-from-cart/{id}")
-    public String removeFromCart(@PathVariable Long id,  @SessionAttribute Orders order, Model model){
+    public String removeFromCart(@PathVariable Long id,  Model model){
 
-        System.out.println(order.getId());
-        Long orderId = order.getId();
-        ordersService.changingOrder("remove", id, orderId);
+        Products product = productsService.retrieve(id);
+        Orders order = product.getOrder();
+
+        ordersService.changingOrder("remove", id, order.getId());
         model.addAttribute("orders", order);
 
-        return "order/updateOrder";
+        return "redirect:/orders/to-edit/" + order.getId();
     }
 
-    @GetMapping("/add-to-cart/{id}")
-    public String addToCart(@PathVariable Long id,  @Valid Orders order, Model model){
+    @PostMapping("/add-to-cart/{id}")
+    public String addToCart(@PathVariable Long id, Orders orders, Model model){
 
-        Long orderId = order.getId();
-        ordersService.changingOrder("add", id, orderId);
-        model.addAttribute("orders", order);
+        Long productId = Long.parseLong(orders.getMessage());
+        if(productsService.isProductExist(productId)){
+            Products product = productsService.retrieve(productId);
+            if(product.isAvailable())
+                ordersService.changingOrder("add", productId, id);
+        }
 
-        return "order/updateOrder";
+        return "redirect:/orders/to-edit/" + id;
     }
 
+    //delete
     @GetMapping("/to-remove/{id}")
     public String orderToRemove(@PathVariable("id") Long id, Model model) {
 

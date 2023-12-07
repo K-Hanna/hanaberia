@@ -1,188 +1,104 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Hanaberia</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link th:href="@{/styles/user.css}" rel="stylesheet" />
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hanaberia</title>
+        <link rel="icon" type="image/x-icon" href="/styles/fav.png">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <link th:href="@{/styles/user.css}" rel="stylesheet" />
 
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-            crossorigin="anonymous"></script>
+        <script
+                src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+                crossorigin="anonymous"></script>
 
-</head>
-<body>
-<nav id="menu1"></nav>
-<main>
-    <div th:insert="fragments/header :: header"></div>
-    <div th:insert="fragments/navProducts :: nav"></div>
-    <section>
-        <div class="container"
-             style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
+    </head>
+    <body>
+        <nav id="menu1"></nav>
+        <main>
+            <div th:insert="fragments/header :: header"></div>
+            <div th:insert="fragments/navProducts :: nav"></div>
+            <section>
+                <div class="container"
+                     style="padding-top: 5vh; display: flex; flex-direction: column; align-items: center;">
 
-        <div class="container"
-            style="padding-top: 5vh;">
-            <a th:href="@{/products/to-add}" class="btn btn-success">
-                <i class="bi bi-plus-square" title="Dodaj nowy produkt"></i></a>
-        </div>
+                <div class="container"
+                    style="padding-top: 2vh;">
+                    <div class="container"
+                         style="padding-top: 5vh;">
+                        <button type="button"
+                                class="btn btn-success"
+                                data-bs-toggle="modal"
+                                data-bs-target="#createProductModal">
+                            <i class="bi bi-plus-square" title="Dodaj produkt"></i>
+                        </button>
+                    </div>
 
-        <div class="container mt-5">
-            <ul class="nav nav-tabs mt-5">
-                <li class="nav-item"><a href="#bransoletki" class="nav-link active"
-                                        data-bs-toggle="tab">Bransoletki</a></li>
-                <li class="nav-item"><a href="#kolczyki" class="nav-link"
-                                        data-bs-toggle="tab">Kolczyki</a></li>
-                <li class="nav-item"><a href="#naszyjniki" class="nav-link"
-                                        data-bs-toggle="tab">Naszyjniki</a></li>
-                <li class="nav-item"><a href="#pierscionki" class="nav-link"
-                                        data-bs-toggle="tab">Pierścionki</a></li>
-            </ul>
+                    <div
+                            th:insert="product/createProductModal :: modal"
+                            th:with="products=${products}"></div>
 
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="bransoletki">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Zdjęcie</th>
-                            <th scope="col">Nazwa</th>
-                            <th scope="col">Opis</th>
-                            <th scope="col">Cena</th>
-                            <th scope="col">Akcje</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="product : ${bracelets}">
-                            <td th:text="${product.id}"></td>
-                            <td>
-                                <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
-                            </td>
-                            <td name="name" th:text="${product.name}"></td>
-                            <td th:text="${product.description}"></td>
-                            <td th:text="${product.price}"></td>
-                            <td>
-                                <div class="btn-group">
-                                    <a th:href="@{/products/to-edit/{id}(id=${product.id})}" class="btn btn-outline-primary">
-                                        <i class="bi bi-pencil-square" title="Edytuj"></i></a>
-                                    <a th:href="@{/products/to-remove/{id}(id=${product.id})}" class="btn btn-outline-danger">
-                                        <i class="bi bi-x-square" title="Usuń"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
-                <div class="tab-pane fade" id="kolczyki">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Zdjęcie</th>
-                            <th scope="col">Nazwa</th>
-                            <th scope="col">Opis</th>
-                            <th scope="col">Cena</th>
-                            <th scope="col">Akcje</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="product : ${earrings}">
-                            <td th:text="${product.id}"></td>
-                            <td>
-                                <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
-                            </td>
-                            <td name="name" th:text="${product.name}"></td>
-                            <td th:text="${product.description}"></td>
-                            <td th:text="${product.price}"></td>
-                            <td>
-                                <div class="btn-group">
-                                    <a th:href="@{/products/to-edit/{id}(id=${product.id})}" class="btn btn-outline-primary">
-                                        <i class="bi bi-pencil-square" title="Edytuj"></i></a>
-                                    <a th:href="@{/products/to-remove/{id}(id=${product.id})}" class="btn btn-outline-danger">
-                                        <i class="bi bi-x-square" title="Usuń"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="naszyjniki">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Zdjęcie</th>
-                            <th scope="col">Nazwa</th>
-                            <th scope="col">Opis</th>
-                            <th scope="col">Cena</th>
-                            <th scope="col">Akcje</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="product : ${necklaces}">
-                            <td th:text="${product.id}"></td>
-                            <td>
-                                <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
-                            </td>
-                            <td name="name" th:text="${product.name}"></td>
-                            <td th:text="${product.description}"></td>
-                            <td th:text="${product.price}"></td>
-                            <td>
-                                <div class="btn-group">
-                                    <a th:href="@{/products/to-edit/{id}(id=${product.id})}" class="btn btn-outline-primary">
-                                        <i class="bi bi-pencil-square" title="Edytuj"></i></a>
-                                    <a th:href="@{/products/to-remove/{id}(id=${product.id})}" class="btn btn-outline-danger">
-                                        <i class="bi bi-x-square" title="Usuń"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="pierscionki">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Zdjęcie</th>
-                            <th scope="col">Nazwa</th>
-                            <th scope="col">Opis</th>
-                            <th scope="col">Cena</th>
-                            <th scope="col">Akcje</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="product : ${rings}">
-                            <td th:text="${product.id}"></td>
-                            <td>
-                                <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}" width="70"/>
-                            </td>
-                            <td name="name" th:text="${product.name}"></td>
-                            <td th:text="${product.description}"></td>
-                            <td th:text="${product.price}"></td>
-                            <td>
-                                <div class="btn-group">
-                                    <a th:href="@{/products/to-edit/{id}(id=${product.id})}" class="btn btn-outline-primary">
-                                        <i class="bi bi-pencil-square" title="Edytuj"></i></a>
-                                    <a th:href="@{/products/to-remove/{id}(id=${product.id})}" class="btn btn-outline-danger">
-                                        <i class="bi bi-x-square" title="Usuń"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
 
-        </div>
-    </section>
-    <div th:insert="fragments/footer :: footer"></div>
-</main>
-<nav id="menu2"></nav>
-</body>
+                <div class="container mt-5">
+                    <ul class="nav nav-tabs mt-5">
+                        <li class="nav-item" th:each="cat : ${T(com.hanaberia.enums.Categories).values()}">
+                            <a th:href="@{'#' + ${cat}}" class="nav-link" data-bs-toggle="tab">
+                            <span th:text="${cat.displayValue}"></span></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade"
+                             th:each="cat : ${T(com.hanaberia.enums.Categories).values()}" th:id="${cat}">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Zdjęcie</th>
+                                    <th scope="col">Nazwa i opis</th>
+                                    <th scope="col">Cena</th>
+                                    <th scope="col">Akcje</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="product : ${productsByCategories.get(cat)}">
+                                    <td>
+                                        <img th:src="@{${'https://static.wixstatic.com/media/' + product.imageName + '.jpg'}}"
+                                             width="70"/><br>
+                                        <span th:text="${product.id}"></span>
+                                    </td>
+                                    <td>
+                                        <strong><span th:text="${product.name}"></span></strong><br>
+                                        <span th:text="${product.description}"></span>
+                                    </td>
+                                    <td>
+                                        <span th:text="${product.price}"></span>,- zł
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a th:href="@{/products/to-edit/{id}(id=${product.id})}" class="btn btn-outline-primary">
+                                                <i class="bi bi-pencil-square" title="Edytuj"></i></a>
+                                            <a th:href="@{/products/to-remove/{id}(id=${product.id})}" class="btn btn-outline-danger">
+                                                <i class="bi bi-x-square" title="Usuń"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </section>
+            <div th:insert="fragments/footer :: footer"></div>
+        </main>
+        <nav id="menu2"></nav>
+
+        <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+
+    </body>
 </html>

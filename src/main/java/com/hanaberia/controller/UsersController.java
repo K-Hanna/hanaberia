@@ -1,7 +1,6 @@
 package com.hanaberia.controller;
 
 import com.hanaberia.enums.ContactForms;
-import com.hanaberia.model.Messages;
 import com.hanaberia.model.Users;
 import com.hanaberia.repository.UsersRepository;
 import com.hanaberia.service.MyUserDetail;
@@ -25,11 +24,9 @@ import java.util.List;
 public class UsersController {
 
     @Autowired
-    private UsersRepository usersRepository;
-
-    @Autowired
     private UsersService usersService;
 
+    //create
     @GetMapping("/to-add")
     public String userToAdd(Users user){
         user.setContactForm(ContactForms.EMAIL);
@@ -47,6 +44,7 @@ public class UsersController {
         }
     }
 
+    //retrieve
     @GetMapping()
     public String userGet(Model model, HttpSession session) {
 
@@ -60,6 +58,7 @@ public class UsersController {
         return "user/retrieveUser";
     }
 
+    //update
     @GetMapping("/to-edit/{id}")
     public String userToEdit(@PathVariable("id") Long id, Model model){
 
@@ -70,7 +69,7 @@ public class UsersController {
     }
 
     @PostMapping("/edit/{id}")
-    public String userEdit(Model model, @PathVariable("id") Long id, @Valid Users user, HttpServletRequest request) {
+    public String userEdit(Model model, @PathVariable("id") Long id, @RequestBody Users user, HttpServletRequest request) {
 
         Users oldUser = usersService.retrieve(id);
         model.addAttribute("users", oldUser);
@@ -88,6 +87,7 @@ public class UsersController {
         return "redirect:/users";
     }
 
+    //delete
     @GetMapping("/to-remove/{id}")
     public String userToRemove(@PathVariable("id") Long id, Model model){
 
@@ -105,6 +105,7 @@ public class UsersController {
         return "redirect:/";
     }
 
+    //validation
     public int validate(Model model, Users newUser, Users oldUser){
         Validator validator = new Validator();
         int errors = 0;

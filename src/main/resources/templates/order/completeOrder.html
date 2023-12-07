@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <title>Hanaberia</title>
+    <link rel="icon" type="image/x-icon" href="/styles/fav.png">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
     <link th:href="@{/styles/user.css}" rel="stylesheet" />
@@ -33,8 +34,8 @@
                                 id="complete-date"
                                 name="trip-start"
                                 th:field="*{completedDate}"
-                                min="2022-05-31"
-                                th:max="${#dates.format(#dates.createNow(),'yyyy-MM-dd')}"
+                                th:min="${startDate}"
+                                th:max="${endDate}"
                                 required/>
                         <br>
                     </div>

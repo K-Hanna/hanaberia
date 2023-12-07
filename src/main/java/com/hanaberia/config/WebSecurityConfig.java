@@ -1,8 +1,6 @@
 package com.hanaberia.config;
 
 import com.hanaberia.service.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,8 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/webjars/**", "/users/to-add","/users/add", "/styles/**").permitAll()
-                .antMatchers("/archive", "/messages/add", "/messages/to-add").permitAll()
+                .antMatchers("/", "/webjars/**", "/users/to-add","/users/add", "/styles/**", "/js/**").permitAll()
+                .antMatchers("/archive", "/messages/add", "/messages/to-add", "/recover/**").permitAll()
                 .antMatchers("/products/**", "/orders/all", "/messages/all").hasAuthority("ADMIN")
                 .anyRequest().authenticated().and()
                 .formLogin()
@@ -36,6 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/index.html").permitAll()
                 .logoutSuccessUrl("/").and()
                 .exceptionHandling().accessDeniedPage("/403");
+
+        http
+                .csrf().disable();
     }
 
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

@@ -2,7 +2,6 @@ package com.hanaberia.controller;
 
 import com.hanaberia.enums.Categories;
 import com.hanaberia.model.Products;
-import com.hanaberia.repository.ProductsRepository;
 import com.hanaberia.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,46 +9,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/products")
 public class ProductsController {
 
     @Autowired
-    private ProductsRepository productsRepository;
-
-    @Autowired
     private ProductsService productsService;
 
-    @GetMapping()
-    public String allProducts(Model model){
-
-        List<Products> bracelets = productsService.getByCategory(Categories.BRACELET);
-        bracelets.sort(Comparator.comparing(Products :: getId).reversed());
-        model.addAttribute("bracelets", bracelets);
-
-        List<Products> earrings = productsService.getByCategory(Categories.EARRINGS);
-        earrings.sort(Comparator.comparing(Products :: getId).reversed());
-        model.addAttribute("earrings", earrings);
-
-        List<Products> necklaces = productsService.getByCategory(Categories.NECKLACE);
-        necklaces.sort(Comparator.comparing(Products :: getId).reversed());
-        model.addAttribute("necklaces", necklaces);
-
-        List<Products> rings = productsService.getByCategory(Categories.RING);
-        rings.sort(Comparator.comparing(Products :: getId).reversed());
-        model.addAttribute("rings", rings);
-
-        return "product/retrieveProducts";
-    }
-
-    @GetMapping("/to-add")
-    public String productToAdd(Products product){
-        return "product/createProduct";
-    }
-
+    //create
     @PostMapping("/add")
     public String productAdd(@ModelAttribute Products product){
 
@@ -57,6 +28,23 @@ public class ProductsController {
         return "redirect:/products";
     }
 
+    //retrieve
+    @GetMapping()
+    public String allProducts(Model model, Products product){
+
+        Map<Categories, List<Products>> productsByCategories = new HashMap<>();
+
+        for(Categories category : Categories.values()){
+            List<Products> products = productsService.getByCategory(category);
+            productsByCategories.put(category, products);
+        }
+
+        model.addAttribute("productsByCategories", productsByCategories);
+
+        return "product/retrieveProducts";
+    }
+
+    //update
     @GetMapping("/to-edit/{id}")
     public String productToEdit(@PathVariable("id") Long id, Model model){
         Products product = productsService.retrieve(id);
@@ -74,6 +62,7 @@ public class ProductsController {
         return "redirect:/products";
     }
 
+    //delete
     @GetMapping("/to-remove/{id}")
     public String productToRemove(@PathVariable("id") Long id, Model model) {
 
