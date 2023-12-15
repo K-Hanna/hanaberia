@@ -16,7 +16,8 @@ html {
   scroll-behavior: smooth;
 }
 body{
-	background-image: url('left.png'), url('right.png');
+	background-image: url('https://static.wixstatic.com/media/77efc3_b54116683d0945ecb45f424c68caf5aa~mv2.png'),
+	url('https://static.wixstatic.com/media/77efc3_b838583f5ad54e2c92fc34b6edf66e3e~mv2.png');
 	background-repeat: no-repeat, no-repeat;
 	background-position: left top, right bottom;
 	background-size: 13%, 13%;

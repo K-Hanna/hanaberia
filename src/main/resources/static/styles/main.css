@@ -16,7 +16,8 @@ html {
   scroll-behavior: smooth;
 }
 body{
-	background-image: url('left.png'), url('right.png');
+	background-image: url('https://static.wixstatic.com/media/77efc3_b54116683d0945ecb45f424c68caf5aa~mv2.png'),
+	url('https://static.wixstatic.com/media/77efc3_b838583f5ad54e2c92fc34b6edf66e3e~mv2.png');
 	background-repeat: no-repeat, no-repeat;
 	background-position: left top, right bottom;
 	background-size: 13%, 13%;
@@ -59,26 +60,26 @@ p {
     font-family: 'Lobster Two', Georgia, cursive;
 }
 .home {
-	background-image: url('all.png');
+	background-image: url('https://static.wixstatic.com/media/77efc3_f752fbac93034f489227664d594f1116~mv2.png');
 	height: 650px;
 }
 .BRACELET {
-	background-image: url('bracelet.png');
+	background-image: url('https://static.wixstatic.com/media/77efc3_6619388c90824974870b4cf3bd7eb566~mv2.png');
 }
 .EARRINGS {
-	background-image: url('earrings.png');
+	background-image: url('https://static.wixstatic.com/media/77efc3_fec38c417bfe40fa8951d08b60b37e85~mv2.png');
 }
 .NECKLACE {
-	background-image: url('necklace.png');
+	background-image: url('https://static.wixstatic.com/media/77efc3_29f3c549b9374eedbcb3d379661e19ed~mv2.png');
 }
 .RING {
-	background-image: url('ring.png');
+	background-image: url("https://static.wixstatic.com/media/77efc3_a7652d33bd524683ae986aeb07da7985~mv2.png");
 }
 .OTHERS {
-	background-image: url('bg.png');
+	background-image: url('https://static.wixstatic.com/media/77efc3_b2e5a9c55bf64a08ada2b5f09104ad2e~mv2.png');
 }
 .archive {
-	background-image: url('archive.png');
+	background-image: url('https://static.wixstatic.com/media/77efc3_dda3bfa1e6d147c787107844d6b63504~mv2.png');
 }
 section {
 	background-color: #000000;
